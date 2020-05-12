@@ -1,0 +1,23 @@
+
+<h2>ジャンルを作成する</h2>
+<div class="w-100">
+</div>
+<%= form_for @genre , url: admins_genres_path , method: :post do |f| %>
+<%= f.text_field :name %>
+<%= f.submit "CREATE", class:"btn btn-primary"%>
+<% end %>
+
+<table class="table">
+		<tr>
+			<td>ジャンル名</td>
+			<td>使用合計</td>
+			<td></td>
+		</tr>
+		<% @genres.each do |genre| %>
+		<tr>
+			<td><%= genre.name %></td>
+			<td></td>
+			<td><%= link_to "delete" , admins_genre_path(genre) , method: :delete %></td>
+		</tr>
+		<% end %>
+</table>

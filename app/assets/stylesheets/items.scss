@@ -1,3 +1,14 @@
 // Place all the styles related to the Items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.item-container{
+	border: 0.5px solid lightgray;
+	border-radius: 7px;
+	padding: 7px;
+	margin: 10px;
+}
+
+.slide-container{
+    height: 500px; /* ここの高さはいくつでも構いません */
+}

@@ -9,7 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :last_name_kana
       t.string :image_id
       t.string :phone_number
-      t.string :postcode
+      t.integer :postcode
       t.string :address
       t.boolean :is_credit ,null: false, default: false
       ## Database authenticatable

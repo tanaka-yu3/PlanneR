@@ -1,0 +1,36 @@
+<div class="w-100">
+</div>
+<div class="w-100 item-container">
+	<div class="w-100">
+		<% @item.photos.each do |image| %>
+    <%= attachment.image_tag image ,:image ,:fill ,100 ,100 %>
+    <% end %>
+		<p><%= @item.video %></p>
+	</div>
+　　<div class="w-100">
+　　</div>
+  商品名:<%= @item.name %>期間:<%= @item.start_day %> 〜 <%= @item.finish_day %>
+  <div>
+  	場所:<%= @item.address %>
+  </div>
+  <div>
+  	説明:<%= @item.text %>
+  </div>
+  <div>
+  	制限:<%= @item.total %>
+  </div>
+  <% if current_user.id == @item.user_id %>
+  	<%= link_to "商品を編集する" ,edit_item_path(@item) , class:"btn btn-success" %>
+	<%= link_to "delete" ,item_path(@item) , method: :delete ,class:"btn btn-danger" %>
+	<% else %>
+	<% if admin_signed_in? %>
+	  <%= link_to "承認する" %>
+	<% end %>
+	<%= link_to "購入する" , item_new_order_path(@item) ,class:"btn btn-success"%>
+  <% end %>
+  <%= link_to "出品者のページへ" , user_path(@item.user), class:"btn btn-primary" %>
+</div>
+
+<div class="w-100 item-container">
+  <%= render "reviews/index" , reviews:@reviews %>
+</div>

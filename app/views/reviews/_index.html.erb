@@ -1,0 +1,16 @@
+<table class="table">
+		<tr>
+			<td>ユーザー</td>
+			<td>レビュー内容</td>
+			<td>星の数</td>
+			<td>写真</td>
+		</tr>
+		<% reviews.each do |review| %>
+		<tr>
+			<td><%= review.user.name %></td>
+			<td><%= review.text %></td>
+			<td><%= review.rate %></td>
+			<td><%= review.photo %></td>
+		</tr>
+		<% end %>
+</table>

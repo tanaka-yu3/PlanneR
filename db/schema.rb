@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_102104) do
+ActiveRecord::Schema.define(version: 2020_05_11_133911) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_05_09_102104) do
   end
 
   create_table "genres", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -97,7 +98,7 @@ ActiveRecord::Schema.define(version: 2020_05_09_102104) do
     t.string "last_name_kana"
     t.string "image_id"
     t.string "phone_number"
-    t.string "postcode"
+    t.integer "postcode"
     t.string "address"
     t.boolean "is_credit", default: false, null: false
     t.string "email", default: "", null: false
@@ -112,6 +113,10 @@ ActiveRecord::Schema.define(version: 2020_05_09_102104) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "uid"
+    t.string "meta"
+    t.string "token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

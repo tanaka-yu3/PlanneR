@@ -1,2 +1,16 @@
-<h1>Reviews#show</h1>
-<p>Find me in app/views/reviews/show.html.erb</p>
+<h2>レビュー詳細</h2>
+
+<table class="table">
+		<tr>
+			<td>ユーザー</td>
+			<td>レビュー内容</td>
+			<td>星の数</td>
+			<td>写真</td>
+		</tr>
+		<tr>
+			<td><%= @review.user.name %></td>
+			<td><%= @review.text %></td>
+			<td><%= @review.rate %></td>
+			<td><%= @review.photo %></td>
+		</tr>
+</table>
