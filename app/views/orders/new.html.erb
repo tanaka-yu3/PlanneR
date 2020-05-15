@@ -1,0 +1,30 @@
+<h2>購入する</h2>
+<div class="w-100">
+</div>
+
+<table class="table">
+	<%= form_for [@item , @order] ,url:(item_order_confirm_path) do |f| %>
+		<tr>
+			<td>商品名</td>
+			<td><%= @item.name %></td>
+		</tr>
+		<tr>
+			<td>期間</td>
+			<td><%= f.date_field :first_day %> 〜 <%= f.date_field :last_day %></td>
+		</tr>
+		<tr>
+			<td>人数</td>
+			<td><%= f.text_field :amount %></td>
+		</tr>
+		<tr>
+			<td>支払い方法</td>
+			<td>ご登録のクレジットカード</td>
+		</tr>
+		<tr>
+			<td>合計金額</td>
+			<td>¥<%= @item.price %></td>
+		</tr>
+</table>
+<%= f.submit "注文確認画面へ", class:"btn btn-success"%>
+<% end %>
+

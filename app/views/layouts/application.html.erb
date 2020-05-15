@@ -1,15 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PlanneR</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>PlanneR</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <script src="https://kit.fontawesome.com/944651f84d.js" crossorigin="anonymous"></script>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
+<body>
+    <header>
+      <div class="header-logo">
+        <% if admin_signed_in?  %>
+        <% else %>
+          <h2><%= link_to "PlanneR" , items_path %></h2>
+        <% end %>
+      </div>
+      <nav>
+        <ul>
+        <% if user_signed_in? %>
+          <li><%= link_to "マイページへ",user_path(current_user) , class:"btn btn-primary" %></li>
+          <li><%= link_to "ログアウト" ,destroy_user_session_path , method: :delete , class:"btn btn-primary"%></li>
+        <% else %>
+          <% if admin_signed_in?  %>
+            <li><%= link_to "商品一覧" ,admins_items_path ,class:"btn btn-primary" %></li>
+            <li><%= link_to "顧客一覧", admins_users_path ,class:"btn btn-primary" %></li>
+            <li><%= link_to "ジャンル作成",admins_genres_path ,class:"btn btn-primary" %></li>
+            <li><%= link_to "管理者ログアウト", destroy_admin_session_path , method: :delete ,class:"btn btn-primary" %></li>
+            <li><%= link_to "注文一覧" , admins_orders_path ,class:"btn btn-primary" %></li>
+            <% end %>
+          <li><%= link_to "ログイン", user_session_path , class:"btn btn-primary" %></li>
+          <li><%= link_to "新規登録", new_user_registration_path , class:"btn btn-primary" %></li>
+          <li><%= link_to "PlanneRとは" ,about_path , class:"btn btn-primary" %></li>
+        <% end %>
+          <li><%= link_to "お問い合わせ",  inquiry_path, class:"btn btn-primary" %></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="row">
+      <%= yield %>
+      </div>
+  </div>
+
+    <footer class="footer">
+    </footer>
+</body>
+
 </html>
