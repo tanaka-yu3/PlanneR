@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @reviews = current_user.reviews.all
   end
@@ -8,18 +10,21 @@ class ReviewsController < ApplicationController
   end
 
   def new
-    @review = Review.new
+    @item = Item.find(params[:item_id])
+    @review = @item.reviews.new
   end
 
   def create
-    @review = Review.new(review_params)
+    @item = Item.find(params[:item_id])
+    @review = @item.reviews.new(review_params)
+    @review.user_id = current_user.id
     @review.save
-    redirect_to reviews_path
+    redirect_to item_path(@item)
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:text)
+    params.require(:review).permit(:user_id, :item_id, :text ,:rate, photos_images:[])
   end
 end

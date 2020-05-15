@@ -4,7 +4,7 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   require 'devise/orm/active_record'
-  config.omniauth :google_oauth2,ENV['GOOGLE_APP_ID'], ENV['GOOGLE_APP_SECRET'], name: :google
+  config.omniauth :google_oauth2,ENV['GOOGLE_APP_ID'], ENV['GOOGLE_APP_SECRET'], name: :google, :skip_jwt => true
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.

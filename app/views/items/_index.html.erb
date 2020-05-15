@@ -1,31 +1,29 @@
-
-<div class="w-100">
-</div><br>
-
-
 <% items.each do |item| %>
-<div class="w-100 item-container">
-	<div class="row">
-		<div class="col-4">
+    <div class="w-100 item-container">
+    	<div class="row">
+		<div class="col-3">
 			<div>
-				¥<%= item.price %>
 			</div>
+			<% else %>
+		    <div>
+		      <i class="fas fa-bookmark" style="color: green;"><%= item.favorites.count %>人がお気に入り</i>
+		    </div>
 		</div>
-		<div class="col-6">
-		名前: <%= item.name %>
-		期間: <%= item.start_day %> 〜 <%= item.finish_day %>
-		<div>
-			説明<%= item.text %>
-		</div>
+		<div class="col-5">
+			<% if admin_signed_in? %>
+			名前:<%= link_to (item.name) , admins_item_path(item) , class:"btn btn-light"%>
+			<% else %>
+		    名前: <%= link_to (item.name) , item_path(item) , class:"btn btn-light"%>
+		  <% end %>
+		  期間: <%= item.start_day %> 〜 <%= item.finish_day %>
+		  説明<%= item.text %>
         </div>
-        <div class="col-2">
-        	<% if user_signed_in? %>
-        	  <%= link_to "詳細画面へ", item_path(item) , class:"btn btn-primary"%>
-        	  <%= link_to "購入画面へ" , item_new_order_path(item) , class:"btn btn-success" %>
-        	<% else %>
-        	  <%= link_to "詳細画面へ", item_path(item)%>
-        	<% end %>
+        <div class="col-1">
+          <% if user_signed_in? && item.user_id != current_user.id %>
+            <%= link_to "購入する" , item_new_order_path(item) , class:"btn btn-success" %>
+          <% end %>
         </div>
     </div>
-</div>
-<% end %>
+    </div>
+  <% end %>
+<%= paginate items %>

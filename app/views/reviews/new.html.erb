@@ -1,10 +1,28 @@
-<h2>レビューを作成する</h2>
 
-<%= form_for @review do |f| %>
-<%= f.text_field :text %>
-<div id="star">
-<%= f.hidden_field :rate %>
+<h2>評価する</h2>
+<div class="w-100">
 </div>
+
+<div class="col-6">
+	<div class="w-100 item-container">
+		名前: <%= @item.name %>
+		期間: <%= @item.start_day %> 〜 <%= @item.finish_day %>
+		説明<%= @item.text %>
+    </div>
+</div>
+
+<div class="6">
+<%= form_for [@item, @review] ,url:(item_reviews_path) do |f| %>
+<div class="w-100">
+</div><br>
+<div id="star">
+ <%= f.hidden_field :rate %>
+</div><br>
+<div>
+	<%= f.text_area :text %>
+</div><br>
+
 
 <%= f.submit "レビューを投稿する"%>
 <% end %>
+</div>

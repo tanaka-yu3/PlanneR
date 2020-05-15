@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+
+  enums:
+    item:
+      item_status:
+        permitting: 管理者承認中
+        release: 販売中
+        expired: 期限切れ
+        stopping: 一時停止中

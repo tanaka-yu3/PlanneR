@@ -16,8 +16,8 @@
 		<% @genres.each do |genre| %>
 		<tr>
 			<td><%= genre.name %></td>
-			<td></td>
-			<td><%= link_to "delete" , admins_genre_path(genre) , method: :delete %></td>
+			<td><%= genre.items.count %></td>
+			<td><%= link_to "削除する" , admins_genre_path(genre) , method: :delete ,data: {confirm: "本当に削除しますか？"} ,class:"btn btn-danger" %></td>
 		</tr>
 		<% end %>
 </table>

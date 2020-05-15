@@ -1,7 +1,29 @@
+<% if admin_signed_in? %>
+<div class="container">
+	<div class="row">
+		<h2>商品一覧</h2>
+		<div class="w-100 item-container">
+			最新
+			<%= render "index" ,items:@items %>
+		</div>
+</div>
+<% else %>
 
 <div class="container">
-<div class="row">
-<h2>商品一覧</h2>
-<%= render "index" , items:@items %>
+	<div class="row">
+		<h2>商品一覧</h2>
+		<div class="w-100 item-container">
+			最新
+			<%= render "index" ,items:@latest_items %>
+		</div>
+		<div class="w-100 item-container">
+			人気
+			<%= render "index" ,items:@popular_items %>
+		</div>
+		<div class="w-100 item-container">
+			近日公開
+			<%= render "index" ,items:@commingsoon_items %>
+		</div>
+	</div>
 </div>
-</div>
+<% end %>

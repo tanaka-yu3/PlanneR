@@ -31,7 +31,7 @@
     </tr>
     <tr>
       <td>郵便番号</td>
-      <td> <%= f.text_field :postcode ,id:"user_postcode"%></td>
+      <td> <%= f.text_field :postcode ,id: "user_postcode"%></td>
       <td></td>
     </tr>
     <tr>
@@ -42,7 +42,7 @@
     <tr>
       <td>パスワード</td>
       <td><%= f.password_field :password, autocomplete: "new-password" %></td>
-      <td><% if @minimum_password_length %><em>(<%= @minimum_password_length %> characters minimum)</em><% end %></td>
+      <td><% if @minimum_password_length %><em>(<%= @minimum_password_length %> 文字以上で入力してください)</em><% end %></td>
     </tr>
     <tr>
       <td>パスワード確認用</td>
@@ -52,6 +52,6 @@
 </table>
 <div class="log-botton">
   <%= f.submit "登録する" , class:"btn btn-success btn-lg" %>
-  <%= link_to 'Googleログイン',  user_google_omniauth_authorize_path ,class:"btn btn-dark"%>
+  <%= link_to '/Googleアカウントでログイン',  user_google_omniauth_authorize_path ,class:"fab fa-google btn btn-light btn-lg"%>
 </div>
 <% end %>

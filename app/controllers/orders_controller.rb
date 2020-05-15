@@ -1,23 +1,31 @@
 class OrdersController < ApplicationController
+	before_action :authenticate_user!
 
-	before_action :confirm, only: [:create]
-	
 	def new
-		@order = current_user.orders.new
 		@item = Item.find(params[:item_id])
+		@order = @item.orders.new
 	end
 
 	def confirm
-		@order = current_user.orders.new(order_params)
+		@item = Item.find(params[:item_id])
+		@order = @item.orders.new(order_params)
 	end
 
 	def create
-		@order = current_user.orders.new(order_params)
+		@item = Item.find(params[:item_id])
+		@order = @item.orders.new(order_params)
+		@order.user_id = current_user.id
 		@order.save
+		redirect_to item_thanks_path
+	end
+
+	def thanks
+
 	end
 
 	private
+
 	def order_params
-		params.reqiure(:order).permit(:user_id, :item_id, :start_day, :finish_day, :amout)
+		params.require(:order).permit(:user_id, :item_id, :first_day, :last_day, :amount)
 	end
 end

@@ -3,22 +3,8 @@
 
 
 <% users.each do |user| %>
-<div class="w-100 item-container">
-	<div class="row">
-		<div class="col-4">
-			image
-			<div>
-				<%= user.family_name %>
-				<%= user.last_name %>
-			</div>
-		</div>
-		<div class="col-6">
-		<div>
-		</div>
-        </div>
-        <div class="col-2">
-        	  <%= link_to "詳細画面へ", user_path(user)%>
-        </div>
-    </div>
+<div class="col-2 item-container">
+<%= link_to (user.family_name), user_path(user)%>(<%= user.id %>)
+<%= attachment_image_tag user , :image, :fill, 150,100 %><br>
 </div>
 <% end %>

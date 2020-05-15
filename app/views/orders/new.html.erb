@@ -3,7 +3,7 @@
 </div>
 
 <table class="table">
-	<%= form_for @order ,url:(item_order_path) do |f| %>
+	<%= form_for [@item , @order] ,url:(item_order_confirm_path) do |f| %>
 		<tr>
 			<td>商品名</td>
 			<td><%= @item.name %></td>
