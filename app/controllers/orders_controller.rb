@@ -1,6 +1,11 @@
 class OrdersController < ApplicationController
 	before_action :authenticate_user!
 
+	def index
+		@user = User.find(params[:user_id])
+		@orders = @user.orders.all
+	end
+
 	def new
 		@item = Item.find(params[:item_id])
 		@order = @item.orders.new

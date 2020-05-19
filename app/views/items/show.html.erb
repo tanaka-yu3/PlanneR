@@ -1,55 +1,92 @@
-<div class="w-100"></div>
+
 <div class="w-100 item-container">
 	<div class="w-100">
-    <div class="container">
+    <div class="item-image-box">
     <div id="item-slide">
 		<% @item.photos.each do |image| %>
       <div><%= attachment_image_tag image ,:image ,:fill, 1000, 500 %></div>
     <% end %>
     </div>
   </div>
-		<p><%= @item.video %></p>
+  <% if @item.video.present? %>
+  <iframe width="100%" height="500" src="https://www.youtube.com/embed/<%= @item.video %>"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <% end %>
 	</div>
 　<div class="w-100">
 　</div>
-  商品名:<%= @item.name %>期間:<%= @item.start_day %> 〜 <%= @item.finish_day %>
-  <div>
-  	場所:<%= @item.address %>
-  </div>
-  <div>
-  	説明:<%= @item.text %>
-  </div>
-  <div>
-  	制限:<%= @item.total %>
-  </div>
-  <% if user_signed_in? %>
-  <div>
-    <%= render "favorites/form" ,item:@item %>
-  </div>
-  <% if @item.item_status != 0 %>
-  <% else %>
-    <% if current_user.id == @item.user_id %>
-  	  <%= link_to "商品を編集する" ,edit_item_path(@item) , class:"btn btn-success" %>
-	    <%= link_to "商品を削除する" ,item_path(@item) , method: :delete ,class:"btn btn-danger" , data: {confirm: "商品を削除しますか？"} %>
-	  <% else %>
-	    <%= link_to "購入する" , item_new_order_path(@item) ,class:"btn btn-success"%>
-      <%= link_to "レビューの作成" ,new_item_review_path(@item),class:"btn btn-success" %>
+<% if user_signed_in? %>
+<div class="favorite-font">
+　　<%= render "favorites/form" ,item:@item %>
+　　<%= @item.favorites.count %>人がお気に入りしています
+</div>
+ <% if  current_user.id == @item.user_id %>
+    <%= link_to edit_item_path(@item) , class:"btn btn-dark" do %>
+    <i class="fas fa-cog"> 変更する</i>
     <% end %>
-  <% end %>
+    <%= link_to item_path(@item) , method: :delete ,class:"btn btn-danger" , data: {confirm: "商品を削除しますか？"} do %>
+    <i class="fas fa-trash-alt"> 削除する</i>
+    <% end %>
+ <% end %>
+    <%= link_to new_item_review_path(@item) ,class:"btn btn-primary " do %>
+    <i class="fas fa-pen-alt"> 評価する</i>
    <% end %>
-  出品者：<%= link_to (@item.user.family_name) , user_path(@item.user) %>
-  ステータス：<%= @item.item_status_i18n %>
-  <% if admin_signed_in? %>
+   <% if @item.item_status == 1 %>
+     <%= link_to item_new_order_path(@item) ,class:"btn btn-success" do %>
+     <i class="fas fa-shopping-cart"> 購入する</i>
+     <% end %>
+   <% end %>
+ <% end %>
+<table class="table">
+    <tr>
+      <td> 商品名:</td>
+      <td> <%= @item.name %></td>
+    </tr>
+    <tr>
+      <td>値段：</td>
+      <td>￥<%= @item.price %>/人</td>
+    </tr>
+    <tr>
+      <td>期間:</td>
+      <td><%= @item.start_day %> 〜 <%= @item.finish_day %></td>
+    </tr>
+    <tr>
+      <td>制限:</td>
+      <td><%= @item.total %>名</td>
+    </tr>
+    <tr>
+      <td>説明:</td>
+      <td><%= @item.text %></td>
+    </tr>
+    <tr>
+      <td>場所:</td>
+      <td><%= @item.address %></td>
+    </tr>
+    <tr>
+      <td>ステータス：</td>
+      <td><%= @item.item_status_i18n %></td>
+    </tr>
+    <tr>
+      <td>出品者：</td>
+      <td><%= link_to (@item.user.family_name) , user_path(@item.user) %>さん</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+</table>
+<% if  admin_signed_in? %>
   <%= form_for @item ,url:admins_item_path(@item) ,method: :PATCH do |f| %>
-  <%= f.select :item_status , Item.item_statuses_i18n.keys.map{|k| [I18n.t("enums.item.item_status.#{k}"),k]} %>
-  <%= f.submit "更新する",class:"btn btn-success"%>
-  <% end %>
-      <% end %>
+ <%= f.select :item_status , Item.item_statuses_i18n.keys.map{|k| [I18n.t("enums.item.item_status.#{k}"),k]} %>
+ <%= f.submit "更新する",class:"btn btn-success"%>
+ <% end %>
+<% end %>
+ 
 </div>
 
 <div class="w-100 item-container">
+  <h2>この商品の評価</h2>
   <% if @reviews.present? %>
-    <%= render "reviews/index" , reviews:@reviews %>
+    <%= render "reviews/index" , reviews:@reviews ,item:@item %>
   <% else %>
   <div class="text-center">
      <h2>レビューは未だありません</h2>

@@ -1,82 +1,60 @@
-<div class="w-100">
-</div>
+<div class="w-100"></div>
 
-
-<div class="col-3">
-	<%= attachment_image_tag @user , :image , :fill , 250 ,150 %>
-</div>
-
-<div class="col-9">
-	<table class="table">
+<div class="row">
+	<div class="col-3">
+		<table class="table">
+		  <tr>
+			<td><%= attachment_image_tag @user , :image , :fill , 300 ,300 %></td>
+		  </tr>
+		  <tr>
+			<td><%= @user.family_name %><%= @user.last_name %>さん</td>
+			<% if current_user == @user %>
+			<td><%= link_to edit_user_registration_path(@user) ,class:"btn btn-dark" do %>
+			<i class="fas fa-cog"></i>
+			</td><% end %>
+			<% else %>
+			<td></td>
+			<% end %>
+		  </tr>
 	  <tr>
-	  	<td>name</td>
-	  	<td><%= @user.family_name %>さん</td>
-	  	<td><% if admin_signed_in? %>
-            <%= link_to  "退会させる", user_registration_path, data: { confirm: "Are you sure?" }, method: :delete , class:"btn btn-danger"%>
-	        <% else %>
-	  		  <%= link_to "編集する", edit_user_registration_path ,class:"btn btn-success" %>
-	  		<% end %>
+	    <td>フォロー<br>
+	        フォロワー
+	    </td>
+	    <td><%= link_to (@user.follower.count), user_follows_path(@user)  %><br>
+	        <%= link_to (@user.followed.count), user_followers_path(@user) %>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>レビューした数<%= link_to (@user.reviews.count) , user_reviews_path(@user)  %><br>
+	    	レビューされた数</td>
+	  </tr>
+	  <tr>
+	  	<td>あなたの売上金:1000円</td>
+	  </tr>
+	  <tr>
+	  	<td><%= link_to "プランをつくる", new_item_path %></td>
+	  </tr>
+	  <tr>
+	  	<td><%= link_to user_items_path(@user) do %>
+	  		あなたのプラン
+	  		<% end %>(<%= @user.items.count%>件)
 	  	</td>
-	  	<td></td>
 	  </tr>
 	  <tr>
-	    <td>フォローしている人</td>
-	    <td><%= link_to "フォロー数"%></td>
-	    <td>フォロワー数</td>
-	    <td></td>
+	  	<td><%= link_to "気になっているプラン" ,user_favorites_path(@user) %>(<%= @user.favorites.count %>件)</td>
 	  </tr>
 	  <tr>
-	    <td>レビューした数</td>
-	    <td><%= link_to (@user.reviews.count) %></td>
-	    <td>レビューされた数</td>
-	    <td></td>
+	  	<td><%= link_to "購入されたプラン" ,user_sold_items_path(@user) %></td>
+	  </tr>
+	  <tr>
+	  	<td><%= link_to "購入したプラン" ,user_orders_path(@user) %>(<%= @user.orders.count %>件)</td>
 	  </tr>
 	</table>
+	</div>
+	<div class="col-9">
+		<h2><%= @user.family_name %>さんのプラン</h2>
+	    <%= render "items/index", items:@items ,user:@user %>
+	    <%= paginate @items %>
+	</div>
 </div>
 
-<div class="w-100">
-</div>
-
-<div class="col-6">
-	<h2>サービス（<%= @user.items.count %>件）
-		<%= link_to "サービスをはじめる", new_item_path, class:"btn btn-info" %>
-	</h2>
-	<% @items.each do |item| %>
-	<div class="item-container">
-		<div class="row">
-		<div class="col-3">
-		</div>
-		<div class="col-6">
-			<p><%= link_to (item.name) ,item_path(item) %></p>
-			<p><%= item.start_day %> 〜 <%= item.finish_day %></p>
-		</div>
-		<div class="col-3">
-			<%= link_to item_path(item) , method: :DELETE ,class:"btn btn-danger",data: {confirm: "サービスを削除しますか？"} do %>
-			<i class="fas fa-trash-alt"></i>
-			<% end %>
-			<%= link_to edit_item_path(item) ,class:"btn btn-dark" do %>
-			<i class="fas fa-cog"></i>
-			<% end %>
-		</div>
-	</div>
-	</div>
-	<% end %>
-</div>
-
-<div class="col-6">
-	<h2>利用したサービス（<%= @user.orders.count %>件）</h2>
-	<% @orders.each do |order|%>
-	<div class="item-container">
-		<div class="row">
-		<div class="col-3">
-			<p><%= link_to (order.item.name), item_path(order) %>/<%= order.item.price %></p>
-		</div>
-		<div class="col-9">
-			<p><%= order.first_day %>〜<%= order.last_day%></p>
-			<p>レビュー</p>
-			<p><%= link_to (order.item.user.family_name) , user_path(order) %></p>
-		</div>
-	</div>
-	</div>
-	<% end %>
-</div>

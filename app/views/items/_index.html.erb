@@ -1,29 +1,39 @@
-<% items.each do |item| %>
-    <div class="w-100 item-container">
-    	<div class="row">
-		<div class="col-3">
-			<div>
-			</div>
-			<% else %>
-		    <div>
-		      <i class="fas fa-bookmark" style="color: green;"><%= item.favorites.count %>人がお気に入り</i>
-		    </div>
-		</div>
-		<div class="col-5">
-			<% if admin_signed_in? %>
-			名前:<%= link_to (item.name) , admins_item_path(item) , class:"btn btn-light"%>
-			<% else %>
-		    名前: <%= link_to (item.name) , item_path(item) , class:"btn btn-light"%>
-		  <% end %>
-		  期間: <%= item.start_day %> 〜 <%= item.finish_day %>
-		  説明<%= item.text %>
+ <% items.each do |item| %>
+	   <div class="col no-gutters">
+	     <div>
+	       <%= link_to item_path(item) ,class:"image-action" do %>
+	       <% if current_page?(items_path) %>
+	       	<%= attachment_image_tag item.photos.first , :image ,:fill ,1100 ,500 %>
+	       	<% else %>
+	       	<%= attachment_image_tag item.photos.first , :image ,:fill ,1000 ,300 %>
+	       <% end %>
+	       
+		   <% end %>
+	     </div>
+	     <div>
+	       <i class="fas fa-bookmark" style="color: green;"><%= item.favorites.count %>人がお気に入り</i>
+	     </div>
+	   </div>
+	   <div class="col no-gutters">
+	   	<table class="table">
+	   		<tr>
+	   			<td>名前:</td>
+	   			<td> <%= item.name %></td>
+	   		</tr>
+	   		<tr>
+	   			<td>期間:</td>
+	   			<td><%= item.start_day %> 〜 <%= item.finish_day %></td>
+	   		</tr>
+	   		<tr>
+	   			<td>値段：</td>
+	   			<td>¥<%= item.price %></td>
+	   		</tr>
+	   	</table>
         </div>
-        <div class="col-1">
+        <div class="col no-gutters">
           <% if user_signed_in? && item.user_id != current_user.id %>
             <%= link_to "購入する" , item_new_order_path(item) , class:"btn btn-success" %>
           <% end %>
         </div>
-    </div>
-    </div>
-  <% end %>
-<%= paginate items %>
+<% end %>
+  

@@ -19,15 +19,18 @@
    margin: 0;
    padding: 0;
    box-sizing: border-box;
+   font-family: 'Ubuntu Mono', monospace;
  }
 
  header{
  	height: 70px;
+ 	background-color: black;
  }
 
  .header-logo{
  	float: left;
- 	line-height: 70px;
+ 	color: white;
+ 	font-size: 100px;
  }
 
  nav {
@@ -44,13 +47,18 @@ nav li{
 	line-height: 70px;
 }
 
-text_fied{
-	width: 200px;
+.container{
+    position: relative;
 }
 
-.container{
-    height: 500px;
-    width: 100%;
+.image-action:hover{
+	opacity: 0.8;
+}
+
+span{
+	font-size: 10px;
+	background-color: red;
+	color: white;
 }
 
 .hhh{
@@ -58,4 +66,20 @@ text_fied{
 	height: 500px;
 	background-position: center;
 	background-size: contain;
+}
+
+footer{
+	position: absolute;
+	margin-top: 100px;
+	bottom: 0;
+	height: 50px;
+	background-color: black;
+	width: 100%;
+	color: white;
+}
+
+footer p{
+	text-align: right;
+	margin-right: 70px;
+	line-height: 50px;
 }

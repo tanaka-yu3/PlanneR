@@ -10,7 +10,17 @@
 		<tr>
 			<td><%= @review.user.family_name %></td>
 			<td><%= @review.text %></td>
-			<td><%= @review.rate %></td>
+			<td><div id="<%= @review.id %>"></div>
+				<script>
+					$("#<%= @review.id %>").raty({
+						size: 36,
+						starOff: '<%= asset_path("star-off.png") %>',
+                        starOn: '<%= asset_path("star-on.png") %>',
+                        readOnly: true,
+                        score: '<%= @review.rate %>'
+					});
+				</script>
+			</td>
 			<td></td>
 		</tr>
 </table>
