@@ -1,0 +1,8 @@
+<% users.each do |user| %>
+<div class="col-2 item-container">
+<%= link_to user_path(user) do %>
+<%= attachment_image_tag user , :image, :fill, 150,100 %>
+<% end %>
+<%= user.family_name %>さん
+</div>
+<% end %>

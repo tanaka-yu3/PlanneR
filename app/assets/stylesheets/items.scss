@@ -2,6 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+.item-image{
+	width: 100%;
+}
+
+
+.item-image-box{
+	height: 500px;
+	width: 100%;
+}
+
+.item-slide{
+	width: 100%;
+}
+
+
 .item-container{
 	border: 0.5px solid lightgray;
 	border-radius: 7px;
@@ -9,6 +25,12 @@
 	margin: 10px;
 }
 
-.slide-container{
-    height: 500px;
+
+
+.favorite-font{
+	font-size: 30px;
+	float: left;
 }
+
+// <div class="item-image-box">
+//     <div id="item-slide">

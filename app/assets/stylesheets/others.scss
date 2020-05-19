@@ -1,3 +1,41 @@
 // Place all the styles related to the Others controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1{
+	font-weight:80px;
+}
+
+.about-box{
+	width: 100%;
+	background-color: black;
+	color: white;
+}
+
+.about-contents{
+	margin: 0 ,0 , 100px,0 ;
+}
+
+.about1{
+	background-image: url(about5.jpg);
+	background-position: center;
+	background-size: cover;
+	height: 350px;
+	width: 270px;
+}
+
+.about2{
+	background-image: url(woman.jpg);
+	background-position: center;
+	background-size: cover;
+	height: 350px;
+	width: 270px;
+}
+
+.about3{
+	background-image: url(about6.jpg);
+	background-position: center;
+	background-size: cover;
+	height: 350px;
+	width: 270px;
+}

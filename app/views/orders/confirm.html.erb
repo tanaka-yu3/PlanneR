@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 			<td>合計金額</td>
-			<td>¥<%= @item.price %></td>
+			<td>¥<%= @item.price*@order.amount %></td>
 		</tr>
 </table>
 <%= f.submit "注文を確定する", class:"btn btn-success" %>

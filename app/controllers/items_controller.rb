@@ -2,9 +2,9 @@ class ItemsController < ApplicationController
   before_action :authenticate_user! , only:[:new , :create , :edit ,:update , :destroy]
 
   def index
-    @latest_items = Item.order(create_at: "DESC").page(params[:page]).per(3)
-    @popular_items = Item.page(params[:page]).per(4)
-    @commingsoon_items = Item.where("(start_day > ?) AND (item_status != ?)",Date.today , 1).page(params[:page]).per(5)
+    @latest_items = Item.order(create_at: "DESC").limit(3)
+    @popular_items = Item.all.limit(3)
+    @comingsoon_items = Item.where("(start_day > ?) AND (item_status != ?)",Date.today , 1).limit(3)
   end
 
   def show
@@ -21,6 +21,9 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.new(item_params)
     @item.photos.build
+    url = params[:item][:video]
+    url = url.last(11)
+    @item.video = url
     @item.save
     redirect_to user_path(current_user)
   end

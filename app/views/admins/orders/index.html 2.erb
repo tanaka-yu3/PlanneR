@@ -1,0 +1,31 @@
+<h2>注文一覧</h2>
+
+<div class="w-100">
+</div>
+<div class="col-2">
+	<p>出品者</p>
+</div>
+<div class="col-8 text-center">
+	<p>商品</p>
+</div>
+<div class="col-2">
+	<p>購入者</p>
+</div>
+
+<div class="w-100">
+</div>
+
+<% @orders.each do |order| %>
+	<div class="col-2">
+		<%= attachment_image_tag order.item.user , :image ,:fill ,100 ,100 %><br>
+		<%= order.item.user.family_name %>
+	</div>
+	<div class="col-8 text-center">
+		<%= order.item.name %><br>
+		<%= order.first_day %>〜<%= order.last_day %>
+	</div>
+	<div class="col-2">
+		<%= attachment_image_tag order.user , :image ,:fill ,100 ,100 %><br>
+		<%= order.user.family_name %>
+	</div>
+	<% end %>

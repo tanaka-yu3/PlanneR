@@ -1,7 +1,6 @@
+<div class="row">
 <h2>管理者商品画面</h2>
 <div class="w-100"></div>
-
-
 <div class="col-6">
   <h2>承認待ち商品一覧</h2>
   <div class="w-100"></div>
@@ -10,4 +9,5 @@
 <div class="col-6">
 	<h2>期限切れ商品<%= link_to "一括停止"%></h2>
 	<%= render "items/index" ,items:@destroy_items %>
+</div>
 </div>
