@@ -1,31 +1,28 @@
-<table class="table">
-　　　<tr>
-		<td>商品</td>
-		<td><i class="fas fa-user"></i> 出品者</td>
-		<td>星の数</td>
-	</tr>
-	<% reviews.each do |review| %>
-	<tr>
-		<td><%= link_to (review.item.name) , item_path(review.item) %></td>
-		<td><%= link_to (review.item.user.family_name) ,user_path(review.item.user) %>さん</td>
-		<td><div id="<%= review.id %>"></div>
-		<script>
-			$("#<%= review.id %>").raty({
-				size: 36,
-				starOff: '<%= asset_path("star-off.png") %>',
-	            starOn: '<%= asset_path("star-on.png") %>',
-	            readOnly: true,
-	            score: '<%= review.rate %>'
-		});
-		</script>
-		</td>
-		<td></td>
-	</tr>
-	<% end %>
-</table>
 
-<% if current_page?("/items/#{item.id}") %>
-<td>購入者</td>
-<td>星の数</td>
-<td>コメント</td>
+<table class="table" style="width: 100%;">
+　<tr>
+	<td>商品</td>
+	<td><i class="fas fa-user"></i> 出品者</td>
+	<td>コメント</td>
+	<td>星の数</td>
+  </tr>
+<% reviews.each do |review| %>
+  <tr>
+	<td><%= link_to (review.item.name) , item_path(review.item) %></td>
+	<td><%= link_to (review.item.user.family_name) ,user_path(review.item.user) %>さん</td>
+	<td><%= review.text %></td>
+	<td><div id="<%= review.id %>"></div>
+	<script>
+		$("#<%= review.id %>").raty({
+			size: 36,
+			starOff: '<%= asset_path("star-off.png") %>',
+            starOn: '<%= asset_path("star-on.png") %>',
+            readOnly: true,
+            score: '<%= review.rate %>'
+	});
+	</script>
+	</td>
+	<td></td>
+  </tr>
 <% end %>
+</table>

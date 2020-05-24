@@ -1,4 +1,4 @@
-<% if current_page?("/users/#{@user.id}/items") %>
-	<h2>あなたの商品</h2>
-	<%= render "/items/index" ,items:@user_items , user:@user %>
-<% end %>
+<div class="row">
+  <h2 class="title">- あなたのプラン -</h2>
+  <%= render "/items/index" ,items:@items , user:@user %>
+</div>

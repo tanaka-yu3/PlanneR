@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   
-  root 'others#top'
+  root 'others#about'
   get '/about' => 'others#about' ,as: 'about'
   get '/inquiry' => 'others#inquiry' , as:'inquiry'
+  get 'search' => 'searches#search'
 
   #ユーザー側
   devise_for :users, controllers: {
@@ -13,11 +14,16 @@ Rails.application.routes.draw do
     get 'follows' => 'relationships#follower', as: 'follows'
     get 'followers' => 'relationships#followed', as: 'followers'
     get 'reviews' => 'reviews#index'
+    get 'reviewed' => 'reviews#reviewed'
     get 'orders' => 'orders#index'
     get 'favorites' => 'favorites#index'
     get 'items' => 'users#items'
     get 'sold_items' => 'users#sold_items'
   end
+
+  get 'items/latest' => 'items#latest'
+  get 'items/popular' => 'items#popular'
+  get 'items/comming_soon' => 'items#comming_soon'
   resources :items do
     get '/order/new' => 'orders#new' ,as: 'new_order'
     post '/order' => 'orders#create'

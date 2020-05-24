@@ -1,23 +1,26 @@
 
-<h2>ジャンルを作成する</h2>
-<div class="w-100">
-</div>
-<%= form_for @genre , url: admins_genres_path , method: :post do |f| %>
-<%= f.text_field :name %>
-<%= f.submit "CREATE", class:"btn btn-primary"%>
-<% end %>
+<h2 class="title">- ジャンルを作成する -</h2>
+  <div class="text-center">
+  	<div class="validates">
+  		<%= flash[:save] %><%= flash[:unsave] %>
+  	</div>
+  	<%= form_for @genre , url: admins_genres_path , method: :post do |f| %>
+	  <%= f.text_field :name ,placeholder:"ここに入力" %>
+	  <%= f.submit "作成", class:"btn btn-primary"%>
+	<% end %>
+  </div>
 
 <table class="table">
-		<tr>
-			<td>ジャンル名</td>
-			<td>使用合計</td>
-			<td></td>
-		</tr>
-		<% @genres.each do |genre| %>
-		<tr>
-			<td><%= genre.name %></td>
-			<td><%= genre.items.count %></td>
-			<td><%= link_to "削除する" , admins_genre_path(genre) , method: :delete ,data: {confirm: "本当に削除しますか？"} ,class:"btn btn-danger" %></td>
-		</tr>
-		<% end %>
+  <tr>
+    <td>ジャンル名</td>
+    <td>使用合計</td>
+    <td></td>
+  </tr>
+<% @genres.each do |genre| %>
+  <tr>
+    <td><%= genre.name %></td>
+    <td><%= genre.items.count %></td>
+    <td><%= link_to "削除する" , admins_genre_path(genre) , method: :delete ,data: {confirm: "本当に削除しますか？"} ,class:"btn btn-danger" %></td>
+  </tr>
+<% end %>
 </table>

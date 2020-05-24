@@ -1,1 +1,6 @@
-<%#= render "/items/index" ,items:@items ,user:@user %>
+<h2 class="title">- 購入されたプラン -</h2>
+<% if @orders.present? %>
+  <%= render "orders/index" ,orders:@orders ,user:@user %>
+<% else %>
+ <h2 class="title">購入されたプランは未だありません</h2>
+<% end %>

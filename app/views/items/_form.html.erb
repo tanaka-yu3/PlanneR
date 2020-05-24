@@ -1,59 +1,74 @@
 
-<%= form_for item do |f| %>
-	<table class="table">
-		<tr>
-			<td>画像 <span>必須</span></td>
-			<td><%= f.attachment_field :photos_images ,multiple: true%></td>
-		</tr>
-			<tr>
-				<td>商品名 <span>必須</span></td>
-				<td><%= f.text_field :name %></td>
-			</tr>
-			<tr>
-				<td>ジャンル <span>必須</span></td>
-				<td><%= f.collection_select :genre_id  ,genres , :id, :name , class:"btn btn-default" %></td>
-			</tr>
-			<tr>
-				<td>商品説明 <span>必須</span></td>
-				<td><%= f.text_area :text %></td>
-			</tr>
-			<tr>
-				<td>Youtube URL</td>
-				<td><%= f.text_field :video %></td>
-			</tr>
-			<tr>
-				<td>場所 <span>必須</span></td>
-				<td><%= f.text_field :address %></td>
-			</tr>
-			<tr>
-				<td>開始日 <span>必須</span></td>
-				<td><%= f.date_field :start_day %></td>
-			</tr>
-			<tr>
-				<td>終了日 <span>必須</span></td>
-				<td><%= f.date_field :finish_day %></td>
-			</tr>
-			<tr>
-				<td>人数制限 <span>必須</span></td>
-				<td><%= f.text_field :total %></td>
-			</tr>
-			<tr>
-				<td>値段 <span>必須</span></td>
-				<td><%= f.text_field :price %></td>
-			</tr>
-			<tr>
-				<td>販売手数料</td>
-				<td><div id ></div></td>
-			</tr>
-			<tr>
-				<td>利益</td>
-				<td></td>
-			</tr>
-	</table>
-		<div>
+<div class="validates">
+	<%= flash[:item_unsave]%>
+</div>
+
+<div class="text-center">
+  <%= form_for item do |f| %>
+    <%= render 'layouts/error_messages' , model: f.object %>
+	    <p>画像 <span class="item-attention">必須</span></p>
+		<% @item.photos.each do |image| %>
+	      <div><%= attachment_image_tag image ,:image ,:fill, 500, 300 %></div>
+	    <% end %><br>
+		<div class="item-form">
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+		</div>
+
+		<div class="item-form">
+			<p>商品名 <span class="item-attention">必須</span></p>
+			<div class="item-field">
+				<%= f.text_field :name %>
+			</div>
+		</div>
+
+		<div class="item-form">
+			<p>ジャンル <span class="item-attention">必須</span></p>
+			<%= f.collection_select :genre_id  ,genres , :id, :name , class:"btn btn-default" %>
+		</div>
+
+		<div class="item-form">
+			<p>商品説明 <span class="item-attention">必須</span></p>
+			<%= f.text_area :text %>
+		</div>
+
+		<div class="item-form">
+			<p>Youtube URL</p>
+			<%= f.text_field :video %>
+		</div>
+
+		<div class="item-form">
+			<p>場所 <span class="item-attention">必須</span></p>
+			<%= f.text_field :address %>
+		</div>
+
+		<div class="item-form">
+			<p>開始日 <span class="item-attention">必須</span></p>
+			<%= f.date_field :start_day %>
+		</div>
+
+		<div class="item-form">
+			<p>終了日 <span class="item-attention">必須</span></p>
+			<%= f.date_field :finish_day %>
+		</div>
+
+		<div class="item-form">
+			<p>人数制限 <span class="item-attention">必須</span></p>
+			<%= f.text_field :total %>
+		</div>
+
+		<div class="item-form">
+			<p>値段 <span class="item-attention">必須</span></p>
+			<%= f.text_field :price %>
+		</div>
+
+		<div class="item-form">
 			<%= f.hidden_field :item_status %>
 			<%= f.submit "登録" , class:"btn btn-success" %>
 		</div>
 		<% end %>
-	</div>
 </div>

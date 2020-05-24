@@ -2,7 +2,13 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @reviews = current_user.reviews.all
+    @user = User.find(params[:user_id])
+    @reviews = @user.reviews.all
+  end
+
+  def reviewed
+    @user = User.find(params[:user_id])
+    @reviews = Review.where(item: @user.items)
   end
 
   def show
@@ -20,6 +26,7 @@ class ReviewsController < ApplicationController
     @review = @item.reviews.new(review_params)
     @review.user_id = current_user.id
     @review.save
+    flash[:review_save] = "レビューを登録しました！！"
     redirect_to item_path(@item)
   end
 

@@ -81,3 +81,5 @@ gem 'dotenv-rails'
 gem 'jp_prefecture'
 
 gem 'enum_help'
+
+gem 'payjp'

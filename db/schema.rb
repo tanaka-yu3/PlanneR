@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_124457) do
     t.integer "item_id"
     t.integer "user_id"
     t.integer "amount"
+    t.integer "price"
     t.integer "pay"
     t.date "first_day"
     t.date "last_day"
