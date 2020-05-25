@@ -1,30 +1,23 @@
 
-<h2>評価する</h2>
-<div class="w-100">
-</div>
+<h2 class="title">- 評価する -</h2>
+  <div class="row">
+	<div class="col-8">
+	  <div>
+			名前: <%= @item.name %>
+			期間: <%= @item.start_day %> 〜 <%= @item.finish_day %>
+			説明<%= @item.text %>
+	  </div>
+	</div>
 
-<div class="col-6">
-	<div class="w-100 item-container">
-		名前: <%= @item.name %>
-		期間: <%= @item.start_day %> 〜 <%= @item.finish_day %>
-		説明<%= @item.text %>
+	<div class="col-4">
+	  <%= form_for [@item, @review] ,url:(item_reviews_path) do |f| %>
+	    <div id="star">
+	      <%= f.hidden_field :rate %>
+	    </div><br>
+	    <div>
+		  <%= f.text_area :text %>
+	    </div><br>
+          <%= f.submit "レビューを投稿する"%>
+	  <% end %>
     </div>
-</div>
-
-<div class="6">
-<%= form_for [@item, @review] ,url:(item_reviews_path) do |f| %>
-<div class="w-100">
-</div><br>
-<div>
-</div>
-<div id="star">
- <%= f.hidden_field :rate %>
-</div><br>
-<div>
-	<%= f.text_area :text %>
-</div><br>
-
-
-<%= f.submit "レビューを投稿する"%>
-<% end %>
 </div>

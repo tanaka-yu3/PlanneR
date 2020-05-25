@@ -1,5 +1,5 @@
-<h2>お気に入りした商品</h2>
-
+<h2 class="title">- 気になっているプラン -</h2>
+<% if @favorites.present? %>
 <table class="table">
 		<tr>
 			<td>商品</td>
@@ -19,3 +19,6 @@
 		</tr>
 		<% end %>
 </table>
+<% else %>
+  <h2 class="title">気になっているプランはまだありません</h2>
+<% end %>

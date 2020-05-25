@@ -1,10 +1,8 @@
-<div class="w-100">
-</div><br>
-
-
 <% users.each do |user| %>
-<div class="col-2 item-container">
-<%= link_to (user.family_name), user_path(user)%>(<%= user.id %>)
-<%= attachment_image_tag user , :image, :fill, 150,100 %><br>
-</div>
+  <%= link_to user_path(user) do %>
+	  <div class="col-2" style="float: left;">
+	    <%= attachment_image_tag user , :image, :fill, 200,200 , class:"image-action" %><br>
+	    <%= user.family_name %> (会員番号<%= user.id %>)
+	  </div>
+  <% end %>
 <% end %>

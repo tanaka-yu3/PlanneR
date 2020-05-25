@@ -1,6 +1,6 @@
-<h2>Follower Users</h2>
+<h2 class="title">- <%= @user.family_name%>さんのフォロワー -</h2>
 <% if @users.count > 0 %>
   <%= render '/users/index', users: @users %>
 <% else %>
-  <p>ユーザーはいません</p>
+  <p class="title">まだユーザーはいません</p>
 <% end %>

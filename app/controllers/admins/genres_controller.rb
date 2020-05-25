@@ -8,8 +8,13 @@ class Admins::GenresController < ApplicationController
 
 	def create
 		@genre =Genre.new(genre_params)
-		@genre.save
-		redirect_to request.referer
+		if @genre.save
+			flash[:save] = "作成完了しました!!"
+		   redirect_to request.referer
+		else
+			flash[:unsave] = "作成できませんでした。"
+			redirect_to request.referer
+		end
 	end
 
 	def destroy

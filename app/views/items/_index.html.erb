@@ -1,39 +1,38 @@
- <% items.each do |item| %>
-	   <div class="col no-gutters">
-	     <div>
-	       <%= link_to item_path(item) ,class:"image-action" do %>
-	       <% if current_page?(items_path) %>
-	       	<%= attachment_image_tag item.photos.first , :image ,:fill ,1100 ,500 %>
-	       	<% else %>
-	       	<%= attachment_image_tag item.photos.first , :image ,:fill ,1000 ,300 %>
-	       <% end %>
-	       
-		   <% end %>
-	     </div>
-	     <div>
-	       <i class="fas fa-bookmark" style="color: green;"><%= item.favorites.count %>人がお気に入り</i>
-	     </div>
-	   </div>
-	   <div class="col no-gutters">
-	   	<table class="table">
-	   		<tr>
-	   			<td>名前:</td>
-	   			<td> <%= item.name %></td>
-	   		</tr>
-	   		<tr>
-	   			<td>期間:</td>
-	   			<td><%= item.start_day %> 〜 <%= item.finish_day %></td>
-	   		</tr>
-	   		<tr>
-	   			<td>値段：</td>
-	   			<td>¥<%= item.price %></td>
-	   		</tr>
-	   	</table>
-        </div>
-        <div class="col no-gutters">
-          <% if user_signed_in? && item.user_id != current_user.id %>
-            <%= link_to "購入する" , item_new_order_path(item) , class:"btn btn-success" %>
-          <% end %>
-        </div>
+<% items.each do |item| %>
+  	<!-- 画像 -->
+	<div>
+	  <%= link_to item_path(item) ,class:"image-action" do %>
+	    <% if current_page?("/items") %>
+	      <%= attachment_image_tag item.photos.first , :image ,:fill ,1440 ,500 %>
+	    <% elsif current_page?("/items/#{item.id}") || current_page?(items_latest_path) || current_page?(items_comming_soon_path) %>
+		  <%= attachment_image_tag item.photos.first , :image ,:fill ,1440 ,500 %>
+		<% elsif current_page?("/users/#{user.id}") %>
+		  <%= attachment_image_tag item.photos.first , :image ,:fill ,1050 ,500 %>
+		<% elsif current_page?(admins_items_path) %>
+		  <%= link_to admins_item_path(item) ,class:"image-action" do %>
+		    <%= attachment_image_tag item.photos.first , :image ,:fill ,700 ,300 %>
+		  <% end %>
+	    <% end %>
+	  <% end %>
+	</div>
+
+	<!-- お気に入り -->
+	<div style="float: left;">
+	  <i class="fas fa-bookmark" style="color: green;"><%= item.favorites.count %>人がお気に入り</i>
+	</div>
+
+	<!-- 商品情報 -->
+	<table class="table">
+	  <tr>
+	    <td><%= item.name %></td>
+		<td>¥<%= item.price %></td>
+		<td>期間:<%= item.start_day %> 〜 <%= item.finish_day %></td>
+		<td><% if user_signed_in? && item.user_id != current_user.id %>
+		<%= link_to "購入する" , item_new_order_path(item) , class:"btn btn-success"%>
+		<% end %>
+		</td>
+	  </tr>
+	</table>
+
 <% end %>
-  
+
