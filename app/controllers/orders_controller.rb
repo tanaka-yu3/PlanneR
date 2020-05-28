@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
 		@orders.each do |order|
 			order.update(order_status: 3)
 		end
-		flash[:order_status_update] = "売上金申請を受理しました"
+		flash[:order_status_update] = "売上金申請をしました"
 		redirect_to user_path(current_user)
 	end
 

@@ -5,8 +5,7 @@ class Order < ApplicationRecord
     complete_payment: 1,
     review_done: 2,
     sales_request: 3,
-    sales_request_done: 4,
-    transfer_complete: 5
+    transfer_complete: 4
   }
 
   belongs_to :user

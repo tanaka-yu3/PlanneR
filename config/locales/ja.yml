@@ -6,6 +6,7 @@ ja:
       review: レビュー
     attributes:
       item:
+        photos: 画像
         image: 画像
         name: プラン名
         text: 説明
@@ -34,7 +35,6 @@ ja:
         complete_payment: 支払済み
         review_done: レビュー完了
         sales_request: 売上金申請
-        sales_request_done: 売上金申請受理
         transfer_complete: 振り込み完了
     errors:
       messages:
