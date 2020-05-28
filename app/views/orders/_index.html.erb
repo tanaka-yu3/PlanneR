@@ -1,0 +1,94 @@
+
+<% if admin_signed_in? %>
+  <table class="table">
+	<tr>
+	　<td>注文番号</td>
+	  <td>出品者</td>
+	  <td>プラン名</td>
+	  <td>金額</td>
+	  <td>購入者</td>
+	  <td>購入日</td>
+	  <td>ステータス</td>
+	</tr>
+	<% orders.each do |order| %>
+	<tr>
+	  <td><%= order.id %></td>
+	  <td><%= link_to user_path(order.item.user) do %>
+	      <%= attachment_image_tag order.item.user , :image ,:fill ,100 ,100 %>
+	      <% end %><br>
+	      <%= order.item.user.family_name %>さん</td>
+	  <td><%= order.item.name %></td>
+	  <td><%= order.item.price %></td>
+	  <td><%= link_to user_path(order.user) do %>
+	      <%= attachment_image_tag order.user , :image ,:fill ,100 ,100 %>
+	      <% end %>
+	  </td>
+	  <td><%= order.created_at.strftime ("%Y/%m/%d") %></td>
+	  <td><% if admin_signed_in? %>
+	  	    <% if order.order_status == "waiting_payment" %>
+              <%= form_for order ,url:admins_order_path(order) ,method: :PATCH do |f| %>
+              <%= f.submit "購入済へ更新する",class:"btn btn-success" ,data:{confirm: "更新してもよろしいですか?"}%>
+              <% end %>
+            <% else %>
+              <%= order.order_status_i18n %>
+            <% end %>
+            <% end %>
+       </td>
+	</tr>
+	<% end %>
+  </table>
+<% else %>
+	<table class="table">
+		<tr>
+			<td>購入日</td>
+			<td><% if current_page?("/users/#{user.id}/sold_items") %>
+				   購入されたプラン
+				 <% else %>
+				   購入したプラン
+			    <% end %>
+			</td>
+			<td>利用日</td>
+			<td>請求金額</td>
+			<td>
+				<% if current_page?(user_sold_items_path) %>
+					購入者
+				  <% else %>
+				    出品者
+				<% end %>
+			   
+			</td>
+			<td>ステータス</td>
+		</tr>
+	<% orders.each do |order| %>
+		<tr>
+			<td><%= order.created_at.strftime ("%Y/%m/%d") %></td>
+			<td><%= link_to item_path(order.item) do %>
+				<%= attachment_image_tag order.item.photos.first ,:image ,:fill ,200 ,100 ,class:"img-fluid"%>
+				<% end %><br>
+				<%= order.item.name %>
+			</td>
+			<td><%= order.first_day.strftime ("%Y/%m/%d") %>〜<%= order.last_day.strftime ("%m/%d") %></td>
+			<td>
+				単価:¥<%= order.item.price %><br>
+				数量:<%= order.amount %><br>
+				合計:¥<%= order.price %>
+				</td>
+			<td><% if current_page?(user_sold_items_path) %>
+				   <%= link_to (order.user.family_name) , user_path(order.user) %>
+				<% else %>
+				  <%= link_to (order.item.user.family_name) ,user_path(order.item.user) %>
+			    <% end %>
+			</td>
+			<td>
+			  <% if order.order_status == "complete_payment" && order.item.user != user %>
+			    <%= link_to "評価する" ,new_item_review_path(order.item) %>
+			  <% elsif order.order_status == "review_done" && order.item.user != user %>
+			  	<p>取引完了</p>
+			  <% else %>
+			    <%= order.order_status_i18n %>
+			  <% end %>
+			</td>
+		</tr>
+	<% end %>
+	</table>
+<% end %>

@@ -1,27 +1,30 @@
-<table class="table">
-		<tr>
-			<td>ユーザー</td>
-			<td>レビュー内容</td>
-			<td>星の数</td>
-			<td></td>
-			<td></td>
-		</tr>
-		<% reviews.each do |review| %>
-		<tr>
-			<td><%= review.user.family_name %>さん</td>
-			<td><%= review.text %></td>
-			<td><div id="<%= review.id %>"></div>
-				<script>
-					$("#<%= review.id %>").raty({
-						size: 36,
-						starOff: '<%= asset_path("star-off.png") %>',
-                        starOn: '<%= asset_path("star-on.png") %>',
-                        readOnly: true,
-                        score: '<%= review.rate %>'
-					});
-				</script>
-			</td>
-			<td><%= link_to "レビューを詳しく見る", item_review_path(review) ,class:"btn btn-primary" %></td>
-		</tr>
-		<% end %>
+<div class="table-responsive-sm">
+	
+
+<table class="table table-borderless" style="width: 100%;">
+　<tr>
+	<td>出品者</td>
+	<td>レビューした人</td>
+	<td>コメント</td>
+	<td>星の数</td>
+  </tr>
+<% reviews.each do |review| %>
+  <tr>
+	<td><%= link_to (review.item.user.family_name) ,user_path(review.item.user) %>さん</td>
+	<td><%= link_to (review.user.family_name) ,user_path(review.user) %>さん</td>
+	<td><%= review.text %></td>
+	<td><div id="<%= review.id %>"></div>
+	<script>
+		$("#<%= review.id %>").raty({
+			size: 36,
+			starOff: '<%= asset_path("star-off.png") %>',
+            starOn: '<%= asset_path("star-on.png") %>',
+            readOnly: true,
+            score: '<%= review.rate %>'
+	});
+	</script>
+	</td>
+  </tr>
+<% end %>
 </table>
+</div>

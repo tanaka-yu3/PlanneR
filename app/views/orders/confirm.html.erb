@@ -1,18 +1,14 @@
 
-<div class="w-100">
-</div>
-<h2>注文確定画面</h2>
-<div class="w-100">
-</div>
-<table class="table">
-<%= form_for [@item , @order] ,url:(item_order_path) do |f| %>
+<h2 class="title">- 注文確認画面 -</h2>
+  <%= form_for [@item , @order] ,url:(item_orders_path) , method: :POST do |f| %>
+    <table class="table">
 		<tr>
 			<td>商品名</td>
 			<td><%= @item.name %></td>
 		</tr>
 		<tr>
 			<td>期間</td>
-			<td><%= @order.first_day %>〜<%= @order.last_day %>
+			<td><%= @order.first_day.strftime ("%Y/%m/%d") %>〜<%= @order.last_day.strftime ("%m/%d") %>
 				<%= f.hidden_field :first_day %><%= f.hidden_field :last_day %>
 			</td>
 		</tr>
@@ -24,14 +20,14 @@
 		</tr>
 		<tr>
 			<td>支払い方法</td>
-			<td>ご登録のクレジットカード</td>
+			<td><%= @order.pay %></td>
+			<%= f.hidden_field :pay %>
 		</tr>
 		<tr>
 			<td>合計金額</td>
-			<td>¥<%= @item.price %></td>
+			<td>¥<%= @order.price = @item.price*@order.amount %></td>
+			<%= f.hidden_field :price ,vlau: "@order.price"%>
 		</tr>
-</table>
-<%= f.submit "注文を確定する", class:"btn btn-success" %>
+	</table>
+  <%= f.submit "注文を確定する" ,class:"btn btn-success"%>
 <% end %>
-<div class="w-100">
-</div>

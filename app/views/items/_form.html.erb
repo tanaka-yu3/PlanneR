@@ -1,53 +1,74 @@
 
-<%= form_for item do |f| %>
-<div class="row">
-	<div class="col-7">
-		<%= f.attachment_field :photos_images ,multiple: true%>
-	</div><br>
+<div class="validates">
+	<%= flash[:item_unsave]%>
+</div>
 
-	<div class="col-5">
-		<table class="table">
-				<tr>
-					<td>name</td>
-					<td><%= f.text_field :name %></td>
-				</tr>
-				<tr>
-					<td>genre</td>
-					<td><%= f.collection_select :genre_id  ,genres , :id, :name , class:"btn btn-default" %></td>
-				</tr>
-				<tr>
-					<td>text</td>
-					<td><%= f.text_area :text %></td>
-				</tr>
-				<tr>
-					<td>price</td>
-					<td><%= f.text_field :price %></td>
-				</tr>
-				<tr>
-					<td>video</td>
-					<td><%= f.text_field :video %></td>
-				</tr>
-				<tr>
-					<td>address</td>
-					<td><%= f.text_field :address %></td>
-				</tr>
-				<tr>
-					<td>start_day</td>
-					<td><%= f.date_field :start_day %></td>
-				</tr>
-				<tr>
-					<td>finish_day</td>
-					<td><%= f.date_field :finish_day %></td>
-				</tr>
-				<tr>
-					<td>total</td>
-					<td><%= f.text_field :total %></td>
-				</tr>
-		</table>
-		<div>
+<div class="text-center">
+  <%= form_for item do |f| %>
+    <%= render 'layouts/error_messages' , model: f.object %>
+	    <h2>画像 <span class="item-attention">必須</span></h2>
+		<% @item.photos.each do |image| %>
+	      <div><%= attachment_image_tag image ,:image ,:fill, 500, 300 %></div>
+	    <% end %><br>
+		<div class="form">
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
+		</div>
+
+		<div class="form">
+			<h2>プラン名 <span class="item-attention">必須</span></h2>
+			<div class="item-field">
+				<%= f.text_field :name %>
+			</div>
+		</div>
+
+		<div class="form">
+			<h2>ジャンル <span class="item-attention">必須</span></h2>
+			<%= f.collection_select :genre_id  ,genres , :id, :name , class:"btn btn-default" %>
+		</div>
+
+		<div class="form">
+			<h2>プラン説明 <span class="item-attention">必須</span></h2>
+			<%= f.text_area :text ,class:"text-area"%>
+		</div>
+
+		<div class="form">
+			<h2>Youtube URL</h2>
+			<%= f.text_field :video %>
+		</div>
+
+		<div class="form">
+			<h2>場所 <span class="item-attention">必須</span></h2>
+			<%= f.text_field :address %>
+		</div>
+
+		<div class="form">
+			<h2>開始日 <span class="item-attention">必須</span></h2>
+			<%= f.date_field :start_day %>
+		</div>
+
+		<div class="form">
+			<h2>終了日 <span class="item-attention">必須</span></h2>
+			<%= f.date_field :finish_day %>
+		</div>
+
+		<div class="form">
+			<h2>人数制限 <span class="item-attention">必須</span></h2>
+			<%= f.text_field :total %>
+		</div>
+
+		<div class="form">
+			<h2>値段 <span class="item-attention">必須</span></h2>
+			<%= f.text_field :price %>
+		</div>
+
+		<div class="form">
 			<%= f.hidden_field :item_status %>
 			<%= f.submit "登録" , class:"btn btn-success" %>
 		</div>
 		<% end %>
-	</div>
 </div>

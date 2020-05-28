@@ -1,11 +1,18 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @user = User.find(params[:user_id])
+    @favorites = @user.favorites.all
+  end
+
   def create
   	@item = Item.find(params[:item_id])
   	favorite = @item.favorites.new(user_id: current_user.id)
-  	favorite.save
-  	redirect_to request.referer
+  	if favorite.save
+      flash[:favorite]= "お気に入り登録しました!!"
+  	  redirect_to request.referer
+    end
   end
 
   def destroy

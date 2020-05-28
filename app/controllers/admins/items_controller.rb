@@ -12,7 +12,15 @@ class Admins::ItemsController < ApplicationController
 
 	def update
 		@item = Item.find(params[:id])
-		@item.update(params.require(:item).permit(:item_status))
-		redirect_to admins_items_path
+		@item.item_status = params[:item][:item_status]
+		if @item.save
+			if Item.find_by(id: @item.id + 1)
+			   redirect_to admins_item_path(@item.id + 1)
+			else
+			   redirect_to admins_items_path
+			end
+		else
+			redirect_to request.referer
+		end
 	end
 end

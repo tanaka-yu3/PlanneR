@@ -1,13 +1,22 @@
-<h2>管理者商品画面</h2>
-<div class="w-100"></div>
+<h2 class="title">- 管理者商品一覧画面 -</h2>
+	<div class="row">
 
+		<div class="col-lg-6 resposibe-center">
+		  <h2 class="text-center">承認待ち商品一覧(全<%= @items.count %>件)</h2>
+		  <% if @items.present? %>
+		  	<%= render "items/index" ,items:@items , user:current_admin %>
+		  <% else %>
+		    <h2 class="admin-item">承認するものはありません。</h2>
+		  <% end %>
+		</div>
 
-<div class="col-6">
-  <h2>承認待ち商品一覧</h2>
-  <div class="w-100"></div>
-  <%= render "items/index" ,items:@items %>
-</div>
-<div class="col-6">
-	<h2>期限切れ商品<%= link_to "一括停止"%></h2>
-	<%= render "items/index" ,items:@destroy_items %>
-</div>
+		<div class="col-lg-6 resposibe-center">
+			<h2 class="text-center">期限切れ商品(全<%= @destroy_items.count %>件)</h2>
+			<% if @destroy_items.present? %>
+			  <%= render "items/index" ,items:@destroy_items , user:current_admin %>
+			<% else %>
+			 <h2 class="admin-item">期限切れ商品はありません。</h2>
+			<% end %>
+		</div>
+
+	</div>

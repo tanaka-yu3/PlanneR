@@ -1,0 +1,8 @@
+<h2 class="title"><%= @user.family_name%>さんへのレビュー</h2>
+
+<% if @reviews.present? %>
+  <%= render "index" , reviews:@reviews ,item:@item %>
+<% else %>
+  <h2 class="title">- 0件です -</h2>
+<% end %>
+

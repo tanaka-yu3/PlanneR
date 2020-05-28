@@ -1,58 +1,7 @@
-<div class="w-100"></div>
-<div class="w-100 item-container">
-	<div class="w-100">
-    <div class="container">
-    <div id="item-slide">
-		<% @item.photos.each do |image| %>
-      <div><%= attachment_image_tag image ,:image ,:fill, 1000, 500 %></div>
-    <% end %>
-    </div>
-  </div>
-		<p><%= @item.video %></p>
-	</div>
-　<div class="w-100">
-　</div>
-  商品名:<%= @item.name %>期間:<%= @item.start_day %> 〜 <%= @item.finish_day %>
-  <div>
-  	場所:<%= @item.address %>
-  </div>
-  <div>
-  	説明:<%= @item.text %>
-  </div>
-  <div>
-  	制限:<%= @item.total %>
-  </div>
-  <% if user_signed_in? %>
-  <div>
-    <%= render "favorites/form" ,item:@item %>
-  </div>
-  <% if @item.item_status != 0 %>
-  <% else %>
-    <% if current_user.id == @item.user_id %>
-  	  <%= link_to "商品を編集する" ,edit_item_path(@item) , class:"btn btn-success" %>
-	    <%= link_to "商品を削除する" ,item_path(@item) , method: :delete ,class:"btn btn-danger" , data: {confirm: "商品を削除しますか？"} %>
-	  <% else %>
-	    <%= link_to "購入する" , item_new_order_path(@item) ,class:"btn btn-success"%>
-      <%= link_to "レビューの作成" ,new_item_review_path(@item),class:"btn btn-success" %>
-    <% end %>
-  <% end %>
-   <% end %>
-  出品者：<%= link_to (@item.user.family_name) , user_path(@item.user) %>
-  ステータス：<%= @item.item_status_i18n %>
-  <% if admin_signed_in? %>
-  <%= form_for @item ,url:admins_item_path(@item) ,method: :PATCH do |f| %>
-  <%= f.select :item_status , Item.item_statuses_i18n.keys.map{|k| [I18n.t("enums.item.item_status.#{k}"),k]} %>
-  <%= f.submit "更新する",class:"btn btn-success"%>
-  <% end %>
-      <% end %>
+<div class="validates">
+  <%= flash[:favorite] %>
+  <%= flash[:update] %>
+  <%= flash[:review_save] %>
 </div>
 
-<div class="w-100 item-container">
-  <% if @reviews.present? %>
-    <%= render "reviews/index" , reviews:@reviews %>
-  <% else %>
-  <div class="text-center">
-     <h2>レビューは未だありません</h2>
-  </div>
-  <% end %>
-</div>
+<%= render "show" ,item:@item ,reviews:@reviews %>
