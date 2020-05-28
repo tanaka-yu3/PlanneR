@@ -41,6 +41,10 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.6'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rbenv'
 end
 
 group :development do
@@ -85,8 +89,3 @@ gem 'dotenv-rails'
 gem 'jp_prefecture'
 
 gem 'enum_help'
-
-gem 'capistrano'
-gem 'capistrano-rails'
-gem 'capistrano3-puma'
-gem 'capistrano-rbenv'

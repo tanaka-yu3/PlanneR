@@ -7,8 +7,8 @@ class Admins::UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		orders = @user.items.joins(:orders).where("order_status = ?", 3)
-		@price_sum = orders.sum("orders.price")
+		@orders = @user.items.joins(:orders).where("order_status = ?", 3)
+		@price_sum = @orders.sum("orders.price")
 		@items = @user.items.page(params[:page]).per(5)
 	end
 

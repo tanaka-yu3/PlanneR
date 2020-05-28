@@ -110,7 +110,6 @@
 	  		<% end %>
 	  	</td>
 	  	<td>
-	  		
 	  	</td>
 	  </tr>
     </table>
@@ -118,25 +117,10 @@
 
   <div class="col-lg-9">
 
-  	<% if admin_signed_in? %>
+  	<% if admin_signed_in?  %>
   	  <div class="text-center" , style="padding-top: 20px;">
-  	  	<%= link_to "申請する", admins_user_order_status_update_path(user) %>
-
-
-  	  	<%# if orders.order_statuses == "sales_request" %>
-	  	  	<%#= form_for order ,url:admins_order_path(order),method: :PATCH do |f| %>
-	  	  	<h2>売上金¥<%= (price_sum*0.9).floor %>の申請がありました。</h2><br>
-	  	  	<%#= f.hidden_field :order_status %>
-	  	  	<%#= f.submit "申請を受理する" ,class:"btn btn-primary"%>
-	  	  	<%# end %>
-	  	<!-- 	<%# elsif orders.order_statuses == "sales_request_done" %>
-		  	  <%#= form_for order ,url:admins_order_path(order),method: :PATCH do |f| %>
-		  	  	<%#= f.hidden_field :order_status %>
-		  	  	<%#= f.submit "振り込み完了しました" ,class:"btn btn-primary" %>
-		  	  <%# end %>
-	  	<%# end %>
- -->
-
+	  	<h2>売上金¥<%= (price_sum*0.9).floor %>の申請がありました。</h2><br>
+	  	<%= link_to "振り込み完了", admins_user_order_status_update_path(user) ,data: {confirm: "本当に完了ステータスに変更しますか?"} %>
 	  </div>
 	<% end %>
 
