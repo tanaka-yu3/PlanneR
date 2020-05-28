@@ -85,3 +85,8 @@ gem 'dotenv-rails'
 gem 'jp_prefecture'
 
 gem 'enum_help'
+
+gem 'capistrano'
+gem 'capistrano-rails'
+gem 'capistrano3-puma'
+gem 'capistrano-rbenv'
