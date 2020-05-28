@@ -37,7 +37,7 @@ h1{
 }
 
 .about1{
-	background-image: image-url(about5.jpg);
+	background-image: image-url("about5.jpg");
 	background-position: center;
 	background-size: cover;
 	height: 350px;
@@ -45,7 +45,7 @@ h1{
 }
 
 .about2{
-	background-image: image-url(woman.jpg);
+	background-image: image-url("woman.jpg");
 	background-position: center;
 	background-size: cover;
 	height: 350px;
@@ -53,7 +53,7 @@ h1{
 }
 
 .about3{
-	background-image: image-url(about6.jpg);
+	background-image: image-url("about6.jpg");
 	background-position: center;
 	background-size: cover;
 	height: 350px;
