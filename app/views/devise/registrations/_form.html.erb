@@ -3,7 +3,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
   <div class="form">
   	プロフィール写真 <br>
-    <% if user.image.present?%>
+    <% if user.image.present? %>
   	  <%= attachment_image_tag user ,:image ,:fill ,300 ,300, fallback:"noimage.png",size:"300x300" %><br>
     <% end %>
   	<%= f.attachment_field :image ,class:"block-center"%>
