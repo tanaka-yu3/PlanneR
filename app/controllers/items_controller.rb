@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   def index
     @latest_items = Item.where(("item_status == ?") , 1).order(created_at: "DESC").limit(3)
-    @popular_items = Item.where(("item_status == ?") , 1).sort_by {|item| item.orders.count }.reverse.slice(0,3)
+    @popular_items = Item.where(("item_status == ?") , 1).limit(3)
     @comingsoon_items = Item.where("(start_day > ?) AND (item_status != ?)",Date.today , 1).limit(3)
   end
 
