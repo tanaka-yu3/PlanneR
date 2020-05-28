@@ -6,8 +6,34 @@ h1{
 	font-weight:80px;
 }
 
-.about-contents{
-	margin: 0 ,0 , 100px,0 ;
+.video-box{
+	width: 100%;
+	position: absolute;
+}
+
+.about-text{
+	margin: 100px 0;
+	font-size: 50px;
+	position: relative;
+	top: 0;
+	color: white;
+	padding-bottom: 365px;
+}
+
+.about-box1{
+	position: relative;
+	top: 200px;
+
+}
+.about-box2{
+	position: relative;
+	top: 400px;
+
+}
+.about-box3{
+	position: relative;
+	top: 600px;
+
 }
 
 .about1{
@@ -32,4 +58,107 @@ h1{
 	background-size: cover;
 	height: 350px;
 	width: 270px;
+}
+
+/* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
+@media screen and (max-width:1024px) {
+	.video-box{
+	width: 100%;
+	position: absolute;
+}
+
+.about-text{
+	margin: 50px 0;
+	font-size: 30px;
+	position: relative;
+	top: 0;
+	color: white;
+	padding-bottom: 200px;
+}
+.about-box1{
+	position: relative;
+	top: 150px;
+
+	}
+	.about-box2{
+		position: relative;
+		top: 300px;
+
+	}
+	.about-box3{
+		position: relative;
+		top: 450px;
+
+	}
+
+
+
+
+}
+
+/* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
+@media screen and (max-width:768px) {
+	.video-box{
+	width: 100%;
+	position: absolute;
+}
+
+.about-text{
+	margin: 50px 0;
+	font-size: 20px;
+	position: relative;
+	top: 0;
+	color: white;
+}
+
+  .about-box1{
+	position: relative;
+	top: 100px;
+
+	}
+	.about-box2{
+		position: relative;
+		top: 200px;
+
+	}
+	.about-box3{
+		position: relative;
+		top: 300px;
+
+	}
+
+
+}
+
+/* スマートフォンサイズ（425px）以下の際に適用される設定 */
+@media screen and (max-width:425px) {
+	.video-box{
+	width: 100%;
+	position: absolute;
+}
+
+.about-text{
+	margin: 50px 0;
+	font-size: 15px;
+	position: relative;
+	top: 0;
+	color: white;
+}
+    .about-box1{
+	position: relative;
+	top: 50px;
+
+	}
+	.about-box2{
+		position: relative;
+		top: 100px;
+
+	}
+	.about-box3{
+		position: relative;
+		top: 150px;
+
+	}
+
+
 }

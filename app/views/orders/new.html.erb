@@ -6,7 +6,7 @@
 <!-- オーダーフォーム -->
 <%= form_for [@item , @order] ,url:(item_order_confirm_path) do |f| %>
 <%= render 'layouts/error_messages' , model: f.object %>
-  <table class="table">
+  <table class="table responsibe-center">
 	<tr>
 	  <td>商品名</td>
 	  <td><%= @item.name %></td>
@@ -21,7 +21,11 @@
 	</tr>
 	<tr>
 	  <td>支払い方法</td>
-	  <td>ご登録のクレジットカード</td>
+	  <td><%= f.radio_button :pay ,:"売上金で支払う" %>
+	  	 <%= f.label :pay ,"売上金で支払う"%>
+	  	 <%= f.radio_button :pay ,:"銀行振り込み" %>
+	  	 <%= f.label :pay ,"銀行振り込み"%>
+	  	 </td>
 	</tr>
 	<tr>
 	  <td>プランの金額</td>

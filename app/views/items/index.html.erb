@@ -6,7 +6,7 @@
 		<% elsif @latest_items.empty?%>
 		  <h2 class="title">プランはまだありません。しばらくお待ちください。</h2>
 		<% else %>
-		　<%= render "index" ,items:@latest_items , user:@user %>
+		　<%= render "index" ,items:@latest_items , user:current_user %>
 		  <% if @latest_items.count >= 3 %>
 		  	<%= link_to "もっと見る >>" ,items_latest_path , class:"btn btn-light"%>
 		  <% end %>
@@ -17,7 +17,7 @@
 		<% if @popular_items.empty? %>
 		  <h2 class="title">プランはまだありません。しばらくお待ちください。</h2>
 		<% else %>
-		　<%= render "index" ,items:@popular_items , user:@user %>
+		　<%= render "index" ,items:@popular_items , user:current_user %>
 		  <% if @popular_items.count >= 3  %>
 		  	<%= link_to "もっと見る >>" ,items_popular_path , class:"btn btn-light"%>
 		  <% end %>
@@ -26,9 +26,9 @@
 	<div class="w-100">
 		<h2 class="title">- comming_soon... -</h2>
 		<% if @comingsoon_items.empty? %>
-		  <h2 class="title">準備中です。しばらくおお待ちください。</h2>
+		  <h2 class="title">準備中です。<br>しばらくおお待ちください。</h2>
 		<% else %>
-		　<%= render "index" ,items:@comingsoon_items , user:@user %>
+		　<%= render "index" ,items:@comingsoon_items , user:current_user %>
 		  <% if @comingsoon_items.count > 3 %>
 		  	<%= link_to "もっと見る >>" ,items_comming_soon_path , class:"btn btn-light"%>
 		  <% end %>

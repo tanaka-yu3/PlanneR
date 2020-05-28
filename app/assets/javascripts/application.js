@@ -17,6 +17,13 @@
 //= require_tree .
 
 $(function () {
+//ヘッダー　ハンバーガーメニュー
+  $('.menu-trigger').on('click', function() {
+    $(this).toggleClass('active');
+    $('#sp-menu').fadeToggle();
+    return false;
+  });
+//評価　星機能
   $('#star').raty({
     size: 36,
     starOff: "/assets/star-off.png",

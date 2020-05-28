@@ -2,5 +2,5 @@
 <% if @orders.present? %>
   <%= render "orders/index" ,orders:@orders ,user:@user %>
 <% else %>
- <h2 class="title">購入されたプランは未だありません</h2>
+ <h2 class="title">0件です</h2>
 <% end %>

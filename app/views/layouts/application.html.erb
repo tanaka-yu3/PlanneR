@@ -6,70 +6,63 @@
   <%= csp_meta_tag %>
 
   <script src="https://kit.fontawesome.com/944651f84d.js" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
 </head>
 <body>
     <header class="sticky-top">
-      <div class="header-logo">
-        <% if admin_signed_in?  %>
-        <% else %>
+      <% unless admin_signed_in?  %>
           <h2><%= link_to "- PlanneR -" , items_path ,:style=>"color: white;"%></h2>
         <% end %>
-      </div>
-      <nav>
+      <div id="sp-menu">
+        <h2>- MENU -</h2>
         <ul>
         <% if user_signed_in? %>
-          <li><%= link_to user_path(current_user) , class:"btn btn-light" do %>
-          <i class="fas fa-user"> マイページ</i>
-          <% end %></li>
-          <li><%= link_to destroy_user_session_path , method: :delete , class:"btn btn-light" do%>
-          <i class="fas fa-sign-out-alt"> ログアウト</i>
-          <% end %></li>
-        </div>
-          </li>
+          <li><%= link_to user_path(current_user) do %>
+          <i class="fas fa-user"> マイページ</i><% end %></li>
+          <li><%= link_to destroy_user_session_path , method: :delete do%>
+          <i class="fas fa-sign-out-alt"> ログアウト</i><% end %></li>
         <% else %>
           <% if admin_signed_in?  %>
-            <li><%= link_to "商品一覧" ,admins_items_path ,class:"btn btn-light" %></li>
-            <li><%= link_to "顧客一覧", admins_users_path ,class:"btn btn-light" %></li>
-            <li><%= link_to "注文一覧" , admins_orders_path ,class:"btn btn-light" %></li>
-            <li><%= link_to "ジャンル作成",admins_genres_path ,class:"btn btn-light" %></li>
-            <li><%= link_to destroy_user_session_path , method: :delete , class:"btn btn-light" do%>
-          <i class="fas fa-sign-out-alt"> ログアウト</i>
-          <% end %></li>
+            <li><%= link_to "商品一覧" ,admins_items_path %></li>
+            <li><%= link_to "顧客一覧", admins_users_path %></li>
+            <li><%= link_to "注文一覧" , admins_orders_path %></li>
+            <li><%= link_to "ジャンル作成",admins_genres_path %></li>
+            <li><%= link_to destroy_user_session_path , method: :delete do %>
+            <i class="fas fa-sign-out-alt"> ログアウト</i><% end %></li>
           <% else %>
-            <li><%= link_to user_session_path , class:"btn btn-light" do %>
-             <i class="fas fa-sign-in-alt"> ログイン</i>
-            <% end %>
-          </li>
-          <li><%= link_to new_user_registration_path , class:"btn btn-light" do %>
-              <i class="fas fa-user-plus"> はじめる</i>
-              <% end %>
-          </li>
-          <li><%= link_to about_path , class:"btn btn-light" do %>
-              <i class="fas fa-users"> PlanneR</i>
-              <% end %>
-          </li>
+            <li><%= link_to user_session_path do %>
+             <i class="fas fa-sign-in-alt"> ログイン</i><% end %></li>
+            <li><%= link_to new_user_registration_path do %>
+            <i class="fas fa-user-plus"> はじめる</i><% end %></li>
+            <li><%= link_to about_path do %>
+            <i class="fas fa-users"> PlanneR</i><% end %></li>
+          <% end %>
         <% end %>
-        <% end %>
-          <li><%= link_to inquiry_path, class:"btn btn-light" do %>
+          <li><%= link_to inquiry_path do %>
           <i class="fas fa-question-circle"> 問い合わせ</i>
           <% end %></li>
+          <li><%= form_tag(search_path , method: :get) do %>
+                <%= text_field_tag "search[content]" %>
+                <%= select_tag "search[model]", options_for_select({"プラン"=> "item" , "会員" => "user" })%>
+                <%= hidden_field_tag 'search[method]', "部分一致" => "partial" %>
+                <%= submit_tag "さがす" ,class:"btn btn-light"%>
+              <% end %>
+          </li>
         </ul>
-      </nav>
+      </div>
+
+    <!-- ハンバーガーメニューアイコン -->
+    <div id="hm-icon">
+      <a class="menu-trigger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
     </header>
   <div class="container-fluid">
-    <% if user_signed_in? || admin_signed_in? %>
-      <div class="text-right" style=" margin: 20px;">
-      <%= form_tag(search_path , method: :get) do %>
-      <%= text_field_tag "search[content]" %>
-      <%= select_tag "search[model]", options_for_select({"プラン"=> "item" , "会員" => "user" })%>
-      <%= hidden_field_tag 'search[method]', "部分一致" => "partial" %>
-      <%= submit_tag "検索" ,class:"btn btn-success"%>
-      </div>
-      <% end %>
-    <% end %>
-    
       <%= yield %>
   </div>
 </body>

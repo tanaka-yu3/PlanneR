@@ -13,7 +13,7 @@
 				<% end %><br>
 				<%= favorite.item.name %>
 				</td>
-			<td><%= favorite.item.start_day %>〜<%= favorite.item.finish_day %></td>
+			<td><%= favorite.item.start_day.strftime("%Y/%m/%d") %>〜<%= favorite.item.finish_day.strftime("%m/%d") %></td>
 			<td><%= favorite.item.price %></td>
 
 		</tr>

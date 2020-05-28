@@ -20,6 +20,28 @@ class OrdersController < ApplicationController
 		end
 	end
 
+	def sales_request
+		@user = User.find(params[:user_id])
+		@order = Order.where(item: @user.items)
+		@orders = @order.where("order_status = ?" ,2 )
+		@order_status = @orders.each do |order|
+			order = @orders.find_by(id: order.id)
+		end
+	end
+
+	##オーダーステータスレビューと同時更新用
+	def sales_request_finish
+		@user = User.find(params[:user_id])
+		@order = Order.where(item: @user.items)
+		@orders = @order.where("order_status = ?" ,2 )
+		@orders.each do |order|
+			order.update(order_status: 3)
+		end
+		flash[:order_status_update] = "売上金申請を受理しました"
+		redirect_to user_path(current_user)
+	end
+
+
 	def create
 		@item = Item.find(params[:item_id])
 		@order = @item.orders.new(order_params)
@@ -33,20 +55,12 @@ class OrdersController < ApplicationController
 		end
 	end
 
-	def pay
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-    Payjp::Charge.create(
-      :amount => params[:amount],
-      :card => params['payjp-token'],
-      :currency => 'jpy')
-  end
-
 	def thanks
 	end
 
 	private
 
 	def order_params
-		params.require(:order).permit(:user_id, :item_id, :first_day, :last_day, :amount)
+		params.require(:order).permit(:user_id, :item_id, :first_day, :last_day, :amount ,:pay)
 	end
 end

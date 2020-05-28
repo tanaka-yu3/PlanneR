@@ -1,7 +1,7 @@
 <h2 class="title">- 管理者商品一覧画面 -</h2>
 	<div class="row">
 
-		<div class="col-6">
+		<div class="col-lg-6 resposibe-center">
 		  <h2 class="text-center">承認待ち商品一覧(全<%= @items.count %>件)</h2>
 		  <% if @items.present? %>
 		  	<%= render "items/index" ,items:@items , user:current_admin %>
@@ -10,7 +10,7 @@
 		  <% end %>
 		</div>
 
-		<div class="col-6">
+		<div class="col-lg-6 resposibe-center">
 			<h2 class="text-center">期限切れ商品(全<%= @destroy_items.count %>件)</h2>
 			<% if @destroy_items.present? %>
 			  <%= render "items/index" ,items:@destroy_items , user:current_admin %>

@@ -1,7 +1,7 @@
-<h2 class="title">- <%= @user.family_name %>さんがレビューしたプラン -</h2>
+<h2 class="title">- <%= @user.family_name %>さんがレビュー -</h2>
 
 <% if @reviews.empty? %>
-  <h2 class="title">レビューはまだ書いていません</h2>
+  <h2 class="title">0 件です</h2>
 <% else %>
   <%= render "index" , reviews:@reviews , item:@item %>
 <% end %>

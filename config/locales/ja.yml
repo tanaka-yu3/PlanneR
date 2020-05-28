@@ -3,6 +3,7 @@ ja:
     modles:
       item: 商品
       order: 注文
+      review: レビュー
     attributes:
       item:
         image: 画像
@@ -16,6 +17,25 @@ ja:
         amount: 人数
         first_day: プラン開始日
         last_day: プラン終了日
+      review:
+        rate: 星の数
+        text: コメント
+
+  enums:
+    item:
+      item_status:
+        permitting: 管理者承認中
+        release: 販売中
+        expired: 期限切れ
+        stopping: 一時停止中
+    order:
+      order_status:
+        waiting_payment: 支払い待ち
+        complete_payment: 支払済み
+        review_done: レビュー完了
+        sales_request: 売上金申請
+        sales_request_done: 売上金申請受理
+        transfer_complete: 振り込み完了
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -220,11 +240,3 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
-
-  enums:
-    item:
-      item_status:
-        permitting: 管理者承認中
-        release: 販売中
-        expired: 期限切れ
-        stopping: 一時停止中

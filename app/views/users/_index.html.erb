@@ -1,8 +1,20 @@
 <% users.each do |user| %>
-  <%= link_to user_path(user) do %>
-	  <div class="col-2" style="float: left;">
-	    <%= attachment_image_tag user , :image, :fill, 200,200 , class:"image-action" %><br>
-	    <%= user.family_name %> (会員番号<%= user.id %>)
-	  </div>
-  <% end %>
+  <div class="col-lg-3 responsibe-center" style="float: left;">
+    <% if admin_signed_in? %>
+      <%= link_to admins_user_path(user) do %>
+        <%= attachment_image_tag user , :image, :fill, 200,200 ,fallback:"noimage.png",size:"200x200", class:"image-action" %><br>
+        <div>
+    	  <%= user.family_name %>さん
+        </div>
+      <% end %>
+  </div>
+    <% else %>
+      <%= link_to user_path(user) do %>
+        <%= attachment_image_tag user , :image, :fill, 200,200 ,fallback:"noimage.png",size:"200x200", class:"image-action" %><br>
+        <div>
+    	  <%= user.family_name %>さん
+        </div>
+  </div>
+      <% end %>
+    <% end %>
 <% end %>

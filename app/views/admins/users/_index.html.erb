@@ -1,8 +1,0 @@
-<% users.each do |user| %>
-  <%= link_to user_path(user) do %>
-	  <div class="col-2" style="float: left;">
-	    <%= attachment_image_tag user , :image, :fill, 200,200 , class:"image-action" %><br>
-	    <%= user.family_name %> (会員番号<%= user.id %>)
-	  </div>
-  <% end %>
-<% end %>

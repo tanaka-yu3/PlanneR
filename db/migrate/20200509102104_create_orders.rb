@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.references :user
       t.integer :amount
       t.integer :price
-      t.integer :pay
+      t.string :pay
       t.date :first_day
       t.date :last_day
       t.timestamps

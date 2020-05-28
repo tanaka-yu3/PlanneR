@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  
+
   root 'others#about'
-  get '/about' => 'others#about' ,as: 'about'
+  get '/about' => 'others#about'
   get '/inquiry' => 'others#inquiry' , as:'inquiry'
   get 'search' => 'searches#search'
 
@@ -19,14 +19,15 @@ Rails.application.routes.draw do
     get 'favorites' => 'favorites#index'
     get 'items' => 'users#items'
     get 'sold_items' => 'users#sold_items'
+    get '/orders/sales_request' =>'orders#sales_request' ,as: 'sales_request'
+    get '/sales_request_finish' =>'orders#sales_request_finish' ,as: 'sales_request_finish'
   end
 
   get 'items/latest' => 'items#latest'
   get 'items/popular' => 'items#popular'
   get 'items/comming_soon' => 'items#comming_soon'
   resources :items do
-    get '/order/new' => 'orders#new' ,as: 'new_order'
-    post '/order' => 'orders#create'
+    resources :orders ,only:[:new , :create ,:update]
     post '/order/confirm' => 'orders#confirm',as: 'order_confirm'
     get '/thanks' => 'orders#thanks', as: 'thanks'
     resources :reviews , only:[:index, :show, :new, :create]
@@ -42,10 +43,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admins do
-    resources :genres
+    resources :genres, only:[:index, :create, :destroy]
     resources :items
     resources :orders
-    resources :users
+    resources :users ,only:[:index ,:show] do
+      get '/order_status_update' =>'users#order_status_update' ,as: 'order_status_update'
+    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

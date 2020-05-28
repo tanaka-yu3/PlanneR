@@ -1,28 +1,32 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user! , only:[:new , :create , :edit ,:update , :destroy]
-  before_action :item_custome , only:[:edit ,:update , :destroy]
+  before_action :authenticate_user! , only:[:new , :create , :edit , :update , :destroy]
+  before_action :item_custome , only:[:edit , :update , :destroy]
 
   def index
-    @latest_items = Item.where(("item_status == ?"),1).order(created_at: "DESC").limit(3)
-    @popular_items = Item.where(("item_status == ?"),1).sort_by {|item| item.orders.count }.reverse.slice(0,3)
+    @latest_items = Item.where(("item_status == ?") , 1).order(created_at: "DESC").limit(3)
+    @popular_items = Item.where(("item_status == ?") , 1).sort_by {|item| item.orders.count }.reverse.slice(0,3)
     @comingsoon_items = Item.where("(start_day > ?) AND (item_status != ?)",Date.today , 1).limit(3)
   end
 
+  ##新着商品
   def latest
     @items = Item.order(created_at: "DESC").page(params[:page]).per(5)
   end
 
+  ##人気商品
   def popular
-    @items = Item.page(params[:page]).per(5)
+    @items = Item.where(("item_status == ?"),1).sort_by {|item| item.orders.count }.reverse.slice(0,5)
   end
 
+  ##出品予定品
   def comming_soon
     @items = Item.where("(start_day > ?) AND (item_status != ?)",Date.today , 1).page(params[:page]).per(5)
   end
 
   def show
     @item = Item.find(params[:id])
-    @reviews = @item.reviews.limit(3)
+    @review= Review.average(:rate)
+    @reviews = @item.reviews.page(params[:page]).per(3)
     @items = Item.where("(genre_id == ?) AND (id != ?)" , @item.genre_id , @item.id).limit(3)
   end
 
@@ -53,6 +57,7 @@ class ItemsController < ApplicationController
     end
   end
 
+  ##URL直打ち防止
   def item_custome
     item = Item.find(params[:id])
     if current_user.id != item.user_id
@@ -84,6 +89,18 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:user_id, :name, :genre_id, :text, :price, :video, :address, :start_day, :finish_day, :total ,:item_status, photos_images: [])
+    params.require(:item).permit(:user_id,
+      :name,
+      :genre_id,
+      :text,
+      :price,
+      :video,
+      :address,
+      :start_day,
+      :finish_day,
+      :total,
+      :item_status,
+      photos_images: []
+      )
   end
 end

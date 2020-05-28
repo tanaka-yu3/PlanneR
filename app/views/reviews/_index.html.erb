@@ -1,15 +1,17 @@
+<div class="table-responsive-sm">
+	
 
-<table class="table" style="width: 100%;">
+<table class="table table-borderless" style="width: 100%;">
 　<tr>
-	<td>商品</td>
-	<td><i class="fas fa-user"></i> 出品者</td>
+	<td>出品者</td>
+	<td>レビューした人</td>
 	<td>コメント</td>
 	<td>星の数</td>
   </tr>
 <% reviews.each do |review| %>
   <tr>
-	<td><%= link_to (review.item.name) , item_path(review.item) %></td>
 	<td><%= link_to (review.item.user.family_name) ,user_path(review.item.user) %>さん</td>
+	<td><%= link_to (review.user.family_name) ,user_path(review.user) %>さん</td>
 	<td><%= review.text %></td>
 	<td><div id="<%= review.id %>"></div>
 	<script>
@@ -22,7 +24,7 @@
 	});
 	</script>
 	</td>
-	<td></td>
   </tr>
 <% end %>
 </table>
+</div>

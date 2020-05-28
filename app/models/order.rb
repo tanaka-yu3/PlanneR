@@ -1,4 +1,14 @@
 class Order < ApplicationRecord
+
+  enum order_status: {
+    waiting_payment: 0,
+    complete_payment: 1,
+    review_done: 2,
+    sales_request: 3,
+    sales_request_done: 4,
+    transfer_complete: 5
+  }
+
   belongs_to :user
   belongs_to :item
 

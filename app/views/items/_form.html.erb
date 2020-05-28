@@ -6,11 +6,11 @@
 <div class="text-center">
   <%= form_for item do |f| %>
     <%= render 'layouts/error_messages' , model: f.object %>
-	    <p>画像 <span class="item-attention">必須</span></p>
+	    <h2>画像 <span class="item-attention">必須</span></h2>
 		<% @item.photos.each do |image| %>
 	      <div><%= attachment_image_tag image ,:image ,:fill, 500, 300 %></div>
 	    <% end %><br>
-		<div class="item-form">
+		<div class="form">
 			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
 			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
 			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
@@ -19,54 +19,54 @@
 			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
 		</div>
 
-		<div class="item-form">
-			<p>商品名 <span class="item-attention">必須</span></p>
+		<div class="form">
+			<h2>プラン名 <span class="item-attention">必須</span></h2>
 			<div class="item-field">
 				<%= f.text_field :name %>
 			</div>
 		</div>
 
-		<div class="item-form">
-			<p>ジャンル <span class="item-attention">必須</span></p>
+		<div class="form">
+			<h2>ジャンル <span class="item-attention">必須</span></h2>
 			<%= f.collection_select :genre_id  ,genres , :id, :name , class:"btn btn-default" %>
 		</div>
 
-		<div class="item-form">
-			<p>商品説明 <span class="item-attention">必須</span></p>
-			<%= f.text_area :text %>
+		<div class="form">
+			<h2>プラン説明 <span class="item-attention">必須</span></h2>
+			<%= f.text_area :text ,class:"text-area"%>
 		</div>
 
-		<div class="item-form">
-			<p>Youtube URL</p>
+		<div class="form">
+			<h2>Youtube URL</h2>
 			<%= f.text_field :video %>
 		</div>
 
-		<div class="item-form">
-			<p>場所 <span class="item-attention">必須</span></p>
+		<div class="form">
+			<h2>場所 <span class="item-attention">必須</span></h2>
 			<%= f.text_field :address %>
 		</div>
 
-		<div class="item-form">
-			<p>開始日 <span class="item-attention">必須</span></p>
+		<div class="form">
+			<h2>開始日 <span class="item-attention">必須</span></h2>
 			<%= f.date_field :start_day %>
 		</div>
 
-		<div class="item-form">
-			<p>終了日 <span class="item-attention">必須</span></p>
+		<div class="form">
+			<h2>終了日 <span class="item-attention">必須</span></h2>
 			<%= f.date_field :finish_day %>
 		</div>
 
-		<div class="item-form">
-			<p>人数制限 <span class="item-attention">必須</span></p>
+		<div class="form">
+			<h2>人数制限 <span class="item-attention">必須</span></h2>
 			<%= f.text_field :total %>
 		</div>
 
-		<div class="item-form">
-			<p>値段 <span class="item-attention">必須</span></p>
+		<div class="form">
+			<h2>値段 <span class="item-attention">必須</span></h2>
 			<%= f.text_field :price %>
 		</div>
 
-		<div class="item-form">
+		<div class="form">
 			<%= f.hidden_field :item_status %>
 			<%= f.submit "登録" , class:"btn btn-success" %>
 		</div>

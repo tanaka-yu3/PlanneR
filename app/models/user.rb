@@ -9,11 +9,11 @@ class User < ApplicationRecord
   has_many :favorites ,dependent: :destroy
   has_many :orders ,dependent: :destroy
 
-  #フォロー機能
-  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy 
-  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy 
-  has_many :following_user, through: :follower, source: :followed 
-  has_many :follower_user, through: :followed, source: :follower 
+  ##フォロー機能
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_user, through: :follower, source: :followed
+  has_many :follower_user, through: :followed, source: :follower
 
   def follow(user_id)
     follower.create(followed_id: user_id)
@@ -27,7 +27,7 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
 
-  #googleログイン機能
+  ##googleログイン機能
   devise :trackable, :omniauthable, omniauth_providers: %i(google)
   protected
   def self.find_for_google(auth)
@@ -46,13 +46,5 @@ class User < ApplicationRecord
   end
 
   #バリデーション
-  validates :image ,presence: true
   validates :family_name ,presence: true
-  validates :last_name ,presence: true
-  validates :family_name_kana ,presence: true
-  validates :last_name_kana ,presence: true
-  validates :phone_number ,presence: true
-  validates :postcode ,presence: true
-  validates :address ,presence: true
-
 end
