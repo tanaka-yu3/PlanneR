@@ -1,4 +1,3 @@
-<div class="row">
 	<h2 class="title">プラン一覧</h2>
 	  <% if @items.empty? %>
 	    <h2 class="title">0件です</h2><br>
@@ -8,4 +7,4 @@
 	    <% else %>
 	      <%= render "/items/index", items:@items, user:@user %>
 	  <% end %>
-</div>
+
