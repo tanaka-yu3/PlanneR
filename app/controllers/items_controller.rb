@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   def index
     @latest_items = Item.where(("item_status = ?") , 1).order(created_at: "DESC").limit(3)
-    @popular_items = Item.where(("item_status = ?") , 1).limit(3)
+    @popular_items = Item.find(Order.group(:item_id).order("count(item_id) desc").limit(3).pluck(:item_id))
     @comingsoon_items = Item.where("(start_day > ?) AND (item_status != ?)",Date.today , 1).limit(3)
   end
 
@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
 
   ##人気商品
   def popular
-    @items = Item.where(("item_status = ?"),1).sort_by {|item| item.orders.count }.reverse.slice(0,5)
+    @items = Item.find(Order.group(:item_id).order("count(item_id) desc").limit(3).pluck(:item_id))
   end
 
   ##出品予定品
