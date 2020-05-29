@@ -1,23 +1,27 @@
-
 <div class="validates">
 	<%= flash[:item_unsave]%>
 </div>
 
 <div class="text-center">
   <%= form_for item do |f| %>
+
+  　<!-- 　エラーメッセージ -->
     <%= render 'layouts/error_messages' , model: f.object %>
+
 	    <h2>画像 <span class="item-attention">必須</span></h2>
-		<% @item.photos.each do |image| %>
-	      <div><%= attachment_image_tag image ,:image ,:fill, 500, 300 %></div>
-	    <% end %><br>
-		<div class="form">
-			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
-			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
-			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
-			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
-			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
-			<%= f.attachment_field :photos_images , multiple: true , direct: true, presigned: true %>
-		</div>
+		    <% @item.photos.each do |image| %>
+	      　<div><%= attachment_image_tag image ,:image ,:fill, 500, 300 %></div>
+	      <% end %><br>
+
+	  <!-- 画像投稿 -->
+				<div class="form">
+					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
+					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
+					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
+					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
+					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
+					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
+				</div>
 
 		<div class="form">
 			<h2>プラン名 <span class="item-attention">必須</span></h2>
@@ -70,5 +74,6 @@
 			<%= f.hidden_field :item_status %>
 			<%= f.submit "登録" , class:"btn btn-success" %>
 		</div>
-		<% end %>
+
+	<% end %>
 </div>

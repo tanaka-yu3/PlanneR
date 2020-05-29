@@ -1,14 +1,14 @@
-  <h2 class="title">- 検索結果(<%= @records.count %>件) -</h2><br>
+<h2 class="title">検索結果(<%= @records.count %>件)</h2><br>
 	<% if @model == "item" %>
 	  <% if @records.empty? %>
-	    <h2 class="title">- プランはありません -</h2>
+	    <h2 class="title">プランはありません</h2>
 	  <% else %>
-	    <%= render "items/index" ,items:@records ,user:current_user %>
+	    <%= render "items/index", items:@records, user:current_user %>
 	  <% end %>
 	<% else %>
 	   <% if @records.empty? %>
-	     <h2 class="title">- 会員はいません -</h2>
+	     <h2 class="title">会員はいません</h2>
 	   <% else %>
-	     <%= render "users/index" ,users:@records %>
+	     <%= render "users/index", users:@records %>
 	   <% end %>
 	<% end %>

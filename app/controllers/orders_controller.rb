@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!,except: [:index]
 
 	def index
 		@user = User.find(params[:user_id])
-		@orders = @user.orders.all
+		@orders = @user.orders.page(params[:page]).per(5)
 	end
 
 	def new
@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
 		end
 	end
 
+	##売上金申請画面用
 	def sales_request
 		@user = User.find(params[:user_id])
 		@order = Order.where(item: @user.items)

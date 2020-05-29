@@ -1,24 +1,24 @@
-<h2 class="title">- 気になっているプラン -</h2>
-<% if @favorites.present? %>
-<table class="table">
-		<tr>
-			<td>商品</td>
-			<td>期間</td>
-			<td>値段</td>
-		</tr>
-		<% @favorites.each do |favorite| %>
-		<tr>
-			<td><%= link_to item_path(favorite.item) do %>
-				<%= attachment_image_tag favorite.item.photos.first , :image ,:fill ,600 ,200 %>
-				<% end %><br>
-				<%= favorite.item.name %>
-				</td>
-			<td><%= favorite.item.start_day.strftime("%Y/%m/%d") %>〜<%= favorite.item.finish_day.strftime("%m/%d") %></td>
-			<td><%= favorite.item.price %></td>
-
-		</tr>
-		<% end %>
-</table>
-<% else %>
-  <h2 class="title">気になっているプランはまだありません</h2>
-<% end %>
+<h2 class="title">気になっているプラン</h2>
+	<% if @favorites.present? %>
+		<table class="table">
+			<tr>
+				<td>商品</td>
+				<td>期間</td>
+				<td>値段</td>
+			</tr>
+			<% @favorites.each do |favorite| %>
+				<tr>
+					<td><%= link_to item_path(favorite.item) do %>
+						<%= attachment_image_tag favorite.item.photos.first, :image, :fill, 600, 200 %>
+						<% end %><br>
+						<%= favorite.item.name %>
+					</td>
+					<td><%= favorite.item.start_day.strftime("%Y/%m/%d") %>〜<%= favorite.item.finish_day.strftime("%m/%d") %></td>
+					<td><%= favorite.item.price %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+	  <h2 class="title">0件です</h2>
+	<% end %>
+	<%= paginate @favorites %>

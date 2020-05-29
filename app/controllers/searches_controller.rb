@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+
 	def search
 		@model = params["search"]["model"]
 		@content = params["search"]["content"]
@@ -7,7 +8,8 @@ class SearchesController < ApplicationController
 	end
 
 	private
-	def search_for(nodel,content,method)
+
+	def search_for(model,content,method)
 		if @model == 'user'
 		   method == 'partial'
 		   User.where('family_name LIKE ?', '%'+content+'%')

@@ -2,29 +2,29 @@
 	<%= flash[:review_unsave] %>
 </div>
 <h2 class="title">- 評価する -</h2>
-  <div class="row">
-  	<div class="col-lg-5 responsibe-center">
-  		 <%= attachment_image_tag @item.photos.first , :image ,:fill,500,500 %>
-  		 <div>
-			プラン名:<%= @item.name %>
+	<div class="row">
+		<div class="col-lg-5 text-center">
+			<%= attachment_image_tag @item.photos.first, :image, :fill, 300, 300, class:"image-fluid" %>
+			<div>
+				<h2 class="form">プラン名:<%= @item.name %></h2>
+			</div>
+			<div>
+				<h2 class="form">値段:¥<%= @item.price %></h2>
+			</div>
 		</div>
-		<div>
-			値段:¥<%= @item.price %>
+		<div class="col-lg-5">
+			<div class="responsibe-center">
+				<%= form_with model:[@item, @review] ,url:(item_reviews_path),data: {remote: false}  do |f| %>
+				<%= render 'layouts/error_messages' , model: f.object %>
+				<%= hidden_field_tag :order_id, @order.id %>
+				<div id="star">
+					<%= f.hidden_field :rate %>
+				</div><br>
+				<div>
+					<%= f.text_area :text ,class:"text-area"%>
+				</div><br>
+				<%= f.submit "レビューを投稿する" , class:"btn btn-primary"%>
+				<% end %>
+			</div>
 		</div>
-  	</div>
-  	<div class="col-lg-5">
-		<div class="responsibe-center">
-	      <%= form_with model:[@item, @review] ,url:(item_reviews_path),data: {remote: false}  do |f| %>
-	      <%= render 'layouts/error_messages' , model: f.object %>
-		      <%= hidden_field_tag :order_id, @order.id %>
-		    <div id="star">
-		      <%= f.hidden_field :rate %>
-		    </div><br>
-		    <div>
-			  <%= f.text_area :text ,class:"text-area"%>
-		    </div><br>
-          <%= f.submit "レビューを投稿する" , class:"btn btn-primary"%>
-	      <% end %>
-	    </div>
-    </div>
-  </div>
+	</div>

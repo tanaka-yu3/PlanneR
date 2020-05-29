@@ -1,57 +1,57 @@
 
 <div class="row">
   <div class="validates">
-  <%= flash[:favorite] %>
-  <%= flash[:update] %>
-  <%= flash[:review_save] %>
-</div>
-<!-- 画像コード -->
-<div class="item-image-box">
-  <div id="item-slide">
-	  <% item.photos.each do |image| %>
-      <div><%= attachment_image_tag image ,:image ,:fill, 1440, 500 ,class:"img-fluid"%></div>
-    <% end %>
+    <%= flash[:favorite] %>
+    <%= flash[:update] %>
+    <%= flash[:review_save] %>
   </div>
-</div>
 
-<!-- videoコード -->
-<% if item.video.present? %>
-  <iframe width="100%" height="500" src="https://www.youtube.com/embed/<%= @item.video %>"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<% end %>
+  <!-- item画像 -->
+  <div class="item-image-box">
+    <div id="item-slide">
+     <% item.photos.each do |image| %>
+     <div><%= attachment_image_tag image, :image, :fill, 1440, 800, class:"img-fluid"%></div>
+     <% end %>
+   </div>
+ </div>
 
+ <!-- videoコード -->
+ <% if item.video.present? %>
+ <iframe width="100%" height="500" src="https://www.youtube.com/embed/<%= @item.video %>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+ <% end %>
 
-<!-- お気に入りボタン -->
-<% if user_signed_in? %>
-  <div class="favorite-font">
-  　　<%= render "favorites/form" ,item:@item %>
+ <!-- お気に入りボタン -->
+ <% if user_signed_in? %>
+ <div class="favorite-font">
+  　　<%= render "favorites/form", item:@item %>
   　　<%= @item.favorites.count %>人がお気に入りしています
-  </div>
+</div>
 
 <!-- 商品アクションボタン -->
-  <div style="margin: 3px auto;">
-    <% if current_user.id == item.user_id %>
-      <%= link_to edit_item_path(item) , class:"btn btn-dark" do %>
-      <i class="fas fa-cog"> 変更する</i>
-      <% end %>
-      <%= link_to item_path(item) , method: :delete ,class:"btn btn-danger" , data: {confirm: "商品を削除しますか？"} do %>
-      <i class="fas fa-trash-alt"> 削除する</i>
+<div style="margin: 3px auto;">
+  <% if current_user.id == item.user_id %>
+    <%= link_to edit_item_path(item), class:"btn btn-dark" do %>
+    <i class="fas fa-cog"> 変更する</i>
+    <% end %>
+    <%= link_to item_path(item), method: :delete, class:"btn btn-danger", data: {confirm: "商品を削除しますか？"} do %>
+    <i class="fas fa-trash-alt"> 削除する</i>
+    <% end %>
+  <% else %>
+    <% if User.where(order: item.orders) == current_user %>
+      <%= link_to new_item_review_path(@item), class:"btn btn-primary " do %>
+      <i class="fas fa-pen-alt"> 評価する</i>
       <% end %>
     <% else %>
-      <% if User.where(order: item.orders) == current_user %>
-        <%= link_to new_item_review_path(@item) ,class:"btn btn-primary " do %>
-        <i class="fas fa-pen-alt"> 評価する</i>
-        <% end %>
-      <% else %>
-       <% if item.total > item.orders.sum(:amount) %>
-        <%= link_to new_item_order_path(item) ,class:"btn btn-success" do %>
+      <% if item.total > item.orders.sum(:amount) %>
+        <%= link_to new_item_order_path(item), class:"btn btn-success" do %>
         <i class="fas fa-shopping-cart"> 購入する</i>
         <% end %>
       <% else %>
         <h2 style="color: red;">- 完売しました -</h2>
-        <% end %>
       <% end %>
     <% end %>
-  </div>
+  <% end %>
+</div>
 <% end %>
 
 <!-- 商品情報 -->
@@ -69,13 +69,12 @@
     <td class="table-td"><%= item.start_day %> 〜 <%= @item.finish_day %></td>
   </tr>
   <tr>
-    <th class="table-th">制限:</th>
+    <th class="table-th">制限人数:</th>
     <% if item.total > item.orders.sum(:amount) %>
-      <td class="table-td"><%= item.total-item.orders.sum(:amount) %>名</td>
+    <td class="table-td"><%= item.total-item.orders.sum(:amount) %>名</td>
     <% else %>
-      <td>- 完売しました -</td>
+    <td>- 完売しました -</td>
     <% end %>
-      
   </tr>
   <tr>
     <th class="table-th">説明:</th>
@@ -91,38 +90,37 @@
   </tr>
   <tr>
     <th class="table-th">出品者：</th>
-    <td class="table-td"><%= link_to (@item.user.family_name) , user_path(@item.user) %>さん</td>
+    <td class="table-td"><%= link_to (@item.user.family_name), user_path(@item.user) %>さん</td>
   </tr>
 </table>
+
 <!-- 管理者用商品ステータス変更 -->
 <% if  admin_signed_in? %>
-  <%= form_for @item ,url:admins_item_path(item) ,method: :PATCH do |f| %>
- <%= f.select :item_status , Item.item_statuses_i18n.keys.map{|k| [I18n.t("enums.item.item_status.#{k}"),k]} %>
- 　<%= f.submit "更新する",class:"btn btn-success"%>
- <% end %>
+  <%= form_for @item,url:admins_item_path(item),method: :PATCH do |f| %>
+    <%= f.select :item_status, Item.item_statuses_i18n.keys.map{|k| [I18n.t("enums.item.item_status.#{k}"),k]} %>
+    <%= f.submit "更新する", class:"btn btn-success"%>
+  <% end %>
 <% end %>
 
 <!-- 商品評価一覧 -->
 <div style="margin: 100px auto ; width: 100%;">
   <h2 class="text-center">- プランの評価 -</h2><br>
-  <% if reviews.present? %>
-  <div class="text-center" id="<%= @review.floor %>"></div>
-    <%= render "reviews/index" , reviews:reviews ,item:item %>
-    <%= paginate reviews %>
-    <script>
-    $("#<%= @review.floor %>").raty({
-    size: 36,
-    starOff: '<%= asset_path("star-off.png") %>',
-          starOn: '<%= asset_path("star-on.png") %>',
-          readOnly: true,
-          score: '<%= @review.floor %>'
-    });
-    </script>
-    
-  <% else %>
-    <div class="text-center">
-      <h2>レビューは未だありません</h2>
-    </div>
-  
-  <% end %>
+    <% if reviews.present? %>
+      <div class="text-center" id="<%= @review.floor %>"></div>
+        <%= render "reviews/index", reviews:reviews, item:item %>
+        <%= paginate reviews %>
+        <script>
+          $("#<%= @review.floor %>").raty({
+            size: 36,
+            starOff: '<%= asset_path("star-off.png") %>',
+            starOn: '<%= asset_path("star-on.png") %>',
+            readOnly: true,
+            score: '<%= @review.floor %>'
+          });
+        </script>
+    <% else %>
+      <div class="text-center">
+        <h2>レビューは未だありません</h2>
+      </div>
+    <% end %>
 </div>

@@ -1,7 +1,8 @@
-<h2 class="title">- <%= @user.family_name %>さんがレビュー -</h2>
+<h2 class="title"><%= @user.family_name %>さんのレビュー</h2>
 
 <% if @reviews.empty? %>
   <h2 class="title">0 件です</h2>
 <% else %>
   <%= render "index" , reviews:@reviews , item:@item %>
+  <%= paginate @reviews %>
 <% end %>

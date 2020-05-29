@@ -2,14 +2,14 @@ class Admins::UsersController < ApplicationController
 	before_action :authenticate_admin!
 
 	def index
-		@users = User.all
+		@users = User.page(params[:page]).per(12)
 	end
 
 	def show
 		@user = User.find(params[:id])
 		@orders = @user.items.joins(:orders).where("order_status = ?", 3)
 		@price_sum = @orders.sum("orders.price")
-		@items = @user.items.page(params[:page]).per(5)
+		@items = @user.items.page(params[:page]).per(3)
 	end
 
 	def order_status_update

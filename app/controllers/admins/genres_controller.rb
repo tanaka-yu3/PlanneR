@@ -3,14 +3,14 @@ class Admins::GenresController < ApplicationController
 
 	def index
 		@genre = Genre.new
-		@genres = Genre.all
+		@genres = Genre.page(params[:page]).per(10)
 	end
 
 	def create
 		@genre =Genre.new(genre_params)
 		if @genre.save
 			flash[:save] = "作成完了しました!!"
-		   redirect_to request.referer
+			redirect_to request.referer
 		else
 			flash[:unsave] = "作成できませんでした。"
 			redirect_to request.referer
@@ -24,7 +24,9 @@ class Admins::GenresController < ApplicationController
 	end
 
 	private
+
 	def genre_params
 		params.require(:genre).permit(:name)
 	end
 end
+

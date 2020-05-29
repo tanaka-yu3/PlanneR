@@ -1,11 +1,11 @@
-
-  <h2 class="title">- プラン一覧 -</h2>
-  </div>
-  <% if @items.empty? %>
-      <h2 class="title">0件です</h2><br>
-      <div class="text-center">
-      	<%= link_to "はじめる" ,new_item_path ,class:"btn btn-primary btn-lg"%>
-      </div>
-  	<% else %>
-  	  <%= render "/items/index" ,items:@items , user:@user %>
-  <% end %>
+<div class="row">
+	<h2 class="title">プラン一覧</h2>
+	  <% if @items.empty? %>
+	    <h2 class="title">0件です</h2><br>
+	      <div class="text-center">
+	       <%= link_to "はじめる", new_item_path, class:"btn btn-primary btn-lg"%>
+	      </div>
+	    <% else %>
+	      <%= render "/items/index", items:@items, user:@user %>
+	  <% end %>
+</div>

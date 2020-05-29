@@ -1,6 +1,6 @@
-<h2 class="title">- フォロワー -</h2>
-<% if @users.count > 0 %>
-  <%= render '/users/index', users: @users %>
-<% else %>
-  <p class="title">0件です</p>
-<% end %>
+<h2 class="title">フォロワー</h2>
+	<% if @users.count > 0 %>
+	  <%= render '/users/index', users: @users %>
+	<% else %>
+	  <p class="title">0件です</p>
+	<% end %>

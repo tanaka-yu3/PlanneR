@@ -1,6 +1,5 @@
 class RelationshipsController < ApplicationController
-  before_action :authenticate_user! , only:[:create , :destroy]
-
+  before_action :authenticate_user!, only:[:create, :destroy]
 
   def create
     current_user.follow(params[:user_id])
@@ -21,4 +20,5 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:user_id])
     @users = @user.follower_user
   end
+
 end

@@ -1,149 +1,152 @@
 <div class="row">
-	<!-- ユーザーアクション -->
+
+	<!-- ユーザーアクション サイドメニュー-->
   <div class="col-lg-3">
-	<table class="table text-center">
-	  <tr>
-		<td><%= attachment_image_tag user , :image , :fill , 300 ,300 ,fallback: "noimage.png" , size:"300x300"%></td>
-	  </tr>
-	  <tr>
-		<% if current_user == user %>
-		<td><i class="fas fa-user"></i>
-			<%= link_to edit_user_registration_path(user) ,data: {confirm: "編集しますか"} do %>
-			 <%= user.family_name %><%= user.last_name %>さん
-			 <% end %>
-		</td>
-		<% else %>
-		<td><i class="fas fa-user"></i>
-			<%= user.family_name %><%= user.last_name %>さん
-		</td>
-		<% end %>
-	  </tr>
-	  <!-- フォローボタン -->
-	  <% if admin_signed_in? %>
-	    <tr>
-	    <td><i class="fas fa-university"></i>
-	    	<%= link_to admins_user_bank_path(user) do %>
-	  		 <%= user.family_name %>さんの口座情報
-	  		<% end %>
-	  </tr>
-	  	<% else %>
-	  <% if current_user != user %>
-	  <tr>
-		<td>
-		  <% if current_user.following?(user) %>
-		    <%= link_to 'フォロー外す', user_relationships_path(user.id), method: :delete, class: "btn btn-primary"%>
-		  <% else %>
-		    <%= link_to 'フォローする', user_relationships_path(user.id), method: :POST, class: "btn btn-success" %>
-		  <% end %>
-		<% end %>
-		 <% end %>
-		</td>
-	  </tr>
-	  <tr>
-	    <td><i class="fas fa-user-friends"></i>
-	    	<%= link_to user_follows_path(user) do %>
-	    	フォロー : <%= user.follower.count %>
-	    	<% end %>/
+	  <table class="table text-center">
+
+	  	<!-- User画像 -->
+		  <tr>
+			  <td><%= attachment_image_tag user, :image, :fill, 300, 300, fallback: "noimage.png", size:"300x300" %></td>
+		  </tr>
+
+		  <!-- User名 -->
+		  <tr>
+				<td><i class="fas fa-user"></i>
+					<% if current_user == user %>
+						<%= link_to edit_user_registration_path(user), data: {confirm: "編集しますか"} do %>
+						<%= user.family_name %><%= user.last_name %>さん
+						<% end %>
+					<% else %>
+					  <%= user.family_name %><%= user.last_name %>さん
+					<% end %>
+				</td>
+		  </tr>
+		  <tr>
+
+		  	<!-- USER口座情報 -->
+		    <% if admin_signed_in? %>
+		      <td><i class="fas fa-university"></i>
+		    	  <%= link_to admins_user_bank_path(user) do %>
+		  		  <%= user.family_name %>さんの口座情報<% end %>
+		  	  </td>
+
+		  	<!-- フォローボタン -->
+			  <% elsif current_user != user %>
+						<td>
+						  <% if current_user.following?(user) %>
+						    <%= link_to 'フォロー外す', user_relationships_path(user.id), method: :delete, class: "btn btn-primary"%>
+						  <% else %>
+						    <%= link_to 'フォローする', user_relationships_path(user.id), method: :POST, class: "btn btn-success" %>
+						  <% end %>
+						</td>
+			  <% end %>
+		  </tr>
+
+		  <!-- フォロー数 -->
+		  <tr>
+		    <td><i class="fas fa-user-friends"></i>
+		    	<%= link_to user_follows_path(user) do %>
+		    	フォロー : <%= user.follower.count %>
+		    	<% end %>/
 	        <%= link_to user_followers_path(user) do %>
 	        フォロワー : <%= user.followed.count %>
 	        <% end %>
-	    </td>
-	  </tr>
-	  <tr>
-	    <td><i class="fas fa-pen-alt"></i>
-	    	<%= link_to user_reviews_path(user) do %>
-	    	レビュー : <%= user.reviews.count %>
-	    	<% end %>/
-	    	<%= link_to user_reviewed_path(user) do %>
-	    	レビューワー : <%= Review.where(item: user.items).count %>
-	    	<% end %>
-	    </td>
-	  </tr>
-	  <% if current_user != user %>
-	  <tr>
-	  	<td><i class="fas fa-ruler-combined"></i>
-	  		<%= link_to user_items_path(user) do %>
-	  		<%= user.family_name %><%= user.last_name %>さんのプラン(<%= user.items.count%>件)
-	  		<% end %>
-	  	</td>
-	  </tr>
-	  <% else %>
-	  <% if sales > 0 %>
-	  <tr>
-	  	<td><i class="fas fa-coins"></i>
-	  	   	 <%= link_to user_sales_request_path(user) do %>
-	  	   	 売上金:¥<%= (sales*0.9).floor %> 申請する
-	  	   	 <% end %>
-	  	</td>
-	  </tr>
-	  <% end %>
-	  <tr>
-	  	<td><i class="fas fa-file-medical"></i>
-	  		<%= link_to new_item_path do %>
-	  		プランをつくる
-	  		<% end %>
-	  	</td>
-	  </tr>
-	  <tr>
-	  	<td><i class="fas fa-ruler-combined"></i>
-	  		<%= link_to user_items_path(user) do %>
-	  		<%= user.family_name%>さんのプラン(<%= user.items.count%>件)
-	  		<% end %>
-	  	</td>
-	  </tr>
-	  <% end %>
-	  <tr>
-	  	<td><i class="fas fa-bookmark"></i>
-	  		<%= link_to user_favorites_path(user) do %>
-	  		気になっているプラン(<%= user.favorites.count %>件)
-	  		<% end %>
-	  	</td>
-	  </tr>
-	  <tr>
-	  	<td><i class="fas fa-cash-register"></i>
-	  		<%= link_to user_sold_items_path(user) do %>
-	  		購入されたプラン(<%= Order.where(item: user.items).count %>件)
-	  		<% end %>
-	  	</td>
-	  </tr>
-	  <tr>
-	  	<td><i class="fas fa-shopping-cart"></i>
-	  		<%= link_to user_orders_path(user) do %>
-	  		 購入したプラン(<%= user.orders.count %>件)
-	  		<% end %>
-	  		<% if current_user == user %>
-	  	      <span class="maru">
-	  			<%= order %>
-	  		  </span>
-	  		<% end %>
-	  	</td>
-	  </tr>
-	  <tr><td></td></tr>
+		    </td>
+		  </tr>
+
+		  <!-- レビュー数 -->
+		  <tr>
+		    <td><i class="fas fa-pen-alt"></i>
+		    	<%= link_to user_reviews_path(user) do %>
+		    	レビュー : <%= user.reviews.count %>
+		    	<% end %>/
+		    	<%= link_to user_reviewed_path(user) do %>
+		    	レビューワー : <%= Review.where(item: user.items).count %>
+		    	<% end %>
+		    </td>
+		  </tr>
+			  <% if current_user == user %>
+
+			  <!-- 売上金詳細へ -->
+				  <% if sales > 0 %>
+					  <tr>
+					  	<td><i class="fas fa-coins"></i>
+				  	   	<%= link_to user_sales_request_path(user) do %>
+				  	   	売上金:¥<%= (sales*0.9).floor %> 申請する
+				  	   	<% end %>
+					  	</td>
+					  </tr>
+				  <% end %>
+
+				  <!-- item作成 -->
+					  <tr>
+					  	<td><i class="fas fa-file-medical"></i>
+					  		<%= link_to new_item_path do %>
+					  		プランをつくる
+					  		<% end %>
+					  	</td>
+					  </tr>
+				<% end %>
+				  <tr>
+				  	<td><i class="fas fa-ruler-combined"></i>
+				  		<%= link_to user_items_path(user) do %>
+				  		<%= user.family_name%>さんのプラン(<%= user.items.count%>件)
+				  		<% end %>
+				  	</td>
+				  </tr>
+
+				  <!-- お気にいり -->
+		  <tr>
+		  	<td><i class="fas fa-bookmark"></i>
+		  		<%= link_to user_favorites_path(user) do %>
+		  		気になっているプラン(<%= user.favorites.count %>件)
+		  		<% end %>
+		  	</td>
+		  </tr>
+
+		  <!-- 購入履歴へ -->
+		  <tr>
+		  	<td><i class="fas fa-cash-register"></i>
+		  		<%= link_to user_sold_items_path(user) do %>
+		  		購入されたプラン(<%= Order.where(item: user.items).count %>件)
+		  		<% end %>
+		  	</td>
+		  </tr>
+		  <tr>
+		  	<td><i class="fas fa-shopping-cart"></i>
+		  		<%= link_to user_orders_path(user) do %>
+		  		購入したプラン(<%= user.orders.count %>件)
+		  		<% end %>
+			  		<% if current_user == user && order > 0 %>
+			  	    <span class="maru"><%= order %></span>
+			  		<% end %>
+		  	</td>
+		  </tr>
+		  <tr><td></td></tr>
     </table>
   </div>
 
   <div class="col-lg-9">
 
+  	<!-- 振り込み完了ボタン -->
   	<% if admin_signed_in? && price_sum > 0 %>
   	  <div class="text-center" , style="padding-top: 20px;">
-	  	<h2>売上金¥<%= (price_sum*0.9).floor %>の申請がありました。</h2><br>
-	  	<%= link_to "振り込み完了", admins_user_order_status_update_path(user),
-	  	data: {confirm: "講座情報は間違い無いですか？"} %>
-	  </div>
-	<% end %>
+		  	<h2>売上金¥<%= (price_sum*0.9).floor %>の申請がありました。</h2><br>
+		  	<%= link_to "振り込み完了", admins_user_order_status_update_path(user),
+		  	data: {confirm: "本当に完了しました？"}, class:"btn btn-primary" %>
+	  　</div>
+	　<% end %>
 
-
-
-
+	<!-- 商品一覧 -->
 		<h2 class="title">- <%= user.family_name %>さんのプラン -</h2>
-		<% if items.present? %>
-		  <%= render "items/index", items:items ,user:user %>
-	    <%= paginate items %>
-	  <% else %>
-	    <h2 class="title">プランは未だありません。<br><br>
-	    	<%= link_to "はじめる", new_item_path, class:"btn btn-primary btn-lg" %>
-	    </h2>
-		<% end %>
+			<% if items.present? %>
+			  <%= render "items/index", items:items ,user:user %>
+		    <%= paginate items %>
+		  <% else %>
+		    <h2 class="title">プランは未だありません。<br><br>
+		    	<%= link_to "はじめる", new_item_path, class:"btn btn-primary btn-lg" %>
+		    </h2>
+			<% end %>
   </div>
 </div>
 

@@ -1,9 +1,9 @@
 class FavoritesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!,only: [:create, :destroy]
 
   def index
     @user = User.find(params[:user_id])
-    @favorites = @user.favorites.all
+    @favorites = @user.favorites.page(params[:page]).per(5)
   end
 
   def create

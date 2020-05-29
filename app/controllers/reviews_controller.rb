@@ -1,11 +1,12 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only:[:new, :create]
 
   def index
     @user = User.find(params[:user_id])
-    @reviews = @user.reviews.all
+    @reviews = @user.reviews.page(params[:page]).per(5)
   end
 
+  ##レビューされたものを取得
   def reviewed
     @user = User.find(params[:user_id])
     @reviews = Review.where(item: @user.items)
@@ -19,7 +20,7 @@ class ReviewsController < ApplicationController
   def new
     @item = Item.find(params[:item_id])
     @review = @item.reviews.new
-    @order = @item.orders.find_by("(order_status = ?) AND (item_id = ?)", 1 , @item.id)
+    @order = @item.orders.find_by("(order_status = ?) AND (item_id = ?)", 1, @item.id)
   end
 
   def create
@@ -29,7 +30,6 @@ class ReviewsController < ApplicationController
     @order = Order.find(params[:order_id])
     if @review.save
        flash[:review_save] = "レビューを登録しました！！"
-      
        @order.update(order_status: 2)
        redirect_to item_path(@item)
     else
@@ -40,12 +40,11 @@ class ReviewsController < ApplicationController
       @order = Order.find(params[:order_id])
       render :new
     end
-
   end
 
   private
 
   def review_params
-    params.require(:review).permit(:user_id, :item_id, :text ,:rate)
+    params.require(:review).permit(:user_id, :item_id, :text, :rate)
   end
 end

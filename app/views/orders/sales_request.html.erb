@@ -1,40 +1,19 @@
 <h2 class="title">- 売上金申請 -</h2>
-<div class="row responsibe-center">
-    <div class="w-100"></div>
+  <!-- 売上金詳細 -->
+		<div class="title">
+			売上金:¥ <%= @orders.sum(:price) %><br><br>
+			手数料 (10%):¥ <%= (@orders.sum(:price)*0.1).floor %><br><br>
+			最終金額:¥ <%= @orders.sum(:price)-(@orders.sum(:price)*0.1).floor %><br><br>
+			<%= link_to "申請する" ,user_sales_request_finish_path,
+			data:{confirm: "本当に申請しますか？"}, class:"btn btn-primary" %>
+		</div>
 	<% @orders.each do |order| %>
-	<div class="col-lg-2">
-		購入日:<%= order.created_at.strftime("%m/%d")%>
-	</div>
-	<div class="col-lg-2">
-		<%= attachment_image_tag order.item.photos.first ,:image ,:fill,100,100 %>
-	</div>
-	<div class="col-lg-2">
-		プラン名<%= order.item.name%>
-	</div>
-	<div class="col-lg-2">
-		プラン金額¥<%= order.item.price%>
-	</div>
-	<div class="col-lg-2">
-		注文数<%= order.amount%>
-	</div>
-	<div class="col-lg-2">
-		注文小計¥<%= order.price%>
-	</div>
-
-	<% end %>
-	<div class="col-lg-2"></div>
-	<div class="col-lg-2"></div>
-	<div class="col-lg-2"></div>
-	<div class="col-lg-2"></div>
-	<div class="col-lg-2">売上金 <br><br>手数料 (10%) <br><br>合計金額 <br><br></div>
-	<div class="col-lg-2">
-		¥ <%= @orders.sum(:price) %><br><br>
-		¥ <%= (@orders.sum(:price)*0.1).floor %><br><br>
-		¥ <%= @orders.sum(:price)-(@orders.sum(:price)*0.1).floor %><br><br>
-		<%= link_to "申請する" ,user_sales_request_finish_path %>
-		<%#= form_for @order_status, url:item_order_path(@order) ,method: :PATCH do |f| %>
-		<%#= f.hidden_feild :order_status %>
-		<%# end %>
-	</div>
-</div>
-
+	  <div class="col-lg-3 responsibe-center" style="float: left; margin-bottom: 20px;">
+			<%= attachment_image_tag order.item.photos.first, :image ,:fill, 200, 200 %><br>
+				<p>購入日:<%= order.created_at.strftime("%m/%d")%></p>
+				<p>プラン名:<%= order.item.name%></p>
+				<p>プラン金額:¥<%= order.item.price%></p>
+				<p>注文数:<%= order.amount%></p>
+				<p>注文小計:¥<%= order.price%></p>
+		</div>
+  <% end %>

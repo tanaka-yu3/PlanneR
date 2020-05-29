@@ -1,96 +1,92 @@
-<h2 class="title">- 会員情報修正 -</h2>
-<div class="text-center">
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="form">
-  	プロフィール写真 <br>
-    <% if @user.image.present? %>
-  	  <%= attachment_image_tag @user ,:image ,:fill ,300 ,300, fallback:"noimage.png",size:"300x300" %><br>
+<h2 class="title">会員情報修正</h2>
+  <div class="text-center">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="form">
+      	プロフィール写真 <br>
+        <% if @user.image.present? %>
+      	  <%= attachment_image_tag @user, :image, :fill, 300, 300, fallback:"noimage.png", size:"300x300" %><br>
+        <% end %>
+      	<%= f.attachment_field :image, class:"block-center" %>
+      </div>
+
+      <div class="form">
+      	姓<span class="item-attention">必須</span><br>
+        <%= f.text_field :family_name %>
+      </div>
+
+      <div class="form">
+      	名<br>
+      	<%= f.text_field :last_name %>
+      </div>
+
+      <div class="form">
+      	セイ<br>
+      	<%= f.text_field :family_name_kana %>
+      </div>
+      <div class="form">
+      	メイ<br>
+      	<%= f.text_field :last_name_kana %>
+      </div>
+
+      <div class="form">
+      	電話番号<br>
+      	<%= f.text_field :phone_number %>
+      </div>
+
+      <div class="form">
+      	Eメール<span class="item-attention">必須</span><br>
+      	<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="form">
+      	郵便番号<br>
+      	<%= f.text_field :postcode, id: "user_postcode"%>
+      </div>
+
+      <div class="form">
+      	住所<br>
+      	<%= f.text_field :address, id:"user_address"%>
+      </div>
+
+      <div class="form">
+      	パスワード<span class="item-attention">必須</span><br>
+      	<%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="form">
+      	パスワード（確認用）<span class="item-attention">必須</span><br>
+      	<%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+       <div class="form">
+        今のパスワード<span class="item-attention">必須</span><br>
+         <%= f.password_field :current_password, autocomplete: "current-password" %>
+      </div>
+
+      <p class="form">※売上金を申請するには下記の登録が必要です。</p>
+        <div class="form">
+          銀行名<br>
+          <%= f.text_field :bank_name %>
+        </div>
+
+        <div class="form">
+          口座種別<br>
+          <%= f.text_field :bank_account_kind %>
+        </div>
+
+        <div class="form">
+          支店コード<br>
+          <%= f.text_field :bank_branch_code %>
+        </div>
+
+        <div class="form">
+          口座番号<br>
+          <%= f.text_field :bank_account_number %>
+        </div>
+
+      <div>
+        <%= f.submit "変更", class:"btn btn-success" %><br><br>
+      </div>
     <% end %>
-  	<%= f.attachment_field :image ,class:"block-center"%>
   </div>
-
-  <div class="form">
-  	姓<span class="item-attention">必須</span><br>
-    <%= f.text_field :family_name %>
-  </div>
-
-  <div class="form">
-  	名<br>
-  	<%= f.text_field :last_name %>
-  </div>
-
-  <div class="form">
-  	セイ<br>
-  	<%= f.text_field :family_name_kana %>
-  </div>
-  <div class="form">
-  	メイ<br>
-  	<%= f.text_field :last_name_kana %>
-  </div>
-
-  <div class="form">
-  	電話番号<br>
-  	<%= f.text_field :phone_number %>
-  </div>
-
-  <div class="form">
-  	Eメール<span class="item-attention">必須</span><br>
-  	<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="form">
-  	郵便番号<br>
-  	<%= f.text_field :postcode ,id: "user_postcode"%>
-  </div>
-
-  <div class="form">
-  	住所<br>
-  	<%= f.text_field :address ,id:"user_address"%>
-  </div>
-
-  <div class="form">
-  	パスワード<span class="item-attention">必須</span><br>
-  	<%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="form">
-  	パスワード（確認用）<span class="item-attention">必須</span><br>
-  	<%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-   <div class="form">
-    今のパスワード<span class="item-attention">必須</span><br>
-     <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <p class="form">※売上金を申請するには下記の登録が必要です。</p>
-    <div class="form">
-      銀行名<br>
-      <%= f.text_field :bank_name %>
-    </div>
-
-    <div class="form">
-      口座種別<br>
-      <%= f.text_field :bank_account_kind %>
-    </div>
-
-    <div class="form">
-      支店コード<br>
-      <%= f.text_field :bank_branch_code %>
-    </div>
-
-    <div class="form">
-      口座番号<br>
-      <%= f.text_field :bank_account_number %>
-    </div>
-
-  <div>
-    <%= f.submit "登録" , class:"btn btn-success" %><br><br>
-    <% if current_page?(new_user_session_path) || if current_page?(new_user_registration_path) %>
-  	  <%= link_to '/Googleアカウントで登録',  user_google_omniauth_authorize_path ,class:"fab fa-google btn btn-dark"%>
-    <% end %>
-  <% end %>
-  </div>
-  <% end %>
-</div>
