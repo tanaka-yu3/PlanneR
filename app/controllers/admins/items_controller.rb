@@ -14,7 +14,7 @@ class Admins::ItemsController < ApplicationController
 		@item = Item.find(params[:id])
 		@item.item_status = params[:item][:item_status]
 		if @item.save
-			if Item.find_by(id: @item.id + 1)
+			if Item.find_by(id: @item.id + 1 ,item_status: @item.item_status == 0)
 			   redirect_to admins_item_path(@item.id + 1)
 			else
 			   redirect_to admins_items_path

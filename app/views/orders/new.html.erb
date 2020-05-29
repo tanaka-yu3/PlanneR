@@ -20,14 +20,6 @@
 	  <td><%= f.text_field :amount %></td>
 	</tr>
 	<tr>
-	  <td>支払い方法</td>
-	  <td><%= f.radio_button :pay ,:"売上金で支払う" %>
-	  	 <%= f.label :pay ,"売上金で支払う"%>
-	  	 <%= f.radio_button :pay ,:"銀行振り込み" %>
-	  	 <%= f.label :pay ,"銀行振り込み"%>
-	  	 </td>
-	</tr>
-	<tr>
 	  <td>プランの金額</td>
 	  <td>¥<%= @item.price %>/人</td>
 	</tr>

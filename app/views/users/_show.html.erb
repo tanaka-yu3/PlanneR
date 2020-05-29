@@ -1,7 +1,7 @@
 <div class="row">
 	<!-- ユーザーアクション -->
   <div class="col-lg-3">
-	<table class="table table-borderless responsibe-center">
+	<table class="table text-center">
 	  <tr>
 		<td><%= attachment_image_tag user , :image , :fill , 300 ,300 ,fallback: "noimage.png" , size:"300x300"%></td>
 	  </tr>
@@ -13,11 +13,19 @@
 			 <% end %>
 		</td>
 		<% else %>
-		<td><%= user.family_name %><%= user.last_name %>さん</td>
+		<td><i class="fas fa-user"></i>
+			<%= user.family_name %><%= user.last_name %>さん
+		</td>
 		<% end %>
 	  </tr>
 	  <!-- フォローボタン -->
 	  <% if admin_signed_in? %>
+	    <tr>
+	    <td><i class="fas fa-university"></i>
+	    	<%= link_to admins_user_bank_path(user) do %>
+	  		 <%= user.family_name %>さんの口座情報
+	  		<% end %>
+	  </tr>
 	  	<% else %>
 	  <% if current_user != user %>
 	  <tr>
@@ -109,18 +117,18 @@
 	  		  </span>
 	  		<% end %>
 	  	</td>
-	  	<td>
-	  	</td>
 	  </tr>
+	  <tr><td></td></tr>
     </table>
   </div>
 
   <div class="col-lg-9">
 
-  	<% if admin_signed_in?  %>
+  	<% if admin_signed_in? && price_sum > 0 %>
   	  <div class="text-center" , style="padding-top: 20px;">
 	  	<h2>売上金¥<%= (price_sum*0.9).floor %>の申請がありました。</h2><br>
-	  	<%= link_to "振り込み完了", admins_user_order_status_update_path(user) ,data: {confirm: "本当に完了ステータスに変更しますか?"} %>
+	  	<%= link_to "振り込み完了", admins_user_order_status_update_path(user),
+	  	data: {confirm: "講座情報は間違い無いですか？"} %>
 	  </div>
 	<% end %>
 

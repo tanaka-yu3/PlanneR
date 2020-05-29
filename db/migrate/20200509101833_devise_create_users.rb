@@ -11,6 +11,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :phone_number
       t.integer :postcode
       t.string :address
+      t.string :bank_name
+      t.string :bank_account_kind
+      t.integer :bank_branch_code
+      t.string :bank_account_number
+      t.string :provider
+      t.string :uid
+      t.string :meta
+      t.string :token
       t.boolean :is_credit ,null: false, default: false
       ## Database authenticatable
       t.string :email,              null: false, default: ""

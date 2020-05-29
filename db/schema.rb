@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_103734) do
+ActiveRecord::Schema.define(version: 2020_05_16_124457) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -62,12 +62,11 @@ ActiveRecord::Schema.define(version: 2020_05_24_103734) do
     t.integer "user_id"
     t.integer "amount"
     t.integer "price"
-    t.string "pay"
+    t.integer "order_status", default: 0
     t.date "first_day"
     t.date "last_day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "order_status", default: 0
     t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -109,6 +108,14 @@ ActiveRecord::Schema.define(version: 2020_05_24_103734) do
     t.string "phone_number"
     t.integer "postcode"
     t.string "address"
+    t.string "bank_name"
+    t.string "bank_account_kind"
+    t.integer "bank_branch_code"
+    t.string "bank_account_number"
+    t.string "provider"
+    t.string "uid"
+    t.string "meta"
+    t.string "token"
     t.boolean "is_credit", default: false, null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -122,10 +129,6 @@ ActiveRecord::Schema.define(version: 2020_05_24_103734) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
-    t.string "meta"
-    t.string "token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

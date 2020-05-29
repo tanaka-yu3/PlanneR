@@ -19,11 +19,6 @@
 			</td>
 		</tr>
 		<tr>
-			<td>支払い方法</td>
-			<td><%= @order.pay %></td>
-			<%= f.hidden_field :pay %>
-		</tr>
-		<tr>
 			<td>合計金額</td>
 			<td>¥<%= @order.price = @item.price*@order.amount %></td>
 			<%= f.hidden_field :price ,vlau: "@order.price"%>

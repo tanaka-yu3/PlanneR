@@ -1,0 +1,22 @@
+<h2 class="title"><%= @user.family_name %>さんの口座情報</h2>
+<div class="text-center">
+	<div class="form">
+		<h2>銀行名</h2><br>
+	  <%= @user.bank_name%>
+	</div>
+
+	<div class="form">
+		<h2>口座種別</h2><br>
+	  <%= @user.bank_account_kind %>
+	</div>
+
+	<div class="form">
+	  <h2>支店コード</h2><br>
+	  <%= @user.bank_branch_code %>
+	</div>
+
+	<div class="form">
+	  <h2>口座番号</h2><br>
+	  <%= @user.bank_account_number %>
+	</div>
+</div>

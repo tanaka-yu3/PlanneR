@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :orders
     resources :users ,only:[:index ,:show] do
       get '/order_status_update' =>'users#order_status_update' ,as: 'order_status_update'
+      get '/bank' => 'users#bank'
     end
   end
 

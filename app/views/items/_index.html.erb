@@ -9,7 +9,7 @@
 		<% elsif user_signed_in? && current_page?(user_path(user)) %>
 		  <%= attachment_image_tag item.photos.first , :image ,:fill ,1050 ,500 ,class:"img-fluid"%>
 		<% else %>
-			<%= attachment_image_tag item.photos.first , :image ,:fill ,1440 ,500 ,class:"img-fluid" %>
+			<%= attachment_image_tag item.photos.first , :image ,:fill ,1440 ,800 ,class:"img-fluid" %>
 		<% end %>
 	  <% end %>
 	</div>

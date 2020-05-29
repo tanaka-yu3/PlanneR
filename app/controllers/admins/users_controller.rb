@@ -21,6 +21,10 @@ class Admins::UsersController < ApplicationController
 		end
 		 redirect_to request.referer
 	end
+
+	def bank
+		@user = User.find(params[:user_id])
+	end
 end
 
 
