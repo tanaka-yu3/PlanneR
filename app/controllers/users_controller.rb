@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
 	def items
 	  @user = User.find(params[:user_id])
-      @items = @user.items..page(params[:page]).per(5)
+      @items = @user.items.page(params[:page]).per(5)
 	end
 
 	def show
