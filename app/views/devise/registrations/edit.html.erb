@@ -11,7 +11,7 @@
       </div>
 
       <div class="form">
-      	姓<span class="item-attention">必須</span><br>
+      	姓<br>
         <%= f.text_field :family_name %>
       </div>
 
@@ -35,7 +35,7 @@
       </div>
 
       <div class="form">
-      	Eメール<span class="item-attention">必須</span><br>
+      	Eメール<br>
       	<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
 
@@ -60,7 +60,7 @@
       </div>
 
        <div class="form">
-        今のパスワード<span class="item-attention">必須</span><br>
+        現在ののパスワード<span class="item-attention">必須</span><br>
          <%= f.password_field :current_password, autocomplete: "current-password" %>
       </div>
 

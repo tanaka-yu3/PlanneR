@@ -46,7 +46,11 @@
             <i class="fas fa-shopping-cart"> 購入する</i>
             <% end %>
           <% else %>
-            <h2 style="color: red;">- 完売しました -</h2>
+            <% if item.item_status == "permitting" %>
+              <h2>承認中</h2>
+            <% else %>
+              <h2 style="color: red;">完売しました</h2>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
@@ -69,11 +73,15 @@
   </tr>
   <tr>
     <th class="table-th">制限:</th>
-    <% if item.total > item.orders.sum(:amount) %>
-    <td class="table-td"><%= item.total-item.orders.sum(:amount) %>名</td>
-    <% else %>
-    <td>- 完売しました -</td>
-    <% end %>
+      <% if item.item_status == "permitting" %>
+        <td>承認待ち</td>
+      <% else %>
+        <% if item.total > item.orders.sum(:amount) %>
+        <td class="table-td"><%= item.total-item.orders.sum(:amount) %>名</td>
+        <% else %>
+        <td>完売しました</td>
+        <% end %>
+      <% end %>
   </tr>
   <tr>
     <th class="table-th">説明:</th>
