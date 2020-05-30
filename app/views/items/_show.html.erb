@@ -41,7 +41,7 @@
           <i class="fas fa-pen-alt"> 評価する</i>
           <% end %>
         <% else %>
-          <% if item.total > item.orders.sum(:amount) %>
+          <% if item.total > item.orders.sum(:amount) && item.item_status == "release" %>
             <%= link_to new_item_order_path(item), class:"btn btn-success" do %>
             <i class="fas fa-shopping-cart"> 購入する</i>
             <% end %>
