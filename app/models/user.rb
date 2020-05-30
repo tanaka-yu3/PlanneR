@@ -46,5 +46,8 @@ class User < ApplicationRecord
   end
 
   #バリデーション
-  validates :family_name ,presence: true
+  validates :family_name, presence: true
+  validates :last_name, presence: true
+  validates :family_name_kana, presence: true
+  validates :last_name_kana, presence: true
 end
