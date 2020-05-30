@@ -33,10 +33,18 @@
                     <%= link_to admins_users_path do %>
                     <i class="fas fa-users"> 顧客一覧</i>
                     <% end %>
+                    <% if Order.where(order_status: 3).count == 0 %>
+                    <% else %>
+                      <span class="maru"></span>
+                    <% end %>
                   </li>
                   <li>
                     <%= link_to admins_orders_path do %>
                     <i class="fas fa-align-justify"> 注文一覧</i>
+                    <% end %>
+                    <% if Order.where(order_status: 0).count == 0 %>
+                    <% else %>
+                      <span class="maru"></span>
                     <% end %>
                   </li>
                   <li>

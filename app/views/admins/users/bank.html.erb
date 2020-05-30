@@ -1,22 +1,39 @@
 <h2 class="title"><%= @user.family_name %>さんの口座情報</h2>
 	<div class="text-center">
+
 		<div class="form">
 			<h2>銀行名</h2><br>
-		  <%= @user.bank_name%>
+			<% if @user.bank_name.present? %>
+			  <%= @user.bank_name %>
+			<% else %>
+			  <p style="color: red;">未登録</p>
+			<% end %>
 		</div>
 
 		<div class="form">
 			<h2>口座種別</h2><br>
-		  <%= @user.bank_account_kind %>
+				<% if @user.bank_account_kind.present? %>
+			    <%= @user.bank_account_kind %>
+			  <% else %>
+				  <p style="color: red;">未登録</p>
+				<% end %>
 		</div>
 
 		<div class="form">
 		  <h2>支店コード</h2><br>
-		  <%= @user.bank_branch_code %>
+			  <% if @user.bank_branch_code.present? %>
+			    <%= @user.bank_branch_code %>
+			  <% else %>
+				  <p style="color: red;">未登録</p>
+				<% end %>
 		</div>
 
 		<div class="form">
 		  <h2>口座番号</h2><br>
-		  <%= @user.bank_account_number %>
+			  <% if @user.bank_account_number.present? %>
+			    <%= @user.bank_account_number %>
+			  <% else %>
+				  <p style="color: red;">未登録</p>
+				<% end %>
 		</div>
 	</div>

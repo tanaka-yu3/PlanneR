@@ -4,9 +4,9 @@
   <div class="w-100">
 		<h2 class="title">- New -</h2>
 			<% if @latest_items.empty? && @comingsoon_items.present? %>
-			  <h2 class="title">プラン承認中です。しばらくお待ちください。</h2>
+			  <h2 class="title">プラン承認中です。<br>しばらくお待ちください。</h2>
 			<% elsif @latest_items.empty?%>
-			  <h2 class="title">プランはまだありません。しばらくお待ちください。</h2>
+			  <h2 class="title">プランはまだありません。<br>しばらくお待ちください。</h2>
 			<% else %>
 			　<%= render "index" ,items:@latest_items , user:current_user %>
 			  <% if @latest_items.count >= 3 %>
@@ -19,7 +19,7 @@
 	<div class="w-100">
 		<h2 class="title">- Popular -</h2>
 			<% if @popular_items.empty? %>
-			  <h2 class="title">プランはまだありません。しばらくお待ちください。</h2>
+			  <h2 class="title">プランはまだありません。<br>しばらくお待ちください。</h2>
 			<% else %>
 			　<%= render "index" ,items:@popular_items , user:current_user %>
 			  <% if @popular_items.count >= 3  %>
@@ -30,9 +30,9 @@
 
 <!-- 未承認だが出品したもの -->
 	<div class="w-100">
-		<h2 class="title">- comming_soon... -</h2>
+		<h2 class="title">- comming -</h2>
 			<% if @comingsoon_items.empty? %>
-			  <h2 class="title">準備中です。<br>しばらくおお待ちください。</h2>
+			  <h2 class="title">準備中です。<br>しばらくお待ちください。</h2>
 			<% else %>
 			　<%= render "index" ,items:@comingsoon_items , user:current_user %>
 			  <% if @comingsoon_items.count > 3 %>

@@ -1,4 +1,3 @@
-
 <div class="row">
   <div class="validates">
     <%= flash[:favorite] %>
@@ -9,56 +8,56 @@
   <!-- item画像 -->
   <div class="item-image-box">
     <div id="item-slide">
-     <% item.photos.each do |image| %>
-     <div><%= attachment_image_tag image, :image, :fill, 1440, 800, class:"img-fluid"%></div>
-     <% end %>
-   </div>
+      <% item.photos.each do |image| %>
+        <div><%= attachment_image_tag image, :image, :fill, 1440, 800, class:"img-fluid"%></div>
+      <% end %>
+    </div>
  </div>
 
  <!-- videoコード -->
- <% if item.video.present? %>
- <iframe width="100%" height="500" src="https://www.youtube.com/embed/<%= @item.video %>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
- <% end %>
+  <% if item.video.present? %>
+    <iframe width="100%" height="500" src="https://www.youtube.com/embed/<%= @item.video %>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <% end %>
 
  <!-- お気に入りボタン -->
- <% if user_signed_in? %>
- <div class="favorite-font">
-  　　<%= render "favorites/form", item:@item %>
-  　　<%= @item.favorites.count %>人がお気に入りしています
-</div>
+  <% if user_signed_in? %>
+     <div class="favorite-font">
+      　　<%= render "favorites/form", item:@item %>
+      　　<%= @item.favorites.count %>人がお気に入りしています
+     </div>
 
-<!-- 商品アクションボタン -->
-<div style="margin: 3px auto;">
-  <% if current_user.id == item.user_id %>
-    <%= link_to edit_item_path(item), class:"btn btn-dark" do %>
-    <i class="fas fa-cog"> 変更する</i>
-    <% end %>
-    <%= link_to item_path(item), method: :delete, class:"btn btn-danger", data: {confirm: "商品を削除しますか？"} do %>
-    <i class="fas fa-trash-alt"> 削除する</i>
-    <% end %>
-  <% else %>
-    <% if User.where(order: item.orders) == current_user %>
-      <%= link_to new_item_review_path(@item), class:"btn btn-primary " do %>
-      <i class="fas fa-pen-alt"> 評価する</i>
-      <% end %>
-    <% else %>
-      <% if item.total > item.orders.sum(:amount) %>
-        <%= link_to new_item_order_path(item), class:"btn btn-success" do %>
-        <i class="fas fa-shopping-cart"> 購入する</i>
+    <!-- 商品アクションボタン -->
+    <div style="margin: 3px auto;">
+      <% if current_user.id == item.user_id %>
+        <%= link_to edit_item_path(item), class:"btn btn-dark" do %>
+        <i class="fas fa-cog"> 変更する</i>
+        <% end %>
+        <%= link_to item_path(item), method: :delete, class:"btn btn-danger", data: {confirm: "商品を削除しますか？"} do %>
+        <i class="fas fa-trash-alt"> 削除する</i>
         <% end %>
       <% else %>
-        <h2 style="color: red;">- 完売しました -</h2>
+        <% if User.where(order: item.orders) == current_user %>
+          <%= link_to new_item_review_path(@item), class:"btn btn-primary " do %>
+          <i class="fas fa-pen-alt"> 評価する</i>
+          <% end %>
+        <% else %>
+          <% if item.total > item.orders.sum(:amount) %>
+            <%= link_to new_item_order_path(item), class:"btn btn-success" do %>
+            <i class="fas fa-shopping-cart"> 購入する</i>
+            <% end %>
+          <% else %>
+            <h2 style="color: red;">- 完売しました -</h2>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   <% end %>
-</div>
-<% end %>
 
 <!-- 商品情報 -->
 <table class="table table-borderless">
   <tr>
-    <th class="table-th"> 商品名:</th>
-    <td class="table-td"> <%= item.name %></td>
+    <th class="table-th"> プラン:</th>
+    <td class="table-td　text-style"> <%= item.name %></td>
   </tr>
   <tr>
     <th class="table-th">値段：</th>
@@ -69,7 +68,7 @@
     <td class="table-td"><%= item.start_day %> 〜 <%= @item.finish_day %></td>
   </tr>
   <tr>
-    <th class="table-th">制限人数:</th>
+    <th class="table-th">制限:</th>
     <% if item.total > item.orders.sum(:amount) %>
     <td class="table-td"><%= item.total-item.orders.sum(:amount) %>名</td>
     <% else %>

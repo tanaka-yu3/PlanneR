@@ -6,6 +6,15 @@ h1{
 	font-weight:80px;
 }
 
+.about{
+	position: absolute;
+	height: 800px;
+	width: 100%;
+	background-image: image-url("test2.jpg");
+	background-position: center;
+	background-size: cover;
+}
+
 .about-text{
 	margin: 100px 0;
 	font-size: 50px;
@@ -32,7 +41,7 @@ h1{
 }
 
 .about1{
-	background-image: image-url("about5.jpg");
+	background-image: image-url("about6.jpg");
 	background-position: center;
 	background-size: cover;
 	height: 350px;
@@ -48,11 +57,15 @@ h1{
 }
 
 .about3{
-	background-image: image-url("about6.jpg");
+	background-image: image-url("about5.jpg");
 	background-position: center;
 	background-size: cover;
 	height: 350px;
 	width: 270px;
+}
+
+.about-title{
+	margin-bottom: 20px;
 }
 
 /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */

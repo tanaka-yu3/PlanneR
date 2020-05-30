@@ -58,9 +58,11 @@
 
       <div>
         <%= f.submit "登録", class:"btn btn-success" %><br><br>
-        <% if current_page?(new_user_session_path) || if current_page?(new_user_registration_path) %>
-      	  <%= link_to '/Googleアカウントで登録', user_google_omniauth_authorize_path, class:"fab fa-google btn btn-dark" %>
-        <% end %>
+
+        <!-- googole omniauth 2.0 ドメイン取得までコメントアウト -->
+        <%# if current_page?(new_user_session_path) || if current_page?(new_user_registration_path) %>
+      	  <%#= link_to '/Googleアカウントで登録', user_google_omniauth_authorize_path, class:"fab fa-google btn btn-dark" %>
+        <%# end %>
       <% end %>
       </div>
     <% end %>

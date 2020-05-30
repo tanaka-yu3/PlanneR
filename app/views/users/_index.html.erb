@@ -2,6 +2,12 @@
   <div class="col-lg-3 responsibe-center" style="float: left;">
 
     <% if admin_signed_in? %>
+      <% if Order.where(item: user.items, order_status: 3).count > 0 %>
+        <div class="maru">
+          <%= Order.where(item: user.items, order_status: 3).count %>
+        </div><br>
+      <% else %>
+      <% end %>
       <%= link_to admins_user_path(user) do %>
       <%= attachment_image_tag user, :image, :fill, 200, 200,
       fallback:"noimage.png", size:"200x200", class:"image-action" %><br>
