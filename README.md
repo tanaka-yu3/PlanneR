@@ -43,8 +43,6 @@ Things you may want to cover:
 ■ 旅先での地元の人しか知らないようなお店スポットの案内  
 ■ 地域活性化
 
-## 設計書
-
 ### 機能一覧
 https://docs.google.com/spreadsheets/d/1C_EIBBQIh97r8nw9PShv0cgnfzFxlfHYDZ_R7pEQLoM/edit#gid=0
 >>>>>>> c7fa15d3b03c816b5693eeb49ff955645126a0da
