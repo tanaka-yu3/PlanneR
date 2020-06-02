@@ -19,7 +19,7 @@
 					<% else %>
 					  <%= user.family_name %><%= user.last_name %>さん
 					<% end %>
-					 　総評:<%= (Review.where(item: user.items).average(:rate)).floor %>
+					 　総評:<%= Review.where(item: user.items).average(:rate).floor %>
 				</td>
 		  </tr>
 		  <tr>
