@@ -50,4 +50,12 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :family_name_kana, presence: true
   validates :last_name_kana, presence: true
+
+  ##口座チェック
+  class << self
+    def bank
+      user.bank_name.present && user.bank_account_kind.present && user.bank_branch_code.present && user.bank_account_number.present
+    end
+  end
+
 end

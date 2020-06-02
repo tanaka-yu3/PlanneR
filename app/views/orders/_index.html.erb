@@ -74,13 +74,10 @@
 					<%= link_to item_path(order.item) do %>
 					<%= attachment_image_tag order.item.photos.first, :image, :fill ,200, 100, class:"img-fluid image-action"%>
 					<% end %><br>
-					<%= order.item.name %>
 				</td>
 				<td><%= order.first_day.strftime ("%Y/%m/%d") %>〜<%= order.last_day.strftime ("%m/%d") %></td>
 				<td>
-					単価:¥<%= order.item.price %><br>
-					数量:<%= order.amount %><br>
-					合計:¥<%= order.price %>
+					¥: <%= order.price %>
 				</td>
 				<td>
 					<% if current_page?(user_sold_items_path) %>

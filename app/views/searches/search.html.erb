@@ -5,10 +5,16 @@
 	  <% else %>
 	    <%= render "items/index", items:@records, user:current_user %>
 	  <% end %>
-	<% else %>
+	<% elsif @model == "user" %>
 	   <% if @records.empty? %>
 	     <h2 class="title">0件です</h2>
 	   <% else %>
 	     <%= render "users/index", users:@records %>
+	   <% end %>
+	<% else %>
+	   <% if @records.empty? %>
+	     <h2 class="title">0件です</h2>
+	   <% else %>
+	     <%= render "orders/index", orders:@records %>
 	   <% end %>
 	<% end %>

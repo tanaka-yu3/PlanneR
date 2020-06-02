@@ -1,6 +1,7 @@
 <h2 class="title">購入されたプラン</h2>
 	<% if @orders.present? %>
 	  <%= render "orders/index", orders:@orders, user:@user %>
+	  <%= paginate @orders %>
 	<% else %>
 	  <h2 class="title">0件です</h2>
 	<% end %>

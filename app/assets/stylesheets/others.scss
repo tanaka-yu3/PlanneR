@@ -15,32 +15,33 @@ h1{
 	background-size: cover;
 }
 
+
 .about-text{
 	margin: 100px 0;
 	font-size: 50px;
 	position: relative;
 	top: 0;
 	color: white;
-	padding-bottom: 365px;
 }
 
-.about-box1{
-	position: relative;
-	top: 200px;
+// .about-box1{
+// 	position: relative;
+// 	top: 200px;
 
-}
-.about-box2{
-	position: relative;
-	top: 400px;
+// }
+// .about-box2{
+// 	position: relative;
+// 	top: 400px;
 
-}
-.about-box3{
-	position: relative;
-	top: 600px;
+// }
+// .about-box3{
+// 	position: relative;
+// 	top: 600px;
 
-}
+// }
 
 .about1{
+	position: static;
 	background-image: image-url("about6.jpg");
 	background-position: center;
 	background-size: cover;
@@ -62,10 +63,6 @@ h1{
 	background-size: cover;
 	height: 350px;
 	width: 270px;
-}
-
-.about-title{
-	margin-bottom: 20px;
 }
 
 /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
@@ -140,18 +137,15 @@ h1{
 
 /* スマートフォンサイズ（425px）以下の際に適用される設定 */
 @media screen and (max-width:425px) {
-	.video-box{
-	width: 100%;
+	.about{
 	position: absolute;
+	height: 500px;
+	width: 100%;
+	background-image: image-url("test2.jpg");
+	background-position: center;
+	background-size: cover;
 }
 
-.about-text{
-	margin: 50px 0;
-	font-size: 15px;
-	position: relative;
-	top: 0;
-	color: white;
-}
     .about-box1{
 	position: relative;
 	top: 50px;

@@ -23,13 +23,6 @@ $(function () {
     $('#sp-menu').fadeToggle();
     return false;
   });
-//評価　星機能
-  $('#star').raty({
-    size: 36,
-    starOff: "/assets/star-off.png",
-    starOn: "/assets/star-on.png",
-    scoreName: "review[rate]"
-  });
 
   $("#item-slide").skippr({
     // スライドショーの変化（"fade" or "slide"）

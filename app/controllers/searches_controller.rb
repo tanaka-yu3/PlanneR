@@ -10,13 +10,15 @@ class SearchesController < ApplicationController
 	private
 
 	def search_for(model,content,method)
-		if @model == 'user'
-		   method == 'partial'
-		   User.where('family_name LIKE ?', '%'+content+'%')
-	    else
-	       @model == 'item'
-		   method == 'partial'
-		   Item.where('name LIKE ?', '%'+content+'%')
+		if @model == "user"
+		   method == "partial"
+		   User.where("family_name LIKE ?", "%"+content+"%")
+	    elsif @model == "item"
+		   method == "partial"
+		   Item.where("name LIKE ?", "%"+content+"%")
+		else
+			method == "partial"
+		    Order.where("id LIKE ?", "%"+content+"%")
 		end
 	end
 end

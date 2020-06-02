@@ -19,6 +19,7 @@
 					<% else %>
 					  <%= user.family_name %><%= user.last_name %>さん
 					<% end %>
+					 　総評:<%= (Review.where(item: user.items).average(:rate)).floor %>
 				</td>
 		  </tr>
 		  <tr>
@@ -68,7 +69,7 @@
 			  <% if current_user == user %>
 
 			  <!-- 売上金詳細へ -->
-				  <% if sales > 0  %>
+				  <% if sales > 0 && bank.present? %>
 					  <tr>
 					  	<td><i class="fas fa-coins"></i>
 				  	   	<%= link_to user_sales_request_path(user) do %>
