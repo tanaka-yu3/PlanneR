@@ -30,11 +30,14 @@ class User < ApplicationRecord
   ##googleログイン機能
   devise :trackable, :omniauthable, omniauth_providers: %i(google)
   protected
-  def self.find_for_google(auth)
+  def self.find_for_google_oauth2(auth)
+
+  ##登録済のUSER
   user = User.find_by(email: auth.info.email)
 
+  ##新規登録のUSER
   unless user
-  user = User.create(family_name:     auth.info.name,
+  user = User.create(family_name: auth.info.name,
                      email: auth.info.email,
                      provider: auth.provider,
                      uid:      auth.uid,

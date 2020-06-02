@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_124457) do
+ActiveRecord::Schema.define(version: 2020_06_02_090427) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_124457) do
     t.string "bank_account_number"
     t.string "provider"
     t.string "uid"
-    t.string "meta"
+    t.text "meta"
     t.string "token"
     t.boolean "is_credit", default: false, null: false
     t.string "email", default: "", null: false
