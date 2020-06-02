@@ -30,7 +30,7 @@ class User < ApplicationRecord
   ##googleログイン機能
   devise :trackable, :omniauthable, omniauth_providers: %i(google)
   protected
-  def self.find_for_google_oauth2(auth)
+  def self.find_for_google(auth)
 
   ##登録済のUSER
   user = User.find_by(email: auth.info.email)
