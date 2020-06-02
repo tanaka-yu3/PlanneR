@@ -18,8 +18,8 @@
 						<% end %>
 					<% else %>
 					  <%= user.family_name %><%= user.last_name %>さん
+					 総評:<%= (Review.where(item: user.items).average(:rate).floor %>
 					<% end %>
-					 　総評:<%= Review.where(item: user.items).average(:rate).floor %>
 				</td>
 		  </tr>
 		  <tr>
