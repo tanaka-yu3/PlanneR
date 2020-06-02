@@ -16,10 +16,15 @@
         <%= f.submit "ログイン", class:"btn btn-info", style:"margin-bottom: 20px;"%>
       </div>
 
-      <!-- googole omniauth 2.0 ドメイン取得までコメントアウト -->
-      <!-- <div>
+      <div style="margin: 50px;">
+        <p>登録がまだの方は</p>
+        <%= link_to "こちら", new_user_registration_path, class:"btn btn-success"%>
+      </div>
+
+      <!-- googole omniauth 2.0  -->
+      <div>
         <%= link_to '/Googleアカウントでログイン', user_google_omniauth_authorize_path, class:"fab fa-google btn btn-dark" %>
-      </div> -->
+      </div>
 
     <% end %>
 </div>

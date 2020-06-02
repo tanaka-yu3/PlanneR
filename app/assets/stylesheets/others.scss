@@ -25,20 +25,19 @@ h1{
 }
 
 .about-box1{
-	position: fixed;
+	position: relative;
 	top: 800px;
 }
 
 .about-box2{
-	position: fixed;
-	top: 1150px;
+	position: relative;
+	top: 1000px;
 
 }
 
-
 .about-box3{
-	position: fixed;
-	top: 1500px;
+	position: relative;
+	top: 1200px;
 }
 
 
@@ -113,11 +112,10 @@ h1{
 .about-text{
 	margin: 50px 0;
 	font-size: 20px;
-	position: static;
+	position: relative;
 	color: white;
 }
 
-  
 
 
 }
@@ -132,6 +130,14 @@ h1{
 	background-position: center;
 	background-size: cover;
 }
+
+.about-text{
+	font-size: 15px;
+	position: relative;
+	top: 0;
+	color: white;
+}
+
 
 
 }
