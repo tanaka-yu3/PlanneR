@@ -24,21 +24,23 @@ h1{
 	color: white;
 }
 
-// .about-box1{
-// 	position: relative;
-// 	top: 200px;
+.about-box1{
+	position: fixed;
+	top: 800px;
+}
 
-// }
-// .about-box2{
-// 	position: relative;
-// 	top: 400px;
+.about-box2{
+	position: fixed;
+	top: 1150px;
 
-// }
-// .about-box3{
-// 	position: relative;
-// 	top: 600px;
+}
 
-// }
+
+.about-box3{
+	position: fixed;
+	top: 1500px;
+}
+
 
 .about1{
 	position: static;
@@ -111,26 +113,11 @@ h1{
 .about-text{
 	margin: 50px 0;
 	font-size: 20px;
-	position: relative;
-	top: 0;
+	position: static;
 	color: white;
 }
 
-  .about-box1{
-	position: relative;
-	top: 100px;
-
-	}
-	.about-box2{
-		position: relative;
-		top: 200px;
-
-	}
-	.about-box3{
-		position: relative;
-		top: 300px;
-
-	}
+  
 
 
 }
@@ -145,22 +132,6 @@ h1{
 	background-position: center;
 	background-size: cover;
 }
-
-    .about-box1{
-	position: relative;
-	top: 50px;
-
-	}
-	.about-box2{
-		position: relative;
-		top: 100px;
-
-	}
-	.about-box3{
-		position: relative;
-		top: 150px;
-
-	}
 
 
 }

@@ -1,4 +1,4 @@
-<div class="table-responsive-xl">
+<div class="table-responsive-sm">
 <table class="table">
 	<!-- 管理者側 -->
 	<% if admin_signed_in? %>
@@ -24,7 +24,7 @@
 						<%= order.item.name %>
 						<% end %>
 					</td>
-					<td>¥<%= order.item.price %></td>
+					<td>¥<%= order.price %></td>
 					<td>
 						<%= link_to user_path(order.user) do %>
 						<%= order.user.family_name %>さん
@@ -89,7 +89,7 @@
 				<td>
 					<% if order.order_status == "complete_payment" && order.item.user != user %>
 					  <%= link_to "評価する", new_item_review_path(order.item) %>
-					<% elsif order.order_status >= "review_done" && order.item.user != user %>
+					<% elsif order.order_status != "complete_payment" && order.order_status != "waiting_payment" && order.user == user %>
 					  <p>取引完了</p>
 					<% else %>
 					  <%= order.order_status_i18n %>
