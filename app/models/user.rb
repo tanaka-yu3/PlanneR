@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable
   attachment :image
   has_many :items ,dependent: :destroy
   has_many :reviews ,dependent: :destroy
@@ -45,11 +45,8 @@ class User < ApplicationRecord
                         password: Devise.friendly_token[0, 20],
                         meta:     auth.to_yaml)
       end
-    user.skip_confirmation!
     user
   end
-
-  # binding.pry
 
   #バリデーション
   validates :family_name, presence: true
