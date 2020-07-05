@@ -8,7 +8,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # POST /resource/confirmation
   # def create
-  #   super
+  #   super.skip_confirmation!
   # end
 
   # GET /resource/confirmation?confirmation_token=abcdef

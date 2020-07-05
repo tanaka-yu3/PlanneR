@@ -46,4 +46,6 @@ $(function () {
     // 1枚目のスライド表示時に戻る矢印を表示するかどうか [false]:矢印を隠さない [true]:矢印を隠す
     hidePrevious : false
   });
+
+  $(".about").fadeIn(1500)
 });

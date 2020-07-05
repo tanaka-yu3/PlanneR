@@ -45,6 +45,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-puma'
   gem 'capistrano-rbenv'
+  gem "letter_opener"
 end
 
 group :development do

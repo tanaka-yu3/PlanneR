@@ -88,5 +88,9 @@
       <div>
         <%= f.submit "変更", class:"btn btn-success" %><br><br>
       </div>
+
+      <div>
+        <%= link_to "退会する", user_registration_path(@user), method: :DELETE, class:"btn btn-danger"%>
+      </div>
     <% end %>
   </div>

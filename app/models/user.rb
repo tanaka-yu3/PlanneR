@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
   attachment :image
   has_many :items ,dependent: :destroy
   has_many :reviews ,dependent: :destroy
@@ -32,21 +32,24 @@ class User < ApplicationRecord
   protected
   def self.find_for_google(auth)
 
-  ##登録済のUSER
-  user = User.find_by(email: auth.info.email)
+    ##登録済のUSER
+    user = User.find_by(email: auth.info.email)
 
-  ##新規登録のUSER
-  unless user
-  user = User.create(family_name: auth.info.name,
-                     email: auth.info.email,
-                     provider: auth.provider,
-                     uid:      auth.uid,
-                     token:    auth.credentials.token,
-                     password: Devise.friendly_token[0, 20],
-                     meta:     auth.to_yaml)
+    ##新規登録のUSER
+      unless user
+      user = User.create(family_name: auth.info.name,
+                        email: auth.info.email,
+                        provider: auth.provider,
+                        uid:      auth.uid,
+                        token:    auth.credentials.token,
+                        password: Devise.friendly_token[0, 20],
+                        meta:     auth.to_yaml)
+      end
+    user.skip_confirmation!
+    user
   end
-  user
-  end
+
+  # binding.pry
 
   #バリデーション
   validates :family_name, presence: true

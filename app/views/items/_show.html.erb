@@ -79,7 +79,7 @@
 
   <div class="form text-style">
     <h2>説明</h2>
-    <%= item.text %>
+    <%= simple_format(item.text) %>
   </div>
 
   <div class="form">
@@ -98,28 +98,31 @@
   </div>
 
   <!-- 購入アクション -->
-  <div class="form">
-  <% if item.total > item.orders.sum(:amount) && item.item_status == "release" %>
-    <%= link_to new_item_order_path(item), class:"btn btn-success btn-lg" do %>
-    <i class="fas fa-shopping-cart"> 購入する</i>
-    <% end %>
+  <% if  admin_signed_in? %>
+    <div class="form">
+      <%= form_for @item,url:admins_item_path(item),method: :PATCH do |f| %>
+        <%= f.select :item_status, Item.item_statuses_i18n.keys.map{|k| [I18n.t("enums.item.item_status.#{k}"),k]} %>
+        <%= f.submit "更新する", class:"btn btn-success"%>
+      <% end %>
+    </div>
   <% else %>
-    <% if item.item_status == "permitting" %>
-      <h2>承認中</h2>
-    <% else %>
-      <h2 style="color: red;">完売しました</h2>
-    <% end %>
+    <div class="form">
+      <% if item.total > item.orders.sum(:amount) && item.item_status == "release" %>
+        <%= link_to new_item_order_path(item), class:"btn btn-success btn-lg" do %>
+        <i class="fas fa-shopping-cart"> 購入する</i>
+        <% end %>
+      <% else %>
+        <% if item.item_status == "permitting" %>
+          <h2>承認中</h2>
+        <% else %>
+          <h2 style="color: red;">完売しました</h2>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
-  </div>
+
 </div>
 
-<!-- 管理者用商品ステータス変更 -->
-<% if  admin_signed_in? %>
-  <%= form_for @item,url:admins_item_path(item),method: :PATCH do |f| %>
-    <%= f.select :item_status, Item.item_statuses_i18n.keys.map{|k| [I18n.t("enums.item.item_status.#{k}"),k]} %>
-    <%= f.submit "更新する", class:"btn btn-success"%>
-  <% end %>
-<% end %>
 
 <!-- 商品評価一覧 -->
 <div style="margin: 100px auto ; width: 100%;">
