@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only:[:new, :create, :edit, :update, :destroy]
-  before_action :item_custome, only:[:edit, :update  :destroy]
+  before_action :item_custome, only:[:edit, :update, :destroy]
 
   def index
     @latest_items = Item.where(("item_status = ?") , 1).order(created_at: "desc").limit(3)
