@@ -3,9 +3,9 @@
 </div>
 
 <h2 class="title">管理者注文一覧</h2>
-	<% if @orders.empty? %>
-	  <h2 class="title">注文履歴はありません。</h2>
-	<% else %>
-	  <%= render "/orders/index", orders:@orders %>
-	  <%= paginate @orders %>
-	<% end %>
+<% if @orders.empty? %>
+<h2 class="title">注文履歴はありません。</h2>
+<% else %>
+<%= render "/orders/index", orders:@orders %>
+<%= paginate @orders %>
+<% end %>

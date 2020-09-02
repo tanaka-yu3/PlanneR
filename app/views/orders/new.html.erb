@@ -1,28 +1,33 @@
-<h2 class="title">購入する</h2>
-	<div class="validates">
-		<%= flash[:order_unsave]%><%= flash[:not_success_order] %>
-	</div>
+<div class="container">
+  <h2 style="margin: 100px 0;">購入する</h2>
+  <div class="validates">
+    <%= flash[:order_unsave]%><%= flash[:not_success_order] %>
+  </div>
 
-<!-- オーダーフォーム -->
-<%= form_for [@item, @order], url:(item_order_confirm_path) do |f| %>
+  <!-- オーダーフォーム -->
+  <%= form_for [@item, @order], url:(item_order_confirm_path) do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
-	  <table class="table responsibe-center">
-			<tr>
-			  <td>商品名</td>
-			  <td><%= @item.name %></td>
-			</tr>
-			<tr>
-		      <td>期間</td>
-			  <td><%= f.date_field :first_day %> 〜 <%= f.date_field :last_day %></td>
-			</tr>
-			<tr>
-			  <td>人数</td>
-			  <td><%= f.text_field :amount %></td>
-			</tr>
-			<tr>
-			  <td>プランの金額</td>
-			  <td>¥<%= @item.price %>/人</td>
-			</tr>
-	  </table>
-  <%= f.submit "注文確認画面へ", class:"btn btn-success" %>
-<% end %>
+  <table class="table table-borderless form-group">
+    <tr>
+      <td>商品名</td>
+      <td><%= @item.name %></td>
+    </tr>
+    <tr>
+      <td>期間</td>
+      <td><%= f.date_field :first_day, class:'form-control' %> 〜 <%= f.date_field :last_day, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <td>人数</td>
+      <td><%= f.text_field :amount, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <td>プランの金額</td>
+      <td>¥<%= @item.price %>/人</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= f.submit "注文確認画面へ", class:"btn btn-success" %>
+        <% end %></td>
+    </tr>
+  </table>
+</div>

@@ -1,40 +1,48 @@
-<div class="validates">
-	<%= flash[:review_unsave] %>
-</div>
-<h2 class="title">- 評価する -</h2>
-	<div class="row">
-		<div class="col-lg-5 text-center">
-			<%= attachment_image_tag @item.photos.first, :image, :fill, 300, 300, class:"image-fluid" %>
-			<div>
-				<h2 class="form">プラン名:<%= @item.name %></h2>
-			</div>
-			<div>
-				<h2 class="form">値段:¥<%= @item.price %></h2>
-			</div>
-		</div>
-		<div class="col-lg-5">
-			<div class="responsibe-center">
-				<%= form_with model:[@item, @review] ,url:(item_reviews_path),data: {remote: false}  do |f| %>
-				<%= render 'layouts/error_messages' , model: f.object %>
-				<%= hidden_field_tag :order_id, @order.id %>
-				<div id="star">
-					<%= f.hidden_field :rate %>
-				</div><br>
-				<div>
-					<%= f.text_area :text ,class:"text-area"%>
-				</div><br>
-				<%= f.submit "レビューを投稿する" , class:"btn btn-primary"%>
-				<% end %>
-			</div>
-		</div>
-	</div>
+<div class="container">
+  <div class="row">
+    <div class="validates">
+      <%= flash[:review_unsave] %>
+    </div>
+    <div class="review_title">
+      <h2 style="margin: 100px 0;"><i class="fas fa-user-check"></i>- 評価する -</h2>
+    </div>
 
-	<!-- 評価　星機能 -->
-	<script>
-  $('#star').raty({
-    size: 36,
-    starOff: '<%= asset_path("star-off.png") %>',
-    starOn: '<%= asset_path("star-on.png") %>',
-    scoreName: "review[rate]"
-  });
-	</script>
+    <div class="col-md-12 text-center">
+      <table class="table table-borderless">
+        <tr>
+          <td><%= attachment_image_tag @item.photos.first, :image, :fill, 700, 300, class:"image-fluid" %></td>
+        </tr>
+        <tr>
+          <td>プラン名:<%= @item.name %></td>
+        </tr>
+
+        <tr>
+          <td><%= form_with model:[@item, @review] ,url:(item_reviews_path),data: {remote: false}  do |f| %>
+            <%= render 'layouts/error_messages' , model: f.object %>
+            <%= hidden_field_tag :order_id, @order.id %>
+            <div id="star">
+              <%= f.hidden_field :rate %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td> <%= f.text_area :text ,class:"text-area", placeholder:'※ここに感想を記述してください' %></td>
+        </tr>
+        <tr>
+          <td><%= f.submit "レビューを投稿する", class:"btn btn-primary"%>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 評価　星機能 -->
+  <script>
+    $('#star').raty({
+      size: 36,
+      starOff: '<%= asset_path("star-off.png") %>',
+      starOn: '<%= asset_path("star-on.png") %>',
+      scoreName: "review[rate]"
+    });
+  </script>

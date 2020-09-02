@@ -1,10 +1,8 @@
-<div class="row">
-
-  <h1 class="title">- ALL PLAN -</h1>
+<div class="container">
 
   <!-- 新商品 -->
-  <div class="w-100">
-    <h2 class="title">- New -</h2>
+  <div style="box-shadow: 0 0 8px gray;">
+    <h2 class="title">- 新着のプラン -</h2>
     <% if @latest_items.empty? && @comingsoon_items.present? %>
     <h2 class="title">プラン承認中です。<br>しばらくお待ちください。</h2>
     <% elsif @latest_items.empty?%>
@@ -18,8 +16,8 @@
   </div>
 
   <!-- 人気商品 -->
-  <div class="w-100">
-    <h2 class="title">- Popular -</h2>
+  <div style="box-shadow: 0 0 8px gray;">
+    <h2 class="title">- 人気のプラン -</h2>
     <% if @popular_items.empty? %>
     <h2 class="title">プランはまだありません。<br>しばらくお待ちください。</h2>
     <% else %>
@@ -31,8 +29,8 @@
   </div>
 
   <!-- 未承認だが出品したもの -->
-  <div class="w-100">
-    <h2 class="title">- comming -</h2>
+  <div style="box-shadow: 0 0 8px gray; margin-bottom: 100px;">
+    <h2 class="title">- 準備中 -</h2>
     <% if @comingsoon_items.empty? %>
     <h2 class="title">準備中です。<br>しばらくお待ちください。</h2>
     <% else %>
@@ -42,5 +40,4 @@
     <% end %>
     <% end %>
   </div>
-
 </div>

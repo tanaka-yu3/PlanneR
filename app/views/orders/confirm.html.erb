@@ -1,27 +1,33 @@
-<h2 class="title">注文確認画面</h2>
+<div class="container">
+  <h2 style="margin: 100px 0;">注文確認画面</h2>
   <%= form_for [@item, @order], url:(item_orders_path), method: :POST do |f| %>
-    <table class="table">
-			<tr>
-				<td>商品名</td>
-				<td><%= @item.name %></td>
-			</tr>
-			<tr>
-				<td>期間</td>
-				<td><%= @order.first_day.strftime ("%Y/%m/%d") %>〜<%= @order.last_day.strftime ("%m/%d") %>
-					<%= f.hidden_field :first_day %><%= f.hidden_field :last_day %>
-				</td>
-			</tr>
-			<tr>
-				<td>人数</td>
-				<td><%= @order.amount %>
-					<%= f.hidden_field :amount %>
-				</td>
-			</tr>
-			<tr>
-				<td>合計金額</td>
-				<td>¥<%= @order.price = @item.price*@order.amount %></td>
-				<%= f.hidden_field :price, vlau: "@order.price"%>
-			</tr>
-	  </table>
-  <%= f.submit "注文を確定する", class:"btn btn-success" %>
-  <% end %>
+  <table class=" table table-borderless">
+    <tr>
+      <td>商品名</td>
+      <td><%= @item.name %></td>
+    </tr>
+    <tr>
+      <td>期間</td>
+      <td><%= @order.first_day.strftime ("%Y/%m/%d") %>〜<%= @order.last_day.strftime ("%m/%d") %>
+        <%= f.hidden_field :first_day %><%= f.hidden_field :last_day %>
+      </td>
+    </tr>
+    <tr>
+      <td>人数</td>
+      <td><%= @order.amount %>
+        <%= f.hidden_field :amount %>
+      </td>
+    </tr>
+    <tr>
+      <td>合計金額</td>
+      <td>¥<%= @order.price = @item.price*@order.amount %></td>
+      <%= f.hidden_field :price, vlau: "@order.price"%>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= f.submit "注文を確定する", class:"btn btn-success" %>
+        <% end %></td>
+    </tr>
+  </table>
+
+</div>

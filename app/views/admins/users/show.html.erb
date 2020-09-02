@@ -1,4 +1,6 @@
 <div>
   <%= flash[:supply_comfim] %>
 </div>
-<%= render "users/show", user:@user, price_sum:@price_sum, items:@items, orders:@orders %>
+<div class="container">
+  <%= render "users/show", user:@user, price_sum:@price_sum, items:@items, orders:@orders %>
+</div>

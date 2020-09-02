@@ -16,6 +16,28 @@ h1{
 	background-size: cover;
 }
 
+.about_img{
+	background-image: url('about_image1.jpg');
+	height: 500px;
+	width: 100%;
+	background-size: cover;
+	background-position: center;
+	margin: 500px 0 100px 40px;
+}
+
+.card-icon{
+	text-align: center;
+	margin: 20px;
+}
+
+.card-columns{
+	margin: 100px auto;
+}
+
+.card{
+	box-shadow: 0 0 8px gray;
+	margin: 10px;
+}
 
 .about-text{
 	margin: 100px 0;
@@ -23,22 +45,6 @@ h1{
 	position: relative;
 	top: 0;
 	color: white;
-}
-
-.about-box1{
-	position: relative;
-	top: 800px;
-}
-
-.about-box2{
-	position: relative;
-	top: 1000px;
-
-}
-
-.about-box3{
-	position: relative;
-	top: 1200px;
 }
 
 
@@ -49,6 +55,7 @@ h1{
 	background-size: cover;
 	height: 350px;
 	width: 270px;
+	
 }
 
 .about2{
@@ -57,6 +64,7 @@ h1{
 	background-size: cover;
 	height: 350px;
 	width: 270px;
+	
 }
 
 .about3{
@@ -65,6 +73,16 @@ h1{
 	background-size: cover;
 	height: 350px;
 	width: 270px;
+}
+
+.example{
+margin: 200px auto;
+box-shadow: 0 0 8px gray;
+border-radius: 10px;
+}
+
+.example h4{
+margin: 20px;
 }
 
 /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */
@@ -82,25 +100,6 @@ h1{
 	color: white;
 	padding-bottom: 200px;
 }
-.about-box1{
-	position: relative;
-	top: 150px;
-
-	}
-	.about-box2{
-		position: relative;
-		top: 300px;
-
-	}
-	.about-box3{
-		position: relative;
-		top: 450px;
-
-	}
-
-
-
-
 }
 
 /* タブレット縦置きサイズ（768px）以下の際に適用される設定 */
@@ -138,7 +137,6 @@ h1{
 	top: 0;
 	color: white;
 }
-
 
 
 }

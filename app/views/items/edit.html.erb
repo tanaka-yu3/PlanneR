@@ -1,3 +1,4 @@
-<h2 class="title"><%= @item.name%>を編集する</h2>
-
-<%= render "form", item:@item, genres:@genres %>
+<div class="container">
+  <h2 style="margin: 40px;"><%= @item.name%>を編集する</h2>
+  <%= render "form", item:@item, genres:@genres %>
+</div>

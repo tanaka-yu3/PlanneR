@@ -1,1 +1,7 @@
-<h2 class="title">thanks!</h2>
+<div class="container">
+  <h2 class="title">ご注文ありがとうございます!</h2>
+  <p>-以下の新着プランもいかがでしょうか-</p>
+  <div class="recomend">
+    <%= render 'items/index',items:@items, user:current_user %>
+  </div>
+</div>

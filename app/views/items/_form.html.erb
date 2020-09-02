@@ -1,79 +1,67 @@
-<div class="validates">
-	<%= flash[:item_unsave]%>
-</div>
+<div style="border-radius: 20px; box-shadow: 0 0 8px gray;">
 
-<div class="text-center">
-  <%= form_for item do |f| %>
-
-  　<!-- 　エラーメッセージ -->
+  <table class="table table-borderless form-group">
+    <%= form_for item do |f| %>
+    <!-- 　エラーメッセージ -->
     <%= render 'layouts/error_messages' , model: f.object %>
+    <tr>
+      <td class="text-center">画像<span class="item-attention">必須</span></td>
+      <td>
+        <% if @item.photos.exists? %>
+        <% @item.photos.each do |image| %>
+        　<%= attachment_image_tag image ,:image ,:fill, 200, 200 %>
+        <% end %>
+        <% end %> <br>
+        <%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true, class:'form-control' %>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">プラン名 <span class="item-attention">必須</span></td>
+      <td><%= f.text_field :name, class:'form-control' %></td>
+    </tr>
+    <tr>
+      <td class="text-center">値段 <span class="item-attention">必須</span></td>
+      <td> <%= f.text_field :price, class:'form-control', placeholder:'※数字のみ入力してください' %></td>
+    </tr>
+    <tr>
+      <td class="text-center">ジャンル <span class="item-attention">必須</span></td>
+      <td><%= f.collection_select :genre_id  ,genres , :id, :name ,{}, class:'custom-select' %></td>
+    </tr>
+    <tr>
+      <td class="text-center">プラン説明 <span class="item-attention">必須</span></td>
+      <td><%= f.text_area :text ,class:"form-control", placeholder:'※20文字以上入力してください' %></td>
+    </tr>
+    <tr>
+      <td class="text-center">Youtube URL</td>
+      <td> <%= f.text_field :video, class:'form-control', placeholder: '※任意で構いません'%></td>
+    </tr>
+    <tr>
+      <td class="text-center">場所 <span class="item-attention">必須</span></td>
+      <td><%= f.text_field :address, class:'form-control', placeholder:'※都道府県から入力ください' %></td>
+    </tr>
+    <tr>
+      <td class="text-center">開始日 <span class="item-attention">必須</span></td>
+      <td><%= f.date_field :start_day, class:'form-control', placeholder: '※申請日より一週間後の日程で入力ください' %></td>
+    </tr>
+    <tr>
+      <td class="text-center">終了日 <span class="item-attention">必須</span></td>
+      <td>
+        <%= f.date_field :finish_day , class:'form-control'%>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">人数制限 <span class="item-attention">必須</span></td>
+      <td><%= f.text_field :total, class:'form-control', placeholder:'※数字のみ入力してください' %></td>
+    </tr>
 
-	    <h2>画像 <span class="item-attention">必須</span></h2>
-		    <% @item.photos.each do |image| %>
-	      　<div><%= attachment_image_tag image ,:image ,:fill, 500, 300 %></div>
-	      <% end %><br>
+    <tr>
+      <td></td>
+      <td><%= f.hidden_field :item_status %>
+        <%= f.submit "上記のプランを登録申請する" , class:"btn btn-success" %>
+      </td>
+    </tr>
 
-	  <!-- 画像投稿 -->
-				<div class="form">
-					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
-					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
-					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
-					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
-					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
-					<%= f.attachment_field :photos_images, multiple: true, direct: true, presigned: true %>
-				</div>
-
-		<div class="form">
-			<h2>プラン名 <span class="item-attention">必須</span></h2>
-			<div class="item-field">
-				<%= f.text_field :name %>
-			</div>
-		</div>
-
-		<div class="form">
-			<h2>ジャンル <span class="item-attention">必須</span></h2>
-			<%= f.collection_select :genre_id  ,genres , :id, :name , class:"btn btn-default" %>
-		</div>
-
-		<div class="form">
-			<h2>プラン説明 <span class="item-attention">必須</span></h2>
-			<%= f.text_area :text ,class:"text-area"%>
-		</div>
-
-		<div class="form">
-			<h2>Youtube URL</h2>
-			<%= f.text_field :video %>
-		</div>
-
-		<div class="form">
-			<h2>場所 <span class="item-attention">必須</span></h2>
-			<%= f.text_field :address %>
-		</div>
-
-		<div class="form">
-			<h2>開始日 <span class="item-attention">必須</span></h2>
-			<%= f.date_field :start_day %>
-		</div>
-
-		<div class="form">
-			<h2>終了日 <span class="item-attention">必須</span></h2>
-			<%= f.date_field :finish_day %>
-		</div>
-
-		<div class="form">
-			<h2>人数制限 <span class="item-attention">必須</span></h2>
-			<%= f.text_field :total %>
-		</div>
-
-		<div class="form">
-			<h2>値段 <span class="item-attention">必須</span></h2>
-			<%= f.text_field :price %>
-		</div>
-
-		<div class="form">
-			<%= f.hidden_field :item_status %>
-			<%= f.submit "登録" , class:"btn btn-success" %>
-		</div>
-
-	<% end %>
+    <!-- 画像投稿 -->
+    <% end %>
+  </table>
 </div>

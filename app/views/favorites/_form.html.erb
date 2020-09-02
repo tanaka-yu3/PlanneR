@@ -1,9 +1,23 @@
+<style>
+
+</style>
+
+
 <% if item.favorited_by?(current_user) %>
-  <%= link_to item_favorite_path(item), method: :DELETE, data: {confirm: "お気に入り解除しますか？"} do %>
-  <i class="fas fa-bookmark" style="color: green;" ></i>
-  <% end %>
-<% else %>
-  <%= link_to item_favorites_path(item), method: :POST do %>
-  <i class="far fa-bookmark"></i>
-  <% end %>
+<%= link_to item_favorite_path(item), method: :DELETE, remote: true do %>
+<i class="fas fa-bookmark"></i>
 <% end %>
+<% else %>
+<%= link_to item_favorites_path(item), method: :POST, remote: true do %>
+<i class="fas fa-bookmark" id="favorite"></i>
+<% end %>
+<% end %>
+
+
+<script>
+  $(function() {
+    $('#favorite').click(function() {
+      $(this).toggleClass('favorite');
+    })
+  })
+</script>

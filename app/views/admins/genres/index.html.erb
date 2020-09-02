@@ -1,16 +1,15 @@
-
 <h2 class="title">ジャンルを作成する</h2>
 <div class="text-center">
   <div class="validates">
     <%= flash[:save] %><%= flash[:unsave] %>
   </div>
   <%= form_for @genre, url:admins_genres_path, method: :post do |f| %>
-    <%= f.text_field :name, placeholder:"ここに入力" %>
-    <%= f.submit "作成", class:"btn btn-primary"%>
+  <%= f.text_field :name, placeholder:"ここに入力" %>
+  <%= f.submit "作成", class:"btn btn-primary"%>
   <% end %>
 </div>
 
-<table class="table">
+<table class=" container table">
   <tr>
     <td>ジャンル名</td>
     <td>使用合計</td>
@@ -26,4 +25,4 @@
   </tr>
   <% end %>
 </table>
-  <%= paginate @genres %>
+<%= paginate @genres %>

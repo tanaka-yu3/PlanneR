@@ -77,7 +77,7 @@ ul {
 
 .form{
   margin-bottom: 100px;
-  wisth: 100%;
+  width: 100%;
 }
 
 .maru{
@@ -175,6 +175,25 @@ ul {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+}
+
+.login_form{
+  width: 50%;
+  margin: 100px auto;
+  padding: 50px 0;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 0 8px gray;
+}
+footer{
+  min-height: 50vh;
+  width: 100%;
+  background-color: lightgray;
+}
+
+footer p{
+  float: right;
+  margin: 30px;
 }
 
 /* タブレット横置きサイズ（1024px）以下の際に適用される設定 */

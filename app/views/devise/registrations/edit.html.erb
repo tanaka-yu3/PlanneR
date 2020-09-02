@@ -1,96 +1,104 @@
-<h2 class="title">会員情報修正</h2>
-  <div class="text-center">
+<div class="container">
+  <h3 style="margin: 40px;">
+    <i class="fas fa-user"></i>
+    会員情報編集
+  </h3>
+  <div style="box-shadow: 0 0 8px gray; border-radius: 20px;">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="form">
-      	プロフィール写真 <br>
-        <% if @user.image.present? %>
-      	  <%= attachment_image_tag @user, :image, :fill, 300, 300, fallback:"noimage.png", size:"300x300" %><br>
-        <% end %>
-      	<%= f.attachment_field :image, class:"block-center" %>
-      </div>
 
-      <div class="form">
-      	姓<br>
-        <%= f.text_field :family_name %>
-      </div>
+    <table class="table table-borderless form-group" style=" border-radius: 10px;">
+      <%= render "layouts/error_messages",model: f.object %>
+      <tr>
+        <td class="text-center">プロフィール写真</td>
+        <td><% if @user.image.present? %>
+          <%= attachment_image_tag @user, :image, :fill, 300, 300, fallback:"noimage.png", size:"300x300" %><br>
+          <% end %>
+          <%= f.attachment_field :image %></td>
+      </tr>
 
-      <div class="form">
-      	名<br>
-      	<%= f.text_field :last_name %>
-      </div>
+      <tr>
+        <td class="text-center">姓<span class="item-attention">必須</span></td>
+        <td><%= f.text_field :family_name, class:'form-control'%> </td>
+      </tr>
+      <tr>
+        <td class="text-center">名</td>
+        <td><%= f.text_field :last_name, class:'form-control', placeholder:'例：太郎' %></td>
+      </tr>
+      <tr>
+        <td class="text-center">セイ</td>
+        <td><%= f.text_field :family_name_kana, class:'form-control', placeholder:'例：ヤマダ' %></td>
+      </tr>
+      <tr>
+        <td class="text-center">メイ</td>
+        <td><%= f.text_field :last_name_kana, class:'form-control', placeholder:'例：タロウ' %></td>
+      </tr>
+      <tr>
+        <td class="text-center">電話番号</td>
+        <td><%= f.text_field :phone_number, class:'form-control', placeholder:'例:090-8888-7777'%></td>
+      </tr>
+      <tr>
+        <td class="text-center">emailアドレス<span class="item-attention">必須</span></td>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control', placeholder:'例:xxx@xxx.com' %></td>
+      </tr>
+      <tr>
+        <td class="text-center">郵便番号</td>
+        <td><%= f.text_field :postcode, id: "user_postcode", class:'form-control', placeholder:'例：123-4567'%></td>
+      </tr>
+      <tr>
+        <td class="text-center">住所</td>
+        <td><%= f.text_field :address, id:"user_address", class:'form-control', placeholder:'郵便番号を入力すると自動で入力されます' %></td>
+      </tr>
+      <tr>
+        <td class="text-center">新しいパスワード</td>
+        <td><%= f.password_field :password, autocomplete: "new-password", class:'form-control' %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center">新しいパスワード
+        </td>
+        <td>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class:'form-control' %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center">現在ののパスワード<span class="item-attention">必須</span></td>
+        <td>
+          <%= f.password_field :current_password, autocomplete: "current-password", class:'form-control' %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td style="color: red;">※売上金を申請するには以下
+          の登録が必要です。</td>
+      </tr>
+      <tr>
+        <td class=" text-center">銀行名</td>
+        <td><%= f.text_field :bank_name, class:'form-control', placeholder:'例：ABC銀行' %></td>
+      </tr>
+      <tr>
+        <td class="text-center">口座種別</td>
+        <td><%= f.text_field :bank_account_kind, class:'form-control', placeholder:'例：普通' %></td>
+      </tr>
+      <tr>
+        <td class="text-center">支店コード</td>
+        <td><%= f.text_field :bank_branch_code, class:'form-control' %></td>
+      </tr>
+      <tr>
+        <td class="text-center">口座番号</td>
+        <td><%= f.text_field :bank_account_number, class:'form-control', placeholder:'ご本人様名義の口座をご登録ください' %></td>
+      </tr>
+      <tr>
+        <td class="text-center"></td>
+        <td><%= f.submit "会員情報を変更する", class:"btn btn-primary", style:'margin-right: 20px;'%>
+          <% end %>
+          <%= link_to "退会する", user_registration_path, method: :DELETE, data:{ confirm: '本当に退会しますか'} %>
+        </td>
+      </tr>
+    </table>
 
-      <div class="form">
-      	セイ<br>
-      	<%= f.text_field :family_name_kana %>
-      </div>
-      <div class="form">
-      	メイ<br>
-      	<%= f.text_field :last_name_kana %>
-      </div>
-
-      <div class="form">
-      	電話番号<br>
-      	<%= f.text_field :phone_number %>
-      </div>
-
-      <div class="form">
-      	Eメール<br>
-      	<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-
-      <div class="form">
-      	郵便番号<br>
-      	<%= f.text_field :postcode, id: "user_postcode"%>
-      </div>
-
-      <div class="form">
-      	住所<br>
-      	<%= f.text_field :address, id:"user_address"%>
-      </div>
-
-      <div class="form">
-      	パスワード<span class="item-attention">必須</span><br>
-      	<%= f.password_field :password, autocomplete: "new-password" %>
-      </div>
-
-      <div class="form">
-      	パスワード（確認用）<span class="item-attention">必須</span><br>
-      	<%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-      </div>
-
-       <div class="form">
-        現在ののパスワード<span class="item-attention">必須</span><br>
-         <%= f.password_field :current_password, autocomplete: "current-password" %>
-      </div>
-
-      <p class="form">※売上金を申請するには下記の登録が必要です。</p>
-        <div class="form">
-          銀行名<br>
-          <%= f.text_field :bank_name %>
-        </div>
-
-        <div class="form">
-          口座種別<br>
-          <%= f.text_field :bank_account_kind %>
-        </div>
-
-        <div class="form">
-          支店コード<br>
-          <%= f.text_field :bank_branch_code %>
-        </div>
-
-        <div class="form">
-          口座番号<br>
-          <%= f.text_field :bank_account_number %>
-        </div>
-
-      <div>
-        <%= f.submit "変更", class:"btn btn-success" %><br><br>
-      </div>
-
-      <div>
-        <%= link_to "退会する", user_registration_path(@user), method: :DELETE, class:"btn btn-danger"%>
-      </div>
-    <% end %>
   </div>
+</div>

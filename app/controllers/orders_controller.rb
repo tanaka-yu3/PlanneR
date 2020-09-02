@@ -64,6 +64,7 @@ class OrdersController < ApplicationController
 	end
 
 	def thanks
+		@items = Item.where(('item_status = ?') , 1).order(created_at: 'desc').limit(3)
 	end
 
 	private
